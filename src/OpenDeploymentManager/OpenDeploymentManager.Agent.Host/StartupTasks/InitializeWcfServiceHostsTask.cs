@@ -51,12 +51,11 @@ namespace OpenDeploymentManager.Agent.Host.StartupTasks
             this.serviceHost.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
             this.serviceHost.AddServiceEndpoint(typeof(IAgentInfoService), new NetTcpBinding(), typeof(IAgentInfoService).GetServiceRoute());
-            this.serviceHost.AddServiceEndpoint(typeof(IDeploymentService), new NetTcpBinding(), typeof(IDeploymentService).GetServiceRoute());
+            ////this.serviceHost.AddServiceEndpoint(typeof(IDeploymentService), new NetTcpBinding(), typeof(IDeploymentService).GetServiceRoute());
 
             this.serviceHost.Open();
 
             Log.Info(CultureInfo.InvariantCulture, Resources.InitializeWcfServiceHosts_AgentIsListeningOnPort, ServiceHostBaseAddress.AbsoluteUri);
-            Console.WriteLine(Resources.InitializeWcfServiceHosts_AgentIsListeningOnPort, ServiceHostBaseAddress.AbsoluteUri);
         }
 
         public void Reset()
