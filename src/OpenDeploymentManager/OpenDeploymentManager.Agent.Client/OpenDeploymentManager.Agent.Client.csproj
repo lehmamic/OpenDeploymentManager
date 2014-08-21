@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Discovery" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,14 +47,24 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AgentConnectionManager.cs" />
+    <Compile Include="AgentProxyFactory.cs" />
+    <Compile Include="DeploymentAgent.cs" />
+    <Compile Include="IAgentConnectionManager.cs" />
+    <Compile Include="IAgentProxyFactory.cs" />
+    <Compile Include="IDeploymentAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UriExtensions.cs" />
+    <Compile Include="WcfClientProxyInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenDeploymentManager.Agent.Contracts\OpenDeploymentManager.Agent.Contracts.csproj">
       <Project>{18d30cea-3eca-4591-8ee5-8ac509b99c3d}</Project>
       <Name>OpenDeploymentManager.Agent.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
