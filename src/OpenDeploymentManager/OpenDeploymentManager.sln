@@ -5,15 +5,9 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Agent.Host", "OpenDeploymentManager.Agent.Host\OpenDeploymentManager.Agent.Host.csproj", "{8B9F145F-750F-42AC-8E92-883124849AD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Core.Deployment", "OpenDeploymentManager.Core.Deployment\OpenDeploymentManager.Core.Deployment.csproj", "{E4EBAE68-BD99-47EE-8384-F40A7496336F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Core.Deployment.Tests", "OpenDeploymentManager.Core.Deployment.Tests\OpenDeploymentManager.Core.Deployment.Tests.csproj", "{E14D24BB-353E-4186-980F-4D4D7F7F2A35}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Agent.Contracts", "OpenDeploymentManager.Agent.Contracts\OpenDeploymentManager.Agent.Contracts.csproj", "{18D30CEA-3ECA-4591-8EE5-8AC509B99C3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Agent.Client", "OpenDeploymentManager.Agent.Client\OpenDeploymentManager.Agent.Client.csproj", "{8C37A9B7-0DD8-41C0-8B2E-D370BC257A29}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Core.Common", "OpenDeploymentManager.Core.Common\OpenDeploymentManager.Core.Common.csproj", "{78BAE48E-C85D-42CD-9B3A-5D09CA891351}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C922229-9585-4B82-850F-25B2C7060B41}"
 	ProjectSection(SolutionItems) = preProject
@@ -21,6 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Agent.Host.Tests", "OpenDeploymentManager.Agent.Host.Tests\OpenDeploymentManager.Agent.Host.Tests.csproj", "{96C1EDFF-E254-44EC-A674-9E275C71A008}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Common", "OpenDeploymentManager.Common\OpenDeploymentManager.Common.csproj", "{78BAE48E-C85D-42CD-9B3A-5D09CA891351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Deployment", "OpenDeploymentManager.Deployment\OpenDeploymentManager.Deployment.csproj", "{E4EBAE68-BD99-47EE-8384-F40A7496336F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Deployment.Tests", "OpenDeploymentManager.Deployment.Tests\OpenDeploymentManager.Deployment.Tests.csproj", "{E14D24BB-353E-4186-980F-4D4D7F7F2A35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,14 +32,6 @@ Global
 		{8B9F145F-750F-42AC-8E92-883124849AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B9F145F-750F-42AC-8E92-883124849AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B9F145F-750F-42AC-8E92-883124849AD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18D30CEA-3ECA-4591-8EE5-8AC509B99C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{18D30CEA-3ECA-4591-8EE5-8AC509B99C3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18D30CEA-3ECA-4591-8EE5-8AC509B99C3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,14 +40,22 @@ Global
 		{8C37A9B7-0DD8-41C0-8B2E-D370BC257A29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C37A9B7-0DD8-41C0-8B2E-D370BC257A29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C37A9B7-0DD8-41C0-8B2E-D370BC257A29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96C1EDFF-E254-44EC-A674-9E275C71A008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96C1EDFF-E254-44EC-A674-9E275C71A008}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96C1EDFF-E254-44EC-A674-9E275C71A008}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96C1EDFF-E254-44EC-A674-9E275C71A008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BAE48E-C85D-42CD-9B3A-5D09CA891351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4EBAE68-BD99-47EE-8384-F40A7496336F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14D24BB-353E-4186-980F-4D4D7F7F2A35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

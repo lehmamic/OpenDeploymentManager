@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace OpenDeploymentManager.Core.Common.Projection
+namespace OpenDeploymentManager.Common.Projection
 {
     /// <summary>
     /// Automapper type adapter implementation

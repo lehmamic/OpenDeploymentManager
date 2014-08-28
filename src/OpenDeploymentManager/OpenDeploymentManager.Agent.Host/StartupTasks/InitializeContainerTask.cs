@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using AutoMapper;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.Practices.Unity;
@@ -7,8 +6,8 @@ using NLog;
 using OpenDeploymentManager.Agent.Contracts;
 using OpenDeploymentManager.Agent.Host.Properties;
 using OpenDeploymentManager.Agent.Host.Services;
-using OpenDeploymentManager.Core.Common.Projection;
-using OpenDeploymentManager.Core.Common.Unity;
+using OpenDeploymentManager.Common.Projection;
+using OpenDeploymentManager.Common.Unity;
 
 namespace OpenDeploymentManager.Agent.Host.StartupTasks
 {

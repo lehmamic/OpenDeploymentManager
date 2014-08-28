@@ -1,4 +1,4 @@
-﻿namespace OpenDeploymentManager.Core.Common.Projection
+﻿namespace OpenDeploymentManager.Common.Projection
 {
     /// <summary>
     /// Interface for map dto to aggregate or aggregate to dto.

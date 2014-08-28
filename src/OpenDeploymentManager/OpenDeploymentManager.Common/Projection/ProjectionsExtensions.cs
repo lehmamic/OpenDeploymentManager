@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OpenDeploymentManager.Core.Common.Projection
+namespace OpenDeploymentManager.Common.Projection
 {
     public static class ProjectionsExtensions
     {

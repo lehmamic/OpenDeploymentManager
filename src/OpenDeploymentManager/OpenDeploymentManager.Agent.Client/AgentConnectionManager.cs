@@ -25,7 +25,7 @@ namespace OpenDeploymentManager.Agent.Client
             using (var discoveryClient = new DiscoveryClient(new UdpDiscoveryEndpoint()))
             {
                 FindResponse result = discoveryClient.Find(new FindCriteria(typeof(IAgentInfoService)));
-                return result.Endpoints.Select(e => new DeploymentAgent(this.proxyFactory, e.Address.Uri.BaseAddress()));
+                return result.Endpoints.Select(e => new DeploymentAgent(this.proxyFactory, e.Address.Uri.BaseAddress<IAgentInfoService>()));
             }
         }
     }

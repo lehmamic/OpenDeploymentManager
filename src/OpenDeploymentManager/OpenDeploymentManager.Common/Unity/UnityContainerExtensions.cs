@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Practices.Unity;
 
-namespace OpenDeploymentManager.Core.Common.Unity
+namespace OpenDeploymentManager.Common.Unity
 {
     public static class UnityContainerExtensions
     {

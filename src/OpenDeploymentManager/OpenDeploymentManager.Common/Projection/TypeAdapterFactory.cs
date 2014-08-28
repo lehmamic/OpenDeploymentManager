@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenDeploymentManager.Core.Common.Projection
+namespace OpenDeploymentManager.Common.Projection
 {
     public static class TypeAdapterFactory
     {

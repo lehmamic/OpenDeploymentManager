@@ -1,18 +1,21 @@
 ﻿using System;
-using System.Globalization;
+using PiranhaDeploy.Agent.Contracts;
 
 namespace OpenDeploymentManager.Agent.Client
 {
     public static class UriExtensions
     {
-        public static Uri BaseAddress(this Uri uri)
+        public static Uri BaseAddress<TContract>(this Uri uri)
         {
             if (uri == null)
             {
                 throw new ArgumentNullException("uri");
             }
 
-            return new Uri(string.Format(CultureInfo.InvariantCulture, "{0}://{1}", uri.Scheme, uri.Authority));
+            string uriString = uri.ToString();
+            int indexOfRoute = uriString.IndexOf(typeof(TContract).GetServiceRoute(), StringComparison.Ordinal);
+
+            return indexOfRoute > 0 ? new Uri(uriString.Remove(indexOfRoute)) : uri;
         }
     }
 }
