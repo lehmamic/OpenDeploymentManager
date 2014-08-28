@@ -45,7 +45,14 @@
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Deployment.cs" />
+    <Compile Include="IDeploymentExtensionsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenDeploymentManager.Deployment.Activities\OpenDeploymentManager.Deployment.Activities.csproj">
+      <Project>{041C8453-311C-4092-AD28-CF8FD83FEAC2}</Project>
+      <Name>OpenDeploymentManager.Deployment.Activities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

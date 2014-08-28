@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenDeploymentManager.Core.Deployment.Tests
+namespace OpenDeploymentManager.Deployment
 {
-    public class Class1
+    public interface IDeploymentExtensionsFactory
     {
+        T CreateExtension<T>();
     }
 }

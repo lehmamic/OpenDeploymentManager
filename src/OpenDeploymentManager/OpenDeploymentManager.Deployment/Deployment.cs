@@ -1,18 +1,34 @@
-﻿using System.Activities;
+﻿using System;
+using System.Activities;
 using System.Activities.XamlIntegration;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using OpenDeploymentManager.Deployment.Activities;
 
 namespace OpenDeploymentManager.Deployment
 {
     public class Deployment
     {
+        private readonly IDeploymentExtensionsFactory extensionFactory;
+
+        public Deployment(IDeploymentExtensionsFactory extensionFactory)
+        {
+            if (extensionFactory == null)
+            {
+                throw new ArgumentNullException("extensionFactory");
+            }
+
+            this.extensionFactory = extensionFactory;
+        }
+
         public void RunDeployment(string template, object variables)
         {
             Activity workflow = LoadWorkflow(template);
 
             var workflowInvoker = new WorkflowInvoker(workflow);
+            workflowInvoker.Extensions.Add(this.extensionFactory.CreateExtension<IDeploymentLoggingExtension>);
+            workflowInvoker.Extensions.Add(this.extensionFactory.CreateExtension<IDeploymentVariablesExtension>);
 
             var workflowInputs = new Dictionary<string, object>();
             workflowInvoker.Invoke(workflowInputs);
