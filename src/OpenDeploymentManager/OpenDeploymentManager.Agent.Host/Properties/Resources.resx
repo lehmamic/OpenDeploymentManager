@@ -147,4 +147,16 @@
   <data name="InitializeContainerTask_InitializeProjection" xml:space="preserve">
     <value>Initializing the data transfer object projection.</value>
   </data>
+  <data name="InitializeContainerTask_InitializeServiceLocator" xml:space="preserve">
+    <value>Initializing the service locator.</value>
+  </data>
+  <data name="LoggingCallHandler_InvokingMethod" xml:space="preserve">
+    <value>Invoking method {0} at {1}.</value>
+  </data>
+  <data name="LoggingCallHandler_MethodThrewException" xml:space="preserve">
+    <value>Method {0} threw exception {1} at {2}.</value>
+  </data>
+  <data name="LoggingCallHandler_MethodReturned" xml:space="preserve">
+    <value>Method {0} returned {1} at {2}.</value>
+  </data>
 </root>

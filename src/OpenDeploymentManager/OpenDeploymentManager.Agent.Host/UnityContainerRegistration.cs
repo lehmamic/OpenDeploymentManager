@@ -1,7 +1,9 @@
 ﻿using System;
 using AutoMapper;
 using Bootstrap.Unity;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.InterceptionExtension;
 using NLog;
 using OpenDeploymentManager.Agent.Contracts;
 using OpenDeploymentManager.Agent.Host.Properties;
@@ -12,7 +14,7 @@ using OpenDeploymentManager.Deployment;
 
 namespace OpenDeploymentManager.Agent.Host
 {
-    public class ContainerRegistration : IUnityRegistration
+    public class UnityContainerRegistration : IUnityRegistration
     {
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
@@ -25,11 +27,21 @@ namespace OpenDeploymentManager.Agent.Host
             }
 
             Log.Trace(Resources.InitializeContainerTask_ConfiguringContainer);
+            container.AddNewExtension<Interception>();
 
             container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
 
-            container.RegisterTypePerRequest<IAgentInfoService, DeploymentAgentService>();
-            container.RegisterTypePerRequest<IDeploymentService, DeploymentAgentService>();
+            container.RegisterTypePerRequest<IAgentInfoService, DeploymentAgentService>(
+                new InterceptionBehavior<PolicyInjectionBehavior>(),
+                new Interceptor<InterfaceInterceptor>());
+
+            container.RegisterTypePerRequest<IDeploymentService, DeploymentAgentService>(
+                new InterceptionBehavior<PolicyInjectionBehavior>(),
+                new Interceptor<InterfaceInterceptor>());
+
+            Log.Trace(Resources.InitializeContainerTask_InitializeServiceLocator);
+            ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(container));
+            container.RegisterInstance(ServiceLocator.Current);
 
             Log.Trace(Resources.InitializeContainerTask_InitializeProjection);
             Mapper.AssertConfigurationIsValid();

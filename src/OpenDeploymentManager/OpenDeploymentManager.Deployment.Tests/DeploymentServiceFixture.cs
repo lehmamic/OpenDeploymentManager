@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Microsoft.Practices.ServiceLocation;
 using Moq;
 using NUnit.Framework;
@@ -24,7 +25,7 @@ namespace OpenDeploymentManager.Deployment.Tests
             var target = new DeploymentManager(factory.Object);
 
             // act
-            target.RunDeployment(template, null);
+            target.RunDeployment(template, new Dictionary<string, object>(), new Dictionary<string, string>());
 
             // assert
             Assert.That(File.Exists(@"SimpleWorkflowTest\TestFile.txt"), Is.True);

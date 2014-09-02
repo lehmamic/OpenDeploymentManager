@@ -79,6 +79,15 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initializing the service locator..
+        /// </summary>
+        internal static string InitializeContainerTask_InitializeServiceLocator {
+            get {
+                return ResourceManager.GetString("InitializeContainerTask_InitializeServiceLocator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The deployment agent is listening on {0}..
         /// </summary>
         internal static string InitializeWcfServiceHosts_AgentIsListeningOnPort {
@@ -93,6 +102,33 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         internal static string InitializeWcfServiceHostsTask_InitializingServiceHost {
             get {
                 return ResourceManager.GetString("InitializeWcfServiceHostsTask_InitializingServiceHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invoking method {0} at {1}..
+        /// </summary>
+        internal static string LoggingCallHandler_InvokingMethod {
+            get {
+                return ResourceManager.GetString("LoggingCallHandler_InvokingMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method {0} returned {1} at {2}..
+        /// </summary>
+        internal static string LoggingCallHandler_MethodReturned {
+            get {
+                return ResourceManager.GetString("LoggingCallHandler_MethodReturned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method {0} threw exception {1} at {2}..
+        /// </summary>
+        internal static string LoggingCallHandler_MethodThrewException {
+            get {
+                return ResourceManager.GetString("LoggingCallHandler_MethodThrewException", resourceCulture);
             }
         }
         

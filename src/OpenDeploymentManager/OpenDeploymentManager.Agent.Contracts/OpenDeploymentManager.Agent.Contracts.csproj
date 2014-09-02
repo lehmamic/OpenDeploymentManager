@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -47,6 +48,7 @@
     <Compile Include="AgentInfo.cs" />
     <Compile Include="IAgentInfoService.cs" />
     <Compile Include="IDeploymentService.cs" />
+    <Compile Include="KeyValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceRouteAttribute.cs" />
     <Compile Include="ServiceRouteExtensions.cs" />

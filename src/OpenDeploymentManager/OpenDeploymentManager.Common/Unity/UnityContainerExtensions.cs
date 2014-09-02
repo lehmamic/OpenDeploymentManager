@@ -1,31 +1,50 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Practices.Unity;
 
 namespace OpenDeploymentManager.Common.Unity
 {
     public static class UnityContainerExtensions
     {
-        public static IUnityContainer RegisterTypePerRequest<TFrom, TTo>(this IUnityContainer container) where TTo : TFrom
+        public static IUnityContainer RegisterTypePerRequest<TFrom, TTo>(this IUnityContainer container, params InjectionMember[] injectionMembers) where TTo : TFrom
         {
             if (container == null)
             {
                 throw new ArgumentNullException("container");
             }
 
-            return container.RegisterType<TFrom, TTo>(new HierarchicalLifetimeManager());
+            return container.RegisterType<TFrom, TTo>(new HierarchicalLifetimeManager(), injectionMembers);
         }
 
-        public static IUnityContainer RegisterTypePerRequest<T>(this IUnityContainer container)
+        public static IUnityContainer RegisterTypePerRequest<T>(this IUnityContainer container, params InjectionMember[] injectionMembers)
         {
             if (container == null)
             {
                 throw new ArgumentNullException("container");
             }
 
-            return container.RegisterType<T>(new HierarchicalLifetimeManager());
+            return container.RegisterType<T>(new HierarchicalLifetimeManager(), injectionMembers);
         }
 
-        public static IUnityContainer RegisterTypePerRequest<TFrom, TTo>(this IUnityContainer container, Func<IUnityContainer, object> factoryFunc) where TTo : TFrom
+        public static IUnityContainer RegisterTypePerRequest<TFrom, TTo>(this IUnityContainer container, Func<IUnityContainer, object> factoryFunc, params InjectionMember[] injectionMembers) where TTo : TFrom
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+
+            if (factoryFunc == null)
+            {
+                throw new ArgumentNullException("factoryFunc");
+            }
+            
+            var extendedInjectionMembers = injectionMembers.ToList();
+            extendedInjectionMembers.Insert(0, new InjectionFactory(factoryFunc));
+
+            return container.RegisterType<TFrom, TTo>(new HierarchicalLifetimeManager(), extendedInjectionMembers.ToArray());
+        }
+
+        public static IUnityContainer RegisterTypePerRequest<T>(this IUnityContainer container, Func<IUnityContainer, object> factoryFunc, params InjectionMember[] injectionMembers)
         {
             if (container == null)
             {
@@ -37,10 +56,33 @@ namespace OpenDeploymentManager.Common.Unity
                 throw new ArgumentNullException("factoryFunc");
             }
 
-            return container.RegisterType<TFrom, TTo>(new HierarchicalLifetimeManager(), new InjectionFactory(factoryFunc));
+            var extendedInjectionMembers = injectionMembers.ToList();
+            extendedInjectionMembers.Insert(0, new InjectionFactory(factoryFunc));
+
+            return container.RegisterType<T>(new HierarchicalLifetimeManager(), extendedInjectionMembers.ToArray());
         }
 
-        public static IUnityContainer RegisterTypePerRequest<T>(this IUnityContainer container, Func<IUnityContainer, object> factoryFunc)
+        public static IUnityContainer RegisterTypeAsSingleton<TFrom, TTo>(this IUnityContainer container, params InjectionMember[] injectionMembers) where TTo : TFrom
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+
+            return container.RegisterType<TFrom, TTo>(new ContainerControlledLifetimeManager(), injectionMembers);
+        }
+
+        public static IUnityContainer RegisterTypeAsSingleton<T>(this IUnityContainer container, params InjectionMember[] injectionMembers)
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+
+            return container.RegisterType<T>(new ContainerControlledLifetimeManager(), injectionMembers);
+        }
+
+        public static IUnityContainer RegisterTypeAsSingleton<T>(this IUnityContainer container, Func<IUnityContainer, object> factoryFunc, params InjectionMember[] injectionMembers)
         {
             if (container == null)
             {
@@ -52,42 +94,10 @@ namespace OpenDeploymentManager.Common.Unity
                 throw new ArgumentNullException("factoryFunc");
             }
 
-            return container.RegisterType<T>(new HierarchicalLifetimeManager(), new InjectionFactory(factoryFunc));
-        }
+            var extendedInjectionMembers = injectionMembers.ToList();
+            extendedInjectionMembers.Insert(0, new InjectionFactory(factoryFunc));
 
-        public static IUnityContainer RegisterTypeAsSingleton<TFrom, TTo>(this IUnityContainer container) where TTo : TFrom
-        {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-
-            return container.RegisterType<TFrom, TTo>(new ContainerControlledLifetimeManager());
-        }
-
-        public static IUnityContainer RegisterTypeAsSingleton<T>(this IUnityContainer container)
-        {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-
-            return container.RegisterType<T>(new ContainerControlledLifetimeManager());
-        }
-
-        public static IUnityContainer RegisterTypeAsSingleton<T>(this IUnityContainer container, Func<IUnityContainer, object> factoryFunc)
-        {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-
-            if (factoryFunc == null)
-            {
-                throw new ArgumentNullException("factoryFunc");
-            }
-
-            return container.RegisterType<T>(new ContainerControlledLifetimeManager(), new InjectionFactory(factoryFunc));
+            return container.RegisterType<T>(new ContainerControlledLifetimeManager(), extendedInjectionMembers.ToArray());
         }
     }
 }

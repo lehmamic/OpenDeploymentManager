@@ -23,7 +23,7 @@ namespace OpenDeploymentManager.Deployment
             this.serviceLocator = serviceLocator;
         }
 
-        public void RunDeployment(string template, object variables)
+        public void RunDeployment(string template, IDictionary<string, object> arguments, IDictionary<string, string> variables)
         {
             Activity workflow = LoadWorkflow(template);
 

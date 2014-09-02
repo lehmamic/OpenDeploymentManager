@@ -50,7 +50,7 @@ namespace OpenDeploymentManager.Agent.Host.StartupTasks
             this.serviceHost.AddServiceEndpoint(new UdpDiscoveryEndpoint());
 
             this.serviceHost.AddServiceEndpoint(typeof(IAgentInfoService), new NetTcpBinding(), typeof(IAgentInfoService).GetServiceRoute());
-            ////this.serviceHost.AddServiceEndpoint(typeof(IDeploymentService), new NetTcpBinding(), typeof(IDeploymentService).GetServiceRoute());
+            this.serviceHost.AddServiceEndpoint(typeof(IDeploymentService), new NetTcpBinding(), typeof(IDeploymentService).GetServiceRoute());
 
             this.serviceHost.Open();
 

@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="DeploymentManager.cs" />
     <Compile Include="IDeploymentManager.cs" />
+    <Compile Include="DeploymentManagerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
