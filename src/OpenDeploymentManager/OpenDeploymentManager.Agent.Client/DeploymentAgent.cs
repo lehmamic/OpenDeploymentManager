@@ -1,4 +1,5 @@
 using System;
+using System.ServiceModel;
 using System.Threading;
 using OpenDeploymentManager.Agent.Contracts;
 
@@ -48,6 +49,18 @@ namespace OpenDeploymentManager.Agent.Client
             get
             {
                 return new Version(this.agentInfo.Value.Version);
+            }
+        }
+
+        public bool IsAlive()
+        {
+            try
+            {
+                return this.GetService<IAgentInfoService>().GetInfo() != null;
+            }
+            catch (CommunicationException)
+            {
+                return false;
             }
         }
 

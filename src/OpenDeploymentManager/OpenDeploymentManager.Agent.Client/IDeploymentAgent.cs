@@ -11,5 +11,7 @@ namespace OpenDeploymentManager.Agent.Client
         Version Version { get; }
 
         T GetService<T>() where T : class;
+
+        bool IsAlive();
     }
 }
