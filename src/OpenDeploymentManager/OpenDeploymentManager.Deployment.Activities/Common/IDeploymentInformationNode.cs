@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenDeploymentManager.Deployment.Activities
+namespace OpenDeploymentManager.Deployment.Activities.Common
 {
     public interface IDeploymentInformationNode
     {
@@ -11,5 +11,7 @@ namespace OpenDeploymentManager.Deployment.Activities
         IDeploymentInformationNode Parent { get; }
 
         IDeploymentInformationNodeCollection Children { get; }
+
+        Guid Id { get; }
     }
 }

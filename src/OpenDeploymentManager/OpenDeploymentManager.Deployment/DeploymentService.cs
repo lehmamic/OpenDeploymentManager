@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using OpenDeploymentManager.Deployment.Activities;
+using OpenDeploymentManager.Deployment.Activities.Common;
 
 namespace OpenDeploymentManager.Deployment
 {
-    public class Deployment
+    public class DeploymentService
     {
         private readonly IDeploymentExtensionsFactory extensionFactory;
 
-        public Deployment(IDeploymentExtensionsFactory extensionFactory)
+        public DeploymentService(IDeploymentExtensionsFactory extensionFactory)
         {
             if (extensionFactory == null)
             {

@@ -1,11 +1,10 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenDeploymentManager.Deployment.Activities")]
+[assembly: AssemblyTitle("OpenDeploymentManager.Deployment.Activities.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
@@ -15,8 +14,5 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5068feb9-7860-4f0b-b022-cc5a7813c5a3")]
-
-[assembly: InternalsVisibleTo("OpenDeploymentManager.Deployment.Activities.Tests")]
+[assembly: Guid("593c5b14-3942-44bf-9af0-1b7ebe6e4732")]

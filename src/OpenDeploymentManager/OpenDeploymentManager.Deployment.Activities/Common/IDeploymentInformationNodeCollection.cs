@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace OpenDeploymentManager.Deployment.Activities
+namespace OpenDeploymentManager.Deployment.Activities.Common
 {
     public interface IDeploymentInformationNodeCollection : IEnumerable<IDeploymentInformationNode>
     {

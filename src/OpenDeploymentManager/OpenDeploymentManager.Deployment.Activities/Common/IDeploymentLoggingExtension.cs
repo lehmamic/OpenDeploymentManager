@@ -1,6 +1,6 @@
 ﻿using System.Activities;
 
-namespace OpenDeploymentManager.Deployment.Activities
+namespace OpenDeploymentManager.Deployment.Activities.Common
 {
     public interface IDeploymentLoggingExtension
     {
