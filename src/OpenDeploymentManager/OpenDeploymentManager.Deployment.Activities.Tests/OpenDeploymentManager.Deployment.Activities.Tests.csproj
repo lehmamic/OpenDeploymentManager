@@ -70,6 +70,9 @@
     <None Include="TestData\MyPackage.1.0.0.nupkg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestData\MyPackage.1.1.0.nupkg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestData\package.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

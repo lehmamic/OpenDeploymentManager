@@ -2,10 +2,6 @@
     "name": "test-project",
     "version": "0.0.1",
     "dependencies": {
-        "grunt": "latest",
-        "grunt-karma": "latest",
-        "phantomjs": "latest",
-        "karma-phantomjs-launcher": "latest",
-        "karma-jasmine": "latest"
+        "grunt": "latest"
     }
 }
