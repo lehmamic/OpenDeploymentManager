@@ -55,7 +55,11 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Common\ActivityTracking.cs" />
     <Compile Include="Common\BaseCodeActivity.cs" />
+    <Compile Include="Common\DeploymentInformationNode.cs" />
+    <Compile Include="Common\DeploymentInformationNodeCollection.cs" />
+    <Compile Include="Common\DeploymentVariablesExtension.cs" />
     <Compile Include="Common\FileExtensions.cs" />
     <Compile Include="Common\FailingDeploymentException.cs" />
     <Compile Include="Common\IActivityTracking.cs" />

@@ -144,4 +144,7 @@
   <data name="InitializeWcfServiceHostsTask_InitializingServiceHost" xml:space="preserve">
     <value>Initializing wcf service host.</value>
   </data>
+  <data name="InitializeContainerTask_InitializeProjection" xml:space="preserve">
+    <value>Initializing the data transfer object projection.</value>
+  </data>
 </root>

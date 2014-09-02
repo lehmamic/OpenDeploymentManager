@@ -10,6 +10,11 @@ namespace OpenDeploymentManager.Agent.Client
     {
         private readonly IAgentProxyFactory proxyFactory;
 
+        public AgentConnectionManager()
+            : this(new AgentProxyFactory())
+        {
+        }
+
         public AgentConnectionManager(IAgentProxyFactory proxyFactory)
         {
             if (proxyFactory == null)

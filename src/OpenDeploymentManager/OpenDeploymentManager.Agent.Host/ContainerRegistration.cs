@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using Bootstrap.Extensions.StartupTasks;
+using Bootstrap.Unity;
 using Microsoft.Practices.Unity;
 using NLog;
 using OpenDeploymentManager.Agent.Contracts;
@@ -8,40 +8,34 @@ using OpenDeploymentManager.Agent.Host.Properties;
 using OpenDeploymentManager.Agent.Host.Services;
 using OpenDeploymentManager.Common.Projection;
 using OpenDeploymentManager.Common.Unity;
+using OpenDeploymentManager.Deployment;
 
-namespace OpenDeploymentManager.Agent.Host.StartupTasks
+namespace OpenDeploymentManager.Agent.Host
 {
-    public class InitializeContainerTask : IStartupTask
+    public class ContainerRegistration : IUnityRegistration
     {
         public static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private readonly IUnityContainer container;
-
-        public InitializeContainerTask(IUnityContainer container)
+        #region Implementation of IUnityRegistration
+        public void Register(IUnityContainer container)
         {
             if (container == null)
             {
                 throw new ArgumentNullException("container");
             }
 
-            this.container = container;
-        }
-
-        #region Implementation of IStartupTask
-        public void Run()
-        {
             Log.Trace(Resources.InitializeContainerTask_ConfiguringContainer);
 
-            this.container.RegisterTypePerRequest<IAgentInfoService, DeploymentAgentService>();
+            container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
 
+            container.RegisterTypePerRequest<IAgentInfoService, DeploymentAgentService>();
+            container.RegisterTypePerRequest<IDeploymentService, DeploymentAgentService>();
+
+            Log.Trace(Resources.InitializeContainerTask_InitializeProjection);
             Mapper.AssertConfigurationIsValid();
 
             var factory = new AutoMapperTypeAdapterFactory();
             TypeAdapterFactory.SetCurrent(factory);
-        }
-
-        public void Reset()
-        {
         }
         #endregion
     }

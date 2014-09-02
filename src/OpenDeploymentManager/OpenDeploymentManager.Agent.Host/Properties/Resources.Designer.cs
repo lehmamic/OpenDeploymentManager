@@ -70,6 +70,15 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initializing the data transfer object projection..
+        /// </summary>
+        internal static string InitializeContainerTask_InitializeProjection {
+            get {
+                return ResourceManager.GetString("InitializeContainerTask_InitializeProjection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The deployment agent is listening on {0}..
         /// </summary>
         internal static string InitializeWcfServiceHosts_AgentIsListeningOnPort {

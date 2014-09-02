@@ -42,11 +42,11 @@ namespace OpenDeploymentManager.Agent.Host
 
             base.OnStart(args);
 
-            Bootstrapper.With.Unity()
+            Bootstrapper
+                .With.Unity()
                 .And.AutoMapper()
                 .And.StartupTasks().UsingThisExecutionOrder(c =>
-                    c.First<InitializeContainerTask>()
-                    .Then<InitializeWcfServiceHostsTask>())
+                    c.First<InitializeWcfServiceHostsTask>())
                 .Start();
 
             Log.Info(Resources.Program_AgentStarted);

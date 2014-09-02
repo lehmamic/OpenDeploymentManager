@@ -39,7 +39,6 @@ namespace OpenDeploymentManager.Agent.Host.StartupTasks
         }
 
         #region Implementation of IStartupTask
-
         public void Run()
         {
             Log.Trace(Resources.InitializeWcfServiceHostsTask_InitializingServiceHost);
@@ -62,7 +61,6 @@ namespace OpenDeploymentManager.Agent.Host.StartupTasks
         {
             this.CleanupWcfHosts();
         }
-
         #endregion
 
         #region Implementation of IDisposable

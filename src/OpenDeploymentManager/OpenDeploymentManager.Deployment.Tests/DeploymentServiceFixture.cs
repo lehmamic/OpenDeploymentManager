@@ -1,8 +1,7 @@
 ﻿using System.IO;
+using Microsoft.Practices.ServiceLocation;
 using Moq;
 using NUnit.Framework;
-using OpenDeploymentManager.Deployment.Activities;
-using OpenDeploymentManager.Deployment.Activities.Common;
 
 namespace OpenDeploymentManager.Deployment.Tests
 {
@@ -13,21 +12,22 @@ namespace OpenDeploymentManager.Deployment.Tests
         public void RunDeployment_WithOneActivity_ExecutesActivity()
         {
             // arrange
+            var directory = new DirectoryInfo("SimpleWorkflowTest");
+            if (directory.Exists)
+            {
+                directory.Delete(true);
+            }
+
             string template = this.LoadTemplate("OpenDeploymentManager.Deployment.Tests.TestData.SimpleWorkflow.xaml");
 
-            var variablesExtension = new Mock<IDeploymentVariablesExtension>();
-
-            var factory = new Mock<IDeploymentExtensionsFactory>();
-            factory.Setup(f => f.CreateExtension<IDeploymentVariablesExtension>()).Returns(variablesExtension.Object);
-            factory.Setup(f => f.CreateExtension<IDeploymentLoggingExtension>()).Returns(new Mock<IDeploymentLoggingExtension>().Object);
-
-            var target = new DeploymentService(factory.Object);
+            var factory = new Mock<IServiceLocator>();
+            var target = new DeploymentManager(factory.Object);
 
             // act
             target.RunDeployment(template, null);
 
             // assert
-            variablesExtension.Verify(e => e.Get<string>("test"));
+            Assert.That(File.Exists(@"SimpleWorkflowTest\TestFile.txt"), Is.True);
         }
 
         private string LoadTemplate(string templateResource)

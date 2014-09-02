@@ -4,23 +4,23 @@ using System.Activities.XamlIntegration;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using OpenDeploymentManager.Deployment.Activities;
+using Microsoft.Practices.ServiceLocation;
 using OpenDeploymentManager.Deployment.Activities.Common;
 
 namespace OpenDeploymentManager.Deployment
 {
-    public class DeploymentService
+    public class DeploymentManager : IDeploymentManager
     {
-        private readonly IDeploymentExtensionsFactory extensionFactory;
+        private readonly IServiceLocator serviceLocator;
 
-        public DeploymentService(IDeploymentExtensionsFactory extensionFactory)
+        public DeploymentManager(IServiceLocator serviceLocator)
         {
-            if (extensionFactory == null)
+            if (serviceLocator == null)
             {
-                throw new ArgumentNullException("extensionFactory");
+                throw new ArgumentNullException("serviceLocator");
             }
 
-            this.extensionFactory = extensionFactory;
+            this.serviceLocator = serviceLocator;
         }
 
         public void RunDeployment(string template, object variables)
@@ -28,8 +28,9 @@ namespace OpenDeploymentManager.Deployment
             Activity workflow = LoadWorkflow(template);
 
             var workflowInvoker = new WorkflowInvoker(workflow);
-            workflowInvoker.Extensions.Add(this.extensionFactory.CreateExtension<IDeploymentLoggingExtension>);
-            workflowInvoker.Extensions.Add(this.extensionFactory.CreateExtension<IDeploymentVariablesExtension>);
+            workflowInvoker.Extensions.Add(this.serviceLocator);
+            workflowInvoker.Extensions.Add(new ActivityTracking(new DeploymentInformationNode(Guid.Empty, DateTimeOffset.Now, null, "Executing deployment worflow.")));
+            workflowInvoker.Extensions.Add(new DeploymentVariablesExtension(new Dictionary<string, object>()));
 
             var workflowInputs = new Dictionary<string, object>();
             workflowInvoker.Invoke(workflowInputs);

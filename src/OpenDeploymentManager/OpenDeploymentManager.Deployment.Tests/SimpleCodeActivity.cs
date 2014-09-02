@@ -1,6 +1,5 @@
 using System.Activities;
-using OpenDeploymentManager.Deployment.Activities;
-using OpenDeploymentManager.Deployment.Activities.Common;
+using System.IO;
 
 namespace OpenDeploymentManager.Deployment.Tests
 {
@@ -8,8 +7,13 @@ namespace OpenDeploymentManager.Deployment.Tests
     {
         protected override void Execute(CodeActivityContext context)
         {
-            var variables = context.GetExtension<IDeploymentVariablesExtension>();
-            variables.Get<string>("test");
+            var directory = new DirectoryInfo(@"SimpleWorkflowTest");
+            if (!directory.Exists)
+            {
+                directory.Create();
+            }
+
+            File.Create(@"SimpleWorkflowTest\TestFile.txt");
         }
     }
 }
