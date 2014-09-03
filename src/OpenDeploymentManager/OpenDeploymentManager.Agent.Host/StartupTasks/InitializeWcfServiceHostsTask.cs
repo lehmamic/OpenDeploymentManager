@@ -16,7 +16,7 @@ namespace OpenDeploymentManager.Agent.Host.StartupTasks
     public class InitializeWcfServiceHostsTask : IStartupTask, IDisposable
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-        private static readonly Uri ServiceHostBaseAddress = new Uri(ApplicationConfiguration.AgentUrl);
+        private static readonly Uri ServiceHostBaseAddress = new Uri(AgentConfiguration.AgentUrl);
 
         private readonly IUnityContainer container;
 

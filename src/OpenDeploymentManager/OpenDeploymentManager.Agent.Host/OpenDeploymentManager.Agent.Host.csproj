@@ -94,7 +94,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="AgentConfiguration.cs" />
     <Compile Include="Logging\LoggingCallHandlerAttribute.cs" />
     <Compile Include="Logging\LoggingCallHandler.cs" />
     <Compile Include="UnityContainerRegistration.cs" />

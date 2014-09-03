@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 using OpenDeploymentManager.Agent.Client;
 using OpenDeploymentManager.Agent.Contracts;
+using OpenDeploymentManager.Agent.Host;
 
 namespace OpenDeploymentManager.Agent.IntegrationTests.Services
 {
@@ -13,7 +15,7 @@ namespace OpenDeploymentManager.Agent.IntegrationTests.Services
         {
             // arrange
             var connectionManager = new AgentConnectionManager();
-            IDeploymentAgent agent = connectionManager.Discover(new Uri("net.tcp://localhost:53714/"));
+            IDeploymentAgent agent = connectionManager.Discover(new Uri(AgentConfiguration.AgentUrl));
 
             // act
             var target = agent.GetService<IDeploymentService>();
@@ -23,19 +25,42 @@ namespace OpenDeploymentManager.Agent.IntegrationTests.Services
         }
 
         [Test]
-        [Ignore]
-        public void Deploy_SimpleDeploymentWorkflow_ExecutesWorkflow()
+        public void Deploy_SimpleWorkflow_ExecutesWorkflow()
         {
             // arrange
+            string expectedFileName = Path.Combine("SimpleWorkflowTest", "TestFile.txt");
+            string template = this.LoadTemplate("OpenDeploymentManager.Agent.IntegrationTests.Workflows.SimpleWorkflow.xaml");
+
             var connectionManager = new AgentConnectionManager();
-            IDeploymentAgent agent = connectionManager.Discover(new Uri("net.tcp://localhost:53714/"));
+            IDeploymentAgent agent = connectionManager.Discover(new Uri(AgentConfiguration.AgentUrl));
             var target = agent.GetService<IDeploymentService>();
 
             // act
-            target.Deploy(Guid.NewGuid(), Guid.NewGuid(), "", new KeyValue<object>[0], new KeyValue<string>[0]);
+            var arguments = new[] { new KeyValue<object> { Key = "FileName", Value = expectedFileName } };
+            target.Deploy(Guid.NewGuid(), Guid.NewGuid(), template, arguments, new KeyValue<string>[0]);
 
             // assert
-            Assert.That(target, Is.Not.Null);
+            Assert.That(File.Exists(expectedFileName), Is.True);
+        }
+
+        private string LoadTemplate(string templateResource)
+        {
+            var stream = this.GetType().Assembly.GetManifestResourceStream(templateResource);
+            try
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    stream = null;
+                    return reader.ReadToEnd();
+                }
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
         }
     }
 }

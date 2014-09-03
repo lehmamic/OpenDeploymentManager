@@ -39,6 +39,7 @@
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
@@ -56,6 +57,7 @@
     <Compile Include="AssemblyInitializeFixture.cs" />
     <Compile Include="Services\DeploymentServiceFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflows\CreateFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenDeploymentManager.Agent.Client\OpenDeploymentManager.Agent.Client.csproj">
@@ -80,7 +82,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\" />
-    <Folder Include="Workflows\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Workflows\SimpleWorkflow.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

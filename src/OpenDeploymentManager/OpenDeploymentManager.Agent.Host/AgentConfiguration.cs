@@ -2,7 +2,7 @@
 
 namespace OpenDeploymentManager.Agent.Host
 {
-    public static class ApplicationConfiguration
+    public static class AgentConfiguration
     {
         public static string AgentUrl
         {

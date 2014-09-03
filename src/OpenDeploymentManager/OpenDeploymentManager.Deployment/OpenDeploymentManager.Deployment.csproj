@@ -49,11 +49,16 @@
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="DeploymentManager.cs" />
+    <Compile Include="ExpressionCompilationFailedException.cs" />
     <Compile Include="IDeploymentManager.cs" />
     <Compile Include="DeploymentManagerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenDeploymentManager.Common\OpenDeploymentManager.Common.csproj">
+      <Project>{78BAE48E-C85D-42CD-9B3A-5D09CA891351}</Project>
+      <Name>OpenDeploymentManager.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OpenDeploymentManager.Deployment.Activities\OpenDeploymentManager.Deployment.Activities.csproj">
       <Project>{041C8453-311C-4092-AD28-CF8FD83FEAC2}</Project>
       <Name>OpenDeploymentManager.Deployment.Activities</Name>

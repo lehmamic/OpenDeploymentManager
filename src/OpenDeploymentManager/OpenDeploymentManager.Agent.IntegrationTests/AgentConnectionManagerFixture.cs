@@ -24,7 +24,7 @@ namespace OpenDeploymentManager.Agent.IntegrationTests
             IDeploymentAgent agent = discoveredAgents.FirstOrDefault();
             Assert.That(agent, Is.Not.Null);
             Assert.That(agent.IsAlive(), Is.True);
-            Assert.That(agent.Uri, Is.EqualTo(new Uri("net.tcp://localhost:53714/")));
+            Assert.That(agent.Uri, Is.EqualTo(new Uri(AgentConfiguration.AgentUrl)));
             Assert.That(agent.MachineName, Is.EqualTo(Environment.MachineName));
             Assert.That(agent.Version, Is.EqualTo(typeof(Program).Assembly.GetName().Version));
         }
@@ -33,7 +33,7 @@ namespace OpenDeploymentManager.Agent.IntegrationTests
         public void Discover_SingleAgent_ReturnsAgent()
         {
             // arrange
-            var agentUri = new Uri("net.tcp://localhost:53714/");
+            var agentUri = new Uri(AgentConfiguration.AgentUrl);
             var connectionManager = new AgentConnectionManager();
 
             // act

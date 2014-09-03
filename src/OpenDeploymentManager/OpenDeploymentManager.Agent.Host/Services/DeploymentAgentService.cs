@@ -24,7 +24,7 @@ namespace OpenDeploymentManager.Agent.Host.Services
             this.deploymentManager = deploymentManager;
         }
 
-        #region Implementation of IAgentStatusService
+        #region Implementation of IAgentInfoService
         [LoggingCallHandler]
         public AgentInfo GetInfo()
         {
@@ -36,7 +36,7 @@ namespace OpenDeploymentManager.Agent.Host.Services
         }
         #endregion
 
-        #region Implementation of IAgentStatusService
+        #region Implementation of IDeploymentService
         [LoggingCallHandler]
         public void Deploy(Guid deploymentId, Guid deploymentNodeId, string template, KeyValue<object>[] arguments, KeyValue<string>[] variables)
         {

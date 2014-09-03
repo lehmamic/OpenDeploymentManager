@@ -59,6 +59,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Diagnostics\Guard.cs" />
     <Compile Include="Projection\AutomapperTypeAdapter.cs" />
     <Compile Include="Projection\AutomapperTypeAdapterFactory.cs" />
     <Compile Include="Projection\ITypeAdapter.cs" />
