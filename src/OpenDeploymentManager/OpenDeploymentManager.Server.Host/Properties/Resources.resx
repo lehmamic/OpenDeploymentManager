@@ -117,32 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Program_AgentStarted" xml:space="preserve">
-    <value>Open Deployment Manager agent is started.</value>
-  </data>
-  <data name="Program_AgentStopped" xml:space="preserve">
-    <value>Open Deployment Manager agent is stopped.</value>
-  </data>
-  <data name="Program_PressAnyKeyToExit" xml:space="preserve">
-    <value>Press any key to exit</value>
-  </data>
-  <data name="Program_StartingAgent" xml:space="preserve">
-    <value>Starting Open Deployment Manager agent.</value>
-  </data>
-  <data name="Program_StoppingAgent" xml:space="preserve">
-    <value>Stopping Open Deployment Manager agent.</value>
-  </data>
-  <data name="Program_UnhanldedException" xml:space="preserve">
-    <value>An unhandled exception occurred.</value>
-  </data>
-  <data name="InitializeWcfServiceHosts_AgentIsListeningOnPort" xml:space="preserve">
-    <value>The deployment agent is listening on {0}.</value>
-  </data>
   <data name="InitializeContainerTask_ConfiguringContainer" xml:space="preserve">
     <value>Configuring the dependency injection container.</value>
-  </data>
-  <data name="InitializeWcfServiceHostsTask_InitializingServiceHost" xml:space="preserve">
-    <value>Initializing wcf service host.</value>
   </data>
   <data name="InitializeContainerTask_InitializeProjection" xml:space="preserve">
     <value>Initializing the data transfer object projection.</value>
@@ -150,13 +126,22 @@
   <data name="InitializeContainerTask_InitializeServiceLocator" xml:space="preserve">
     <value>Initializing the service locator.</value>
   </data>
-  <data name="LoggingCallHandler_InvokingMethod" xml:space="preserve">
-    <value>Invoking method {0} at {1}.</value>
+  <data name="Program_AgentStarted" xml:space="preserve">
+    <value>Open Deployment Manager server is started.</value>
   </data>
-  <data name="LoggingCallHandler_MethodThrewException" xml:space="preserve">
-    <value>Method {0} threw exception {1} at {2}.</value>
+  <data name="Program_AgentStopped" xml:space="preserve">
+    <value>Open Deployment Manager server is stopped.</value>
   </data>
-  <data name="LoggingCallHandler_MethodReturned" xml:space="preserve">
-    <value>Method {0} returned {1} at {2}.</value>
+  <data name="Program_PressAnyKeyToExit" xml:space="preserve">
+    <value>Press any key to exit</value>
+  </data>
+  <data name="Program_StartingAgent" xml:space="preserve">
+    <value>Starting Open Deployment Manager server.</value>
+  </data>
+  <data name="Program_StoppingAgent" xml:space="preserve">
+    <value>Stopping Open Deployment Manager server.</value>
+  </data>
+  <data name="Program_UnhanldedException" xml:space="preserve">
+    <value>An unhandled exception occurred.</value>
   </data>
 </root>

@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Deplo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Agent.IntegrationTests", "OpenDeploymentManager.Agent.IntegrationTests\OpenDeploymentManager.Agent.IntegrationTests.csproj", "{834D23C3-4AEC-401A-991F-DE64A58A0BBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Server.Host", "OpenDeploymentManager.Server.Host\OpenDeploymentManager.Server.Host.csproj", "{68811462-B984-477B-A4F3-1891C05DC0FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{834D23C3-4AEC-401A-991F-DE64A58A0BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{834D23C3-4AEC-401A-991F-DE64A58A0BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{834D23C3-4AEC-401A-991F-DE64A58A0BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68811462-B984-477B-A4F3-1891C05DC0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68811462-B984-477B-A4F3-1891C05DC0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68811462-B984-477B-A4F3-1891C05DC0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68811462-B984-477B-A4F3-1891C05DC0FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

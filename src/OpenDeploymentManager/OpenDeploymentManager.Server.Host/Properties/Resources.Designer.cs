@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OpenDeploymentManager.Agent.Host.Properties {
+namespace OpenDeploymentManager.Server.Host.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OpenDeploymentManager.Agent.Host.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("OpenDeploymentManager.Server.Host.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -88,52 +88,7 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The deployment agent is listening on {0}..
-        /// </summary>
-        internal static string InitializeWcfServiceHosts_AgentIsListeningOnPort {
-            get {
-                return ResourceManager.GetString("InitializeWcfServiceHosts_AgentIsListeningOnPort", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Initializing wcf service host..
-        /// </summary>
-        internal static string InitializeWcfServiceHostsTask_InitializingServiceHost {
-            get {
-                return ResourceManager.GetString("InitializeWcfServiceHostsTask_InitializingServiceHost", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Invoking method {0} at {1}..
-        /// </summary>
-        internal static string LoggingCallHandler_InvokingMethod {
-            get {
-                return ResourceManager.GetString("LoggingCallHandler_InvokingMethod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Method {0} returned {1} at {2}..
-        /// </summary>
-        internal static string LoggingCallHandler_MethodReturned {
-            get {
-                return ResourceManager.GetString("LoggingCallHandler_MethodReturned", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Method {0} threw exception {1} at {2}..
-        /// </summary>
-        internal static string LoggingCallHandler_MethodThrewException {
-            get {
-                return ResourceManager.GetString("LoggingCallHandler_MethodThrewException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open Deployment Manager agent is started..
+        ///   Looks up a localized string similar to Open Deployment Manager server is started..
         /// </summary>
         internal static string Program_AgentStarted {
             get {
@@ -142,7 +97,7 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open Deployment Manager agent is stopped..
+        ///   Looks up a localized string similar to Open Deployment Manager server is stopped..
         /// </summary>
         internal static string Program_AgentStopped {
             get {
@@ -160,7 +115,7 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting Open Deployment Manager agent..
+        ///   Looks up a localized string similar to Starting Open Deployment Manager server..
         /// </summary>
         internal static string Program_StartingAgent {
             get {
@@ -169,7 +124,7 @@ namespace OpenDeploymentManager.Agent.Host.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stopping Open Deployment Manager agent..
+        ///   Looks up a localized string similar to Stopping Open Deployment Manager server..
         /// </summary>
         internal static string Program_StoppingAgent {
             get {
