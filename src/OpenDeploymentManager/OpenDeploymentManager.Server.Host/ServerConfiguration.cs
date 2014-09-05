@@ -4,7 +4,7 @@ namespace OpenDeploymentManager.Server.Host
 {
     public static class ServerConfiguration
     {
-        public static string AgentUrl
+        public static string ServerUrl
         {
             get
             {

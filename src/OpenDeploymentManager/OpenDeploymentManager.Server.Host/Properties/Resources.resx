@@ -144,4 +144,7 @@
   <data name="Program_UnhanldedException" xml:space="preserve">
     <value>An unhandled exception occurred.</value>
   </data>
+  <data name="InitializeOwinTask_OwinIsListeningOnPort" xml:space="preserve">
+    <value>The deployment server is listening on {0}.</value>
+  </data>
 </root>

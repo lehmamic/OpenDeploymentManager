@@ -88,6 +88,15 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The deployment server is listening on {0}..
+        /// </summary>
+        internal static string InitializeOwinTask_OwinIsListeningOnPort {
+            get {
+                return ResourceManager.GetString("InitializeOwinTask_OwinIsListeningOnPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Deployment Manager server is started..
         /// </summary>
         internal static string Program_AgentStarted {
