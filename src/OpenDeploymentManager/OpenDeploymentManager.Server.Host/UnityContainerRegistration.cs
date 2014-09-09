@@ -40,7 +40,8 @@ namespace OpenDeploymentManager.Server.Host
             ////    new Interceptor<InterfaceInterceptor>());
 
             // register db
-            container.RegisterTypeAsSingleton<IDocumentStoreFactory, DocumentStoreFactory>();
+            container.RegisterTypeAsSingleton<IDocumentStoreFactory, DocumentStoreFactory>(
+                new InjectionConstructor("RavenDBConnection"));
             container.RegisterTypeAsSingleton<IDocumentStore>(c => c.Resolve<IDocumentStoreFactory>().CreateDocumentStore());
             container.RegisterTypePerRequest<IDocumentSession>(c => c.Resolve<IDocumentStore>().OpenSession());
 

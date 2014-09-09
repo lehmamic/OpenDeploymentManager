@@ -33,6 +33,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Agent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Server.Host", "OpenDeploymentManager.Server.Host\OpenDeploymentManager.Server.Host.csproj", "{68811462-B984-477B-A4F3-1891C05DC0FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Client", "OpenDeploymentManager.Client\OpenDeploymentManager.Client.csproj", "{4E412FEF-FD9E-4317-AF8D-46434819D181}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Server.IntegrationTests", "OpenDeploymentManager.Server.IntegrationTests\OpenDeploymentManager.Server.IntegrationTests.csproj", "{6B0BCC07-F937-4F12-BEE6-DD31410E740C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDeploymentManager.Server.Contracts", "OpenDeploymentManager.Server.Contracts\OpenDeploymentManager.Server.Contracts.csproj", "{CE06F873-DDE3-4C24-8F84-4781BC569261}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +93,18 @@ Global
 		{68811462-B984-477B-A4F3-1891C05DC0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68811462-B984-477B-A4F3-1891C05DC0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68811462-B984-477B-A4F3-1891C05DC0FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E412FEF-FD9E-4317-AF8D-46434819D181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E412FEF-FD9E-4317-AF8D-46434819D181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E412FEF-FD9E-4317-AF8D-46434819D181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E412FEF-FD9E-4317-AF8D-46434819D181}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B0BCC07-F937-4F12-BEE6-DD31410E740C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B0BCC07-F937-4F12-BEE6-DD31410E740C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B0BCC07-F937-4F12-BEE6-DD31410E740C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B0BCC07-F937-4F12-BEE6-DD31410E740C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE06F873-DDE3-4C24-8F84-4781BC569261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE06F873-DDE3-4C24-8F84-4781BC569261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE06F873-DDE3-4C24-8F84-4781BC569261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE06F873-DDE3-4C24-8F84-4781BC569261}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

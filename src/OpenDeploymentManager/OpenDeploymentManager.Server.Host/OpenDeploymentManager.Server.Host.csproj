@@ -202,6 +202,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartupTasks\InitializeDatabaseTask.cs" />
     <Compile Include="StartupTasks\InitializeOwinTask.cs" />
     <Compile Include="UnityContainerRegistration.cs" />
     <Compile Include="App_Start\Startup.cs" />

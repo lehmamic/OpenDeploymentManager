@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78BAE48E-C85D-42CD-9B3A-5D09CA891351}</ProjectGuid>
+    <ProjectGuid>{CE06F873-DDE3-4C24-8F84-4781BC569261}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenDeploymentManager.Common</RootNamespace>
-    <AssemblyName>OpenDeploymentManager.Common</AssemblyName>
+    <RootNamespace>OpenDeploymentManager.Server.Contracts</RootNamespace>
+    <AssemblyName>OpenDeploymentManager.Server.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,23 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,26 +42,23 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Diagnostics\Guard.cs" />
-    <Compile Include="Projection\AutomapperTypeAdapter.cs" />
-    <Compile Include="Projection\AutomapperTypeAdapterFactory.cs" />
-    <Compile Include="Projection\ITypeAdapter.cs" />
-    <Compile Include="Projection\ITypeAdapterFactory.cs" />
-    <Compile Include="Projection\ProjectionsExtensions.cs" />
-    <Compile Include="Projection\TypeAdapterFactory.cs" />
-    <Compile Include="Unity\UnityContainerExtensions.cs" />
+    <Compile Include="HttpDeleteAttribute.cs" />
+    <Compile Include="HttpGetAttribute.cs" />
+    <Compile Include="HttpMethodAttribute.cs" />
+    <Compile Include="HttpPostAttribute.cs" />
+    <Compile Include="HttpPutAttribute.cs" />
+    <Compile Include="IAccountService.cs" />
+    <Compile Include="IResource.cs" />
+    <Compile Include="IResourceService.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="LoginData.cs" />
+    <Compile Include="PageResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UriExtensions.cs" />
+    <Compile Include="RouteAttribute.cs" />
+    <Compile Include="TokenResponse.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

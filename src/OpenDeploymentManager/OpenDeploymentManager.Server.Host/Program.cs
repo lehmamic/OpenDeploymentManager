@@ -42,11 +42,11 @@ namespace OpenDeploymentManager.Server.Host
 
             base.OnStart(args);
 
-            Bootstrapper
-                .With.Unity()
+            Bootstrapper.With.Unity()
                 .And.AutoMapper()
                 .And.StartupTasks().UsingThisExecutionOrder(c =>
-                    c.First<InitializeOwinTask>())
+                    c.First<InitializeOwinTask>()
+                    .Then<InitializeDatabaseTask>())
                 .Start();
 
             Log.Info(Resources.Program_AgentStarted);

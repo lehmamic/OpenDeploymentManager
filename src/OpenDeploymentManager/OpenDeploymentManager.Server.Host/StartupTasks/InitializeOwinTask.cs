@@ -33,6 +33,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         public void Run()
         {
             var options = new StartOptions();
+            options.ServerFactory = "Microsoft.Owin.Host.HttpListener";
             options.Urls.Add(ServerConfiguration.ServerUrl);
 
             this.webApp = WebApp.Start(options, this.BuildWebApp);

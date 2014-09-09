@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenDeploymentManager.Agent.IntegrationTests")]
+[assembly: AssemblyTitle("OpenDeploymentManager.Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
@@ -15,4 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2c1fdd09-28a7-4829-bc52-895f57d0b546")]
+[assembly: Guid("6781ac41-618d-4100-ae00-5962f745ea8c")]
