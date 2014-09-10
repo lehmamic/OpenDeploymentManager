@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OpenDeploymentManager.Client.Exceptions
 {
     [Serializable]
-    public class ServerException : Exception
+    public class ServerException : CommunicationException
     {
         private readonly int statusCode;
 

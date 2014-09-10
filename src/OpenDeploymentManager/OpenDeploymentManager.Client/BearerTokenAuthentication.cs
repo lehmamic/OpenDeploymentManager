@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
-using System.Security;
 using OpenDeploymentManager.Client.Exceptions;
 using OpenDeploymentManager.Client.Properties;
 using OpenDeploymentManager.Server.Contracts;
@@ -85,35 +82,57 @@ namespace OpenDeploymentManager.Client
             {
                 client.BaseAddress = uriResolver.RootUri;
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "Token");
-
-                NetworkCredential networkCredential = this.Credentials.GetCredential(uriResolver.Resolve("~/Token"), "Bearer");
-                var requestData = new TokenRequest
-                                      {
-                                          grant_type = "password",
-                                          username = networkCredential.UserName,
-                                          password = networkCredential.Password
-                                      };
-
-
-                request.Content = new ObjectContent(typeof(TokenRequest), requestData, new WritableFormUrlEncodedMediaTypeFormatter());
-
-                HttpResponseMessage response = client.SendAsync(request).WaitOn();
-                var responseData = response.Content.ReadAsAsync<TokenResponse>().WaitOn();
-
-                switch (response.StatusCode)
+                try
                 {
-                    case HttpStatusCode.OK:
-                        this.token = responseData.access_token;
-                        break;
+                    HttpRequestMessage request = this.CreateHttpRequestMessage(uriResolver);
+                    HttpResponseMessage response = client.SendAsync(request).WaitOn();
 
-                    case HttpStatusCode.Unauthorized:
-                        throw new SecurityException(responseData.error_description);
-
-                    default:
-                        string message = responseData.error_description ?? Resources.OpenDeploymentManagerClient_UnknownError;
-                        throw new ServerException(message, (int)response.StatusCode);
+                    this.ProcessResponse(response);
                 }
+                catch (HttpRequestException e)
+                {
+                    throw new CommunicationException(e.Message, e);
+                }
+            }
+        }
+
+        private HttpRequestMessage CreateHttpRequestMessage(IUriResolver uriResolver)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "Token");
+
+            NetworkCredential networkCredential = this.Credentials.GetCredential(uriResolver.Resolve("~/Token"), "Bearer");
+            var requestData = new TokenRequest
+                                  {
+                                      grant_type = "password",
+                                      username = networkCredential.UserName,
+                                      password = networkCredential.Password
+                                  };
+
+            request.Content = new ObjectContent(
+                typeof(TokenRequest),
+                requestData,
+                new WritableFormUrlEncodedMediaTypeFormatter());
+            return request;
+        }
+
+        private void ProcessResponse(HttpResponseMessage response)
+        {
+            var responseData = response.Content.ReadAsAsync<TokenResponse>().WaitOn();
+
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.OK:
+                    this.token = responseData.access_token;
+                    break;
+
+                case HttpStatusCode.Unauthorized:
+                case HttpStatusCode.Forbidden:
+                case HttpStatusCode.BadRequest:
+                    throw new SecurityException(responseData.error_description, (int)response.StatusCode);
+
+                default:
+                    string message = responseData.error_description ?? Resources.OpenDeploymentManagerClient_UnknownError;
+                    throw new ServerException(message, (int)response.StatusCode);
             }
         }
         #endregion

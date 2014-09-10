@@ -57,6 +57,8 @@
     <Compile Include="ApiKeyAuthentication.cs" />
     <Compile Include="AuthenticationHeaderValue.cs" />
     <Compile Include="BearerTokenAuthentication.cs" />
+    <Compile Include="Exceptions\CommunicationException.cs" />
+    <Compile Include="Exceptions\SecurityException.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
     <Compile Include="IUriResolver.cs" />
     <Compile Include="IOpenDeploymentManagerAuthentication.cs" />
