@@ -9,7 +9,7 @@ using Microsoft.Owin.Security.OAuth;
 using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 
-namespace OpenDeploymentManager.Server.Host.Providers
+namespace OpenDeploymentManager.Server.Host.Security
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

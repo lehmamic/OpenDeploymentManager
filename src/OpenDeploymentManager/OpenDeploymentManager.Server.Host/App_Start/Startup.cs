@@ -5,10 +5,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Practices.Unity;
 using OpenDeploymentManager.Common.Diagnostics;
+using OpenDeploymentManager.Server.Host.Helpers;
 using OpenDeploymentManager.Server.Host.Models.Entity;
-using OpenDeploymentManager.Server.Host.Providers;
+using OpenDeploymentManager.Server.Host.Security;
 using Owin;
-using PiranhaDeploy.Server.Api.Identity.Providers;
 
 namespace OpenDeploymentManager.Server.Host
 {
@@ -17,12 +17,21 @@ namespace OpenDeploymentManager.Server.Host
         public const string PublicClientId = "self";
 
         private static OAuthAuthorizationServerOptions authorizationServerOptions;
+        private static ApiKeyAuthenticationOptions apiAuthorizationOptions;
 
         public static OAuthAuthorizationServerOptions OAuthOptions
         {
             get
             {
-                return authorizationServerOptions ?? (authorizationServerOptions = CreateAuthorizationOptions());
+                return authorizationServerOptions ?? (authorizationServerOptions = CreateOAuthAuthorizationOptions());
+            }
+        }
+
+        public static ApiKeyAuthenticationOptions ApiAuthOptions
+        {
+            get
+            {
+                return apiAuthorizationOptions ?? (apiAuthorizationOptions = CreateApiAuthorizationOptions());
             }
         }
 
@@ -49,6 +58,9 @@ namespace OpenDeploymentManager.Server.Host
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
 
+            // Enable the application to use api keys to authenticate users
+            app.UseApiKeyAuthentication(ApiAuthOptions);
+
             // Uncomment the following lines to enable logging in with third party login providers
 
             ////app.UseMicrosoftAccountAuthentication(
@@ -67,7 +79,7 @@ namespace OpenDeploymentManager.Server.Host
         }
 
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
-        private static OAuthAuthorizationServerOptions CreateAuthorizationOptions()
+        private static OAuthAuthorizationServerOptions CreateOAuthAuthorizationOptions()
         {
             Func<UserManager<ApplicationUser>> userManagerFactory = () => GlobalConfiguration.Configuration.DependencyResolver.Resolve<UserManager<ApplicationUser>>();
 
@@ -79,6 +91,13 @@ namespace OpenDeploymentManager.Server.Host
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
             };
+        }
+
+        private static ApiKeyAuthenticationOptions CreateApiAuthorizationOptions()
+        {
+            Func<UserManager<ApplicationUser>> userManagerFactory = () => GlobalConfiguration.Configuration.DependencyResolver.Resolve<UserManager<ApplicationUser>>();
+
+            return new ApiKeyAuthenticationOptions(userManagerFactory);
         }
     }
 }

@@ -149,5 +149,14 @@ namespace OpenDeploymentManager.Server.Host.Properties {
                 return ResourceManager.GetString("Program_UnhanldedException", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not delete the user you currently are logged in with..
+        /// </summary>
+        internal static string UsersController_CanNotDeleteCurrentUser {
+            get {
+                return ResourceManager.GetString("UsersController_CanNotDeleteCurrentUser", resourceCulture);
+            }
+        }
     }
 }

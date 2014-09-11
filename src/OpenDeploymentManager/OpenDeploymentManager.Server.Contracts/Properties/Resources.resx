@@ -117,37 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InitializeContainerTask_ConfiguringContainer" xml:space="preserve">
-    <value>Configuring the dependency injection container.</value>
+  <data name="CompareAttribute_MustMatch" xml:space="preserve">
+    <value>'{0}' and '{1}' do not match.</value>
   </data>
-  <data name="InitializeContainerTask_InitializeProjection" xml:space="preserve">
-    <value>Initializing the data transfer object projection.</value>
+  <data name="EmailAddressAttribute_Invalid" xml:space="preserve">
+    <value>The {0} field is not a valid e-mail address.</value>
   </data>
-  <data name="InitializeContainerTask_InitializeServiceLocator" xml:space="preserve">
-    <value>Initializing the service locator.</value>
+  <data name="Property_ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
   </data>
-  <data name="Program_AgentStarted" xml:space="preserve">
-    <value>Open Deployment Manager server is started.</value>
+  <data name="Property_Created" xml:space="preserve">
+    <value>Created on</value>
   </data>
-  <data name="Program_AgentStopped" xml:space="preserve">
-    <value>Open Deployment Manager server is stopped.</value>
+  <data name="Property_DisplayName" xml:space="preserve">
+    <value>Display name</value>
   </data>
-  <data name="Program_PressAnyKeyToExit" xml:space="preserve">
-    <value>Press any key to exit</value>
+  <data name="Property_Email" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="Program_StartingAgent" xml:space="preserve">
-    <value>Starting Open Deployment Manager server.</value>
+  <data name="Property_Id" xml:space="preserve">
+    <value>Id</value>
   </data>
-  <data name="Program_StoppingAgent" xml:space="preserve">
-    <value>Stopping Open Deployment Manager server.</value>
+  <data name="Property_LastModified" xml:space="preserve">
+    <value>Last modified on</value>
   </data>
-  <data name="Program_UnhanldedException" xml:space="preserve">
-    <value>An unhandled exception occurred.</value>
+  <data name="Property_NewPassword" xml:space="preserve">
+    <value>New password</value>
   </data>
-  <data name="InitializeOwinTask_OwinIsListeningOnPort" xml:space="preserve">
-    <value>The deployment server is listening on {0}.</value>
+  <data name="Property_OldPassword" xml:space="preserve">
+    <value>Old password</value>
   </data>
-  <data name="UsersController_CanNotDeleteCurrentUser" xml:space="preserve">
-    <value>Can not delete the user you currently are logged in with.</value>
+  <data name="Property_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Property_UserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="RequiredAttribute_ValidationError" xml:space="preserve">
+    <value>The {0} field is required.</value>
+  </data>
+  <data name="StringLengthAttribute_ValidationErrorIncludingMinimum" xml:space="preserve">
+    <value>The field {0} must be a string with a minimum length of {2} and a maximum length of {1}.</value>
+  </data>
+  <data name="ValidationError_ConfirmPasswordNotMatch" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
   </data>
 </root>

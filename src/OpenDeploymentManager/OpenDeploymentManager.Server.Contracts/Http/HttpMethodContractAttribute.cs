@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace OpenDeploymentManager.Server.Contracts
+namespace OpenDeploymentManager.Server.Contracts.Http
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public abstract class HttpMethodAttribute : Attribute
+    public abstract class HttpMethodContractAttribute : Attribute
     {
         private readonly string method;
 
-        protected HttpMethodAttribute(string method)
+        protected HttpMethodContractAttribute(string method)
         {
             this.method = method;
         }

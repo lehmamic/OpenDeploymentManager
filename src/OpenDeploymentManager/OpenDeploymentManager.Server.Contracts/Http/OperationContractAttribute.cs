@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace OpenDeploymentManager.Server.Contracts
+namespace OpenDeploymentManager.Server.Contracts.Http
 {
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class RouteAttribute : Attribute
+    public class OperationContractAttribute : Attribute
     {
         private readonly string route;
 
-        public RouteAttribute(string route)
+        public OperationContractAttribute(string route)
         {
             if (route == null)
             {

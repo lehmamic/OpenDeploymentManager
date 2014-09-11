@@ -1,5 +1,4 @@
-﻿
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenDeploymentManager.Client;
 using OpenDeploymentManager.Client.Exceptions;
 using OpenDeploymentManager.Common;

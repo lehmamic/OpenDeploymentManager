@@ -37,7 +37,8 @@ namespace OpenDeploymentManager.Client
                 client.DefaultRequestHeaders.Add(authHeader.Header, authHeader.Value);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json; charset=utf-8"));
 
-                var request = new HttpRequestMessage(invocation.Method.GetHttpMethod(), invocation.TargetType.GetRoute());
+                Uri requestUri = invocation.Method.GetRoute();
+                var request = new HttpRequestMessage(invocation.Method.GetHttpMethod(), requestUri);
 
                 var resourceParameter = invocation.Method.GetParameters().FirstOrDefault(p => p.ParameterType == typeof(T));
                 if (resourceParameter != null)

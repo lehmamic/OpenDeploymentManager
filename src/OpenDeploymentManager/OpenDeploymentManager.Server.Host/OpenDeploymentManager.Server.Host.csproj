@@ -185,18 +185,29 @@
     </Compile>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DataAccess\DocumentSessionExtensions.cs" />
     <Compile Include="DataAccess\DocumentStoreFactory.cs" />
     <Compile Include="DataAccess\IDocumentStoreFactory.cs" />
     <Compile Include="GlobalConfiguration.cs" />
+    <Compile Include="Helpers\HeaderDictionaryExtensions.cs" />
     <Compile Include="Models\Entity\ApplicationUser.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Providers\DependencyResolverSupport.cs" />
+    <Compile Include="Security\ApiKeyAuthenticationExtensions.cs" />
+    <Compile Include="Security\ApiKeyAuthenticationMiddleware.cs" />
+    <Compile Include="Security\ApplicationOAuthProvider.cs" />
+    <Compile Include="Helpers\DependencyResolverExtensions.cs" />
+    <Compile Include="Security\ApiKeyAuthenticationHandler.cs" />
+    <Compile Include="Security\ApiKeyConstants.cs" />
+    <Compile Include="Security\ApiKeyAuthenticationOptions.cs" />
+    <Compile Include="Servces\IUserService.cs" />
+    <Compile Include="Servces\UserService.cs" />
     <Compile Include="ServerConfiguration.cs" />
     <Compile Include="Program.cs">
       <SubType>Component</SubType>
@@ -222,9 +233,12 @@
       <Project>{78BAE48E-C85D-42CD-9B3A-5D09CA891351}</Project>
       <Name>OpenDeploymentManager.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenDeploymentManager.Server.Contracts\OpenDeploymentManager.Server.Contracts.csproj">
+      <Project>{CE06F873-DDE3-4C24-8F84-4781BC569261}</Project>
+      <Name>OpenDeploymentManager.Server.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Models\Dto\" />
     <Folder Include="Models\Mapping\" />
   </ItemGroup>

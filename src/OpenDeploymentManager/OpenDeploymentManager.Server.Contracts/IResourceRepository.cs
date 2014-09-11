@@ -2,9 +2,9 @@
 
 namespace OpenDeploymentManager.Server.Contracts
 {
-    public interface IResourceService<T> where T : IResource
+    public interface IResourceService<T> where T : ResourceBase
     {
-        PageResult<T> Query();
+        PagingResult<T> Query();
 
         T GetById(Guid id);
 
