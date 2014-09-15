@@ -12,6 +12,7 @@ using OpenDeploymentManager.Common.Unity;
 using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
+using OpenDeploymentManager.Server.Host.Servces;
 using Raven.Client;
 using RavenDB.AspNet.Identity;
 
@@ -29,16 +30,6 @@ namespace OpenDeploymentManager.Server.Host
             Log.Trace(Resources.InitializeContainerTask_ConfiguringContainer);
             container.AddNewExtension<Interception>();
 
-            ////container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
-
-            ////container.RegisterTypePerRequest<IAgentInfoService, DeploymentAgentService>(
-            ////    new InterceptionBehavior<PolicyInjectionBehavior>(),
-            ////    new Interceptor<InterfaceInterceptor>());
-
-            ////container.RegisterTypePerRequest<IDeploymentService, DeploymentAgentService>(
-            ////    new InterceptionBehavior<PolicyInjectionBehavior>(),
-            ////    new Interceptor<InterfaceInterceptor>());
-
             // register db
             container.RegisterTypeAsSingleton<IDocumentStoreFactory, DocumentStoreFactory>(
                 new InjectionConstructor("RavenDBConnection"));
@@ -54,6 +45,19 @@ namespace OpenDeploymentManager.Server.Host
 
             container.RegisterTypeAsSingleton<ISecureDataFormat<AuthenticationTicket>>(
                 c => Startup.OAuthOptions.AccessTokenFormat);
+
+            // register services
+            container.RegisterTypePerRequest<IUserService, UserService>();
+
+            ////container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
+
+            ////container.RegisterTypePerRequest<IAgentInfoService, DeploymentAgentService>(
+            ////    new InterceptionBehavior<PolicyInjectionBehavior>(),
+            ////    new Interceptor<InterfaceInterceptor>());
+
+            ////container.RegisterTypePerRequest<IDeploymentService, DeploymentAgentService>(
+            ////    new InterceptionBehavior<PolicyInjectionBehavior>(),
+            ////    new Interceptor<InterfaceInterceptor>());
 
             Log.Trace(Resources.InitializeContainerTask_InitializeServiceLocator);
             ServiceLocator.SetLocatorProvider(() => new UnityServiceLocator(container));

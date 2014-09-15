@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using OpenDeploymentManager.Client.Exceptions;
+using OpenDeploymentManager.Client.Formatting;
+using OpenDeploymentManager.Client.Http;
 using OpenDeploymentManager.Client.Properties;
 using OpenDeploymentManager.Server.Contracts;
 

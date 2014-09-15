@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenDeploymentManager.Client
+namespace OpenDeploymentManager.Client.Http
 {
     internal static class UriExtensions
     {

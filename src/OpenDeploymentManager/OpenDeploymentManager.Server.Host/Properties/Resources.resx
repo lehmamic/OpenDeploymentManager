@@ -150,4 +150,7 @@
   <data name="UsersController_CanNotDeleteCurrentUser" xml:space="preserve">
     <value>Can not delete the user you currently are logged in with.</value>
   </data>
+  <data name="ApplicationUserExtensions_ApplicationUserIdFormat" xml:space="preserve">
+    <value>ApplicationUsers/{0}</value>
+  </data>
 </root>

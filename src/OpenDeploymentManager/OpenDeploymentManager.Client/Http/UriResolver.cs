@@ -1,6 +1,6 @@
 using System;
 
-namespace OpenDeploymentManager.Client
+namespace OpenDeploymentManager.Client.Http
 {
     internal class UriResolver : IUriResolver
     {

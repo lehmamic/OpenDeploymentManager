@@ -59,7 +59,7 @@ namespace OpenDeploymentManager.Server.Host
             app.UseOAuthBearerTokens(OAuthOptions);
 
             // Enable the application to use api keys to authenticate users
-            app.UseApiKeyAuthentication(ApiAuthOptions);
+            // app.UseApiKeyAuthentication(ApiAuthOptions);
 
             // Uncomment the following lines to enable logging in with third party login providers
 

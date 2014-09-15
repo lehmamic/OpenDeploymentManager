@@ -61,6 +61,15 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ApplicationUsers/{0}.
+        /// </summary>
+        internal static string ApplicationUserExtensions_ApplicationUserIdFormat {
+            get {
+                return ResourceManager.GetString("ApplicationUserExtensions_ApplicationUserIdFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuring the dependency injection container..
         /// </summary>
         internal static string InitializeContainerTask_ConfiguringContainer {

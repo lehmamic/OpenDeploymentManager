@@ -1,7 +1,9 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using OpenDeploymentManager.Server.Contracts.Http;
 
 namespace OpenDeploymentManager.Client
@@ -67,6 +69,25 @@ namespace OpenDeploymentManager.Client
             }
 
             return method;
+        }
+
+        public static Uri GetRequestUri(this MethodInfo method, object[] arguments)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+
+            string requestUri = method.GetRoute().ToString().ToLowerInvariant();
+
+            ParameterInfo[] parameters = method.GetParameters();
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                string variable = string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameters[i].Name).ToLowerInvariant();
+                requestUri = requestUri.Replace(variable, arguments[i].ToString());
+            }
+
+            return new Uri(requestUri, UriKind.Relative);
         }
     }
 }

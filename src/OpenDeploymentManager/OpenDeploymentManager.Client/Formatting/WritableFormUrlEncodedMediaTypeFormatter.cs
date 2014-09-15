@@ -8,9 +8,9 @@ using System.Net.Http.Formatting;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpenDeploymentManager.Client
+namespace OpenDeploymentManager.Client.Formatting
 {
-    public class WritableFormUrlEncodedMediaTypeFormatter : FormUrlEncodedMediaTypeFormatter
+    internal class WritableFormUrlEncodedMediaTypeFormatter : FormUrlEncodedMediaTypeFormatter
     {
         public override bool CanWriteType(Type type)
         {

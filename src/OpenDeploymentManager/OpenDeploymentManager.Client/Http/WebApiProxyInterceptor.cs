@@ -6,7 +6,7 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using Castle.DynamicProxy;
 
-namespace OpenDeploymentManager.Client
+namespace OpenDeploymentManager.Client.Http
 {
     internal class WebApiProxyInterceptor<T> : IInterceptor where T : class
     {
@@ -21,7 +21,6 @@ namespace OpenDeploymentManager.Client
 
         #region Implementation of IInterceptor
 
-        [DebuggerStepThrough]
         public void Intercept(IInvocation invocation)
         {
             if (invocation == null)
@@ -31,13 +30,13 @@ namespace OpenDeploymentManager.Client
 
             using (HttpClient client = HttpClientFactory.Create())
             {
-                client.BaseAddress = this.endpoint.UriResolver.BaseUri;
+                client.BaseAddress = this.endpoint.UriResolver.Resolve("~/api/");
 
-                AuthenticationHeaderValue authHeader = endpoint.Authentication.Authenticate(this.endpoint.UriResolver);
+                AuthenticationHeaderValue authHeader = this.endpoint.Authentication.Authenticate(this.endpoint.UriResolver);
                 client.DefaultRequestHeaders.Add(authHeader.Header, authHeader.Value);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json; charset=utf-8"));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                Uri requestUri = invocation.Method.GetRoute();
+                Uri requestUri = invocation.Method.GetRequestUri(invocation.Arguments);
                 var request = new HttpRequestMessage(invocation.Method.GetHttpMethod(), requestUri);
 
                 var resourceParameter = invocation.Method.GetParameters().FirstOrDefault(p => p.ParameterType == typeof(T));

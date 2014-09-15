@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="AssemblyInitializeFixture.cs" />
     <Compile Include="Authentication\BearerTokenAuthenticationFixture.cs" />
+    <Compile Include="Controllers\UsersControllerFixture.cs" />
     <Compile Include="ServerHost.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -81,6 +82,10 @@
     <ProjectReference Include="..\OpenDeploymentManager.Common\OpenDeploymentManager.Common.csproj">
       <Project>{78BAE48E-C85D-42CD-9B3A-5D09CA891351}</Project>
       <Name>OpenDeploymentManager.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenDeploymentManager.Server.Contracts\OpenDeploymentManager.Server.Contracts.csproj">
+      <Project>{CE06F873-DDE3-4C24-8F84-4781BC569261}</Project>
+      <Name>OpenDeploymentManager.Server.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenDeploymentManager.Server.Host\OpenDeploymentManager.Server.Host.csproj">
       <Project>{68811462-b984-477b-a4f3-1891c05dc0fc}</Project>

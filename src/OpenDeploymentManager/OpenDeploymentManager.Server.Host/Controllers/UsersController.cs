@@ -48,7 +48,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public User GetUser(string id)
         {
-            ApplicationUser user = this.userService.GetById(id);
+            ApplicationUser user = this.userService.GetById(id.ToUserId());
             if (user == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -68,7 +68,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            ApplicationUser existingUser = this.userService.GetById(model.UserName);
+            ApplicationUser existingUser = this.userService.GetById(model.UserName.ToUserId());
             if (existingUser != null)
             {
                 this.ModelState.AddModelError(string.Empty, "A user with this user name already exist.");
@@ -96,7 +96,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HttpPut]
         public IHttpActionResult UpdateUser(string id, [FromBody]User model)
         {
-            ApplicationUser user = this.userService.GetById(id);
+            ApplicationUser user = this.userService.GetById(id.ToUserId());
             if (user == null)
             {
                 return this.NotFound();
@@ -125,7 +125,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HttpPut]
         public IHttpActionResult SetPassword(string id, [FromBody]SetPassword model)
         {
-            ApplicationUser user = this.userService.GetById(id);
+            ApplicationUser user = this.userService.GetById(id.ToUserId());
             if (user == null)
             {
                 return this.NotFound();
@@ -160,7 +160,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            ApplicationUser user = this.userService.GetById(id);
+            ApplicationUser user = this.userService.GetById(id.ToUserId());
             if (user != null)
             {
                 IdentityResult result = this.userService.Delete(user);

@@ -60,7 +60,7 @@
     <Compile Include="Exceptions\CommunicationException.cs" />
     <Compile Include="Exceptions\SecurityException.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
-    <Compile Include="IUriResolver.cs" />
+    <Compile Include="Http\IUriResolver.cs" />
     <Compile Include="IOpenDeploymentManagerAuthentication.cs" />
     <Compile Include="IOpenDeploymentManagerClient.cs" />
     <Compile Include="IOpenDeploymentManagerClientFactory.cs" />
@@ -70,16 +70,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="TaskExtensions.cs" />
-    <Compile Include="UriResolver.cs" />
+    <Compile Include="Http\UriResolver.cs" />
     <Compile Include="OpenDeploymentManagerClient.cs" />
     <Compile Include="OpenDeploymentManagerClientFactory.cs" />
     <Compile Include="OpenDeploymentManagerEndpoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceServiceExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
-    <Compile Include="UriExtensions.cs" />
-    <Compile Include="WebApiProxyInterceptor.cs" />
-    <Compile Include="WritableFormUrlEncodedMediaTypeFormatter.cs" />
+    <Compile Include="Http\UriExtensions.cs" />
+    <Compile Include="Http\WebApiProxyInterceptor.cs" />
+    <Compile Include="Formatting\WritableFormUrlEncodedMediaTypeFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

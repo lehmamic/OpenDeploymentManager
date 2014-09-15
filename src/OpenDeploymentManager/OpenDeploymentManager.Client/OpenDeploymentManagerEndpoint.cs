@@ -1,4 +1,5 @@
 using System;
+using OpenDeploymentManager.Client.Http;
 
 namespace OpenDeploymentManager.Client
 {
