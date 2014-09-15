@@ -160,11 +160,29 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Saving the changes to the database..
+        /// </summary>
+        internal static string SaveChangesHandler_SaveChanges {
+            get {
+                return ResourceManager.GetString("SaveChangesHandler_SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not delete the user you currently are logged in with..
         /// </summary>
         internal static string UsersController_CanNotDeleteCurrentUser {
             get {
                 return ResourceManager.GetString("UsersController_CanNotDeleteCurrentUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A user with this user name already exist..
+        /// </summary>
+        internal static string UserService_UserAlreadyExists {
+            get {
+                return ResourceManager.GetString("UserService_UserAlreadyExists", resourceCulture);
             }
         }
     }

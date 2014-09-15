@@ -45,11 +45,13 @@
     </Compile>
     <Compile Include="ChangePassword.cs" />
     <Compile Include="CreateUser.cs" />
+    <Compile Include="Http\HttpBodyContentAttribute.cs" />
     <Compile Include="Http\HttpDeleteContractAttribute.cs" />
     <Compile Include="Http\HttpGetContractAttribute.cs" />
     <Compile Include="Http\HttpMethodContractAttribute.cs" />
     <Compile Include="Http\HttpPostContractAttribute.cs" />
     <Compile Include="Http\HttpPutContractAttribute.cs" />
+    <Compile Include="Http\HttpUrlContentAttribute.cs" />
     <Compile Include="IAccountRepository.cs" />
     <Compile Include="ResourceBase.cs" />
     <Compile Include="IResourceRepository.cs" />

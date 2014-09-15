@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using Castle.DynamicProxy;
+using OpenDeploymentManager.Client.Exceptions;
+using OpenDeploymentManager.Server.Contracts.Http;
 
 namespace OpenDeploymentManager.Client.Http
 {
@@ -39,14 +41,20 @@ namespace OpenDeploymentManager.Client.Http
                 Uri requestUri = invocation.Method.GetRequestUri(invocation.Arguments);
                 var request = new HttpRequestMessage(invocation.Method.GetHttpMethod(), requestUri);
 
-                var resourceParameter = invocation.Method.GetParameters().FirstOrDefault(p => p.ParameterType == typeof(T));
+                var resourceParameter = invocation.Method.GetParameters().FirstOrDefault(p => p.IsDefined(typeof(HttpBodyContentAttribute), true));
                 if (resourceParameter != null)
                 {
                     int index = invocation.Method.GetParameters().ToList().IndexOf(resourceParameter);
-                    request.Content = new ObjectContent(typeof(T), invocation.Arguments[index], new JsonMediaTypeFormatter());
+                    request.Content = new ObjectContent(resourceParameter.ParameterType, invocation.Arguments[index], new JsonMediaTypeFormatter());
                 }
 
                 HttpResponseMessage response = client.SendAsync(request).WaitOn();
+                if (!response.IsSuccessStatusCode)
+                {
+                    string errorContent = response.Content.ReadAsAsync<string>().WaitOn();
+                    throw new ServerException(errorContent, (int)response.StatusCode);
+                }
+
                 if (invocation.Method.ReturnType != typeof(void))
                 {
                     invocation.ReturnValue = response.Content.ReadAsAsync(invocation.Method.ReturnType).WaitOn();

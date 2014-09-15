@@ -191,6 +191,8 @@
     <Compile Include="DataAccess\DocumentSessionExtensions.cs" />
     <Compile Include="DataAccess\DocumentStoreFactory.cs" />
     <Compile Include="DataAccess\IDocumentStoreFactory.cs" />
+    <Compile Include="DataAccess\SaveChangesAttribute.cs" />
+    <Compile Include="DataAccess\SaveChangesHandler.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Helpers\HeaderDictionaryExtensions.cs" />
     <Compile Include="Models\Entity\ApplicationUser.cs" />

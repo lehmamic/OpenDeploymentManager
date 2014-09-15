@@ -32,22 +32,21 @@ namespace OpenDeploymentManager.Server.Host
 
             // register db
             container.RegisterTypeAsSingleton<IDocumentStoreFactory, DocumentStoreFactory>(
-                new InjectionConstructor("RavenDBConnection"));
+                new InjectionConstructor());
             container.RegisterTypeAsSingleton<IDocumentStore>(c => c.Resolve<IDocumentStoreFactory>().CreateDocumentStore());
             container.RegisterTypePerRequest<IDocumentSession>(c => c.Resolve<IDocumentStore>().OpenSession());
 
             // register asp identity
-            container.RegisterTypePerRequest<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(c =>
-            {
-                IDocumentSession documentSession = c.Resolve<IDocumentStore>().OpenSession();
-                return new UserStore<ApplicationUser>(documentSession);
-            });
+            container.RegisterTypePerRequest<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
+                new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));
 
             container.RegisterTypeAsSingleton<ISecureDataFormat<AuthenticationTicket>>(
                 c => Startup.OAuthOptions.AccessTokenFormat);
 
             // register services
-            container.RegisterTypePerRequest<IUserService, UserService>();
+            container.RegisterTypePerRequest<IUserService, UserService>(
+                new InterceptionBehavior<PolicyInjectionBehavior>(),
+                new Interceptor<InterfaceInterceptor>());
 
             ////container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
 

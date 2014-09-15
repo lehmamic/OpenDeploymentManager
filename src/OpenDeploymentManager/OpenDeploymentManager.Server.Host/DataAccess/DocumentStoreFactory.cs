@@ -18,9 +18,14 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
             this.connectionStringName = connectionStringName;
         }
 
+        public DocumentStoreFactory()
+        {
+            this.connectionStringName = string.Empty;
+        }
+
         public IDocumentStore CreateDocumentStore()
         {
-            var documentStore = new EmbeddableDocumentStore { ConnectionStringName = this.connectionStringName };
+            var documentStore = !string.IsNullOrEmpty(this.connectionStringName) ? new EmbeddableDocumentStore { ConnectionStringName = this.connectionStringName } : new EmbeddableDocumentStore();
             documentStore.Initialize();
 
             return documentStore;

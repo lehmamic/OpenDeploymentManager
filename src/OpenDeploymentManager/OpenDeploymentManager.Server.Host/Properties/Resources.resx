@@ -153,4 +153,10 @@
   <data name="ApplicationUserExtensions_ApplicationUserIdFormat" xml:space="preserve">
     <value>ApplicationUsers/{0}</value>
   </data>
+  <data name="SaveChangesHandler_SaveChanges" xml:space="preserve">
+    <value>Saving the changes to the database.</value>
+  </data>
+  <data name="UserService_UserAlreadyExists" xml:space="preserve">
+    <value>A user with this user name already exist.</value>
+  </data>
 </root>

@@ -9,6 +9,9 @@ namespace OpenDeploymentManager.Server.Host.Models.Mapping
         protected override void Configure()
         {
             this.CreateMap<ApplicationUser, User>();
+            this.CreateMap<User, ApplicationUser>();
+
+            this.CreateMap<ApplicationUser, CreateUser>();
         }
     }
 }

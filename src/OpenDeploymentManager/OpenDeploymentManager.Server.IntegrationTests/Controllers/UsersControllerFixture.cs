@@ -13,7 +13,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void GetUserById_WithExistingUserId_ReturnsUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("admin", "123456"));
+            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -21,6 +21,22 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // assert
             Assert.That(actual, Is.Not.Null);
+        }
+
+        [Test]
+        public void CreateUser_WithValidUser_CreatesUser()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            var target = client.GetService<IUserRepository>();
+
+            // act
+            var user = new CreateUser { UserName = "CreateUserTest", Password = "123456", ConfirmPassword = "123456" };
+            target.CreateUser(user);
+
+            // assert
+            var created = target.GetUserById(user.UserName);
+            Assert.That(created, Is.Not.Null);
         }
 
         private static IOpenDeploymentManagerClient CreateClient(IOpenDeploymentManagerAuthentication authentication)

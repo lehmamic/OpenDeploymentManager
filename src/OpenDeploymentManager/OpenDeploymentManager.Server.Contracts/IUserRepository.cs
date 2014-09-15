@@ -11,7 +11,7 @@ namespace OpenDeploymentManager.Server.Contracts
         User GetUserById(string id);
 
         [OperationContract("Users")]
-        User CreateUser(CreateUser user);
+        User CreateUser([HttpBodyContentAttribute]CreateUser user);
 
         [OperationContract("Users/{id}")]
         void UpdateUser(User user);

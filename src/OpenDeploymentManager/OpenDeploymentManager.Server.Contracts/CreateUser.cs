@@ -16,7 +16,7 @@ namespace OpenDeploymentManager.Server.Contracts
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("NewPassword", ErrorMessageResourceName = "ValidationError_ConfirmPasswordNotMatch", ErrorMessageResourceType = typeof(Resources))]
+        [Compare("Password", ErrorMessageResourceName = "ValidationError_ConfirmPasswordNotMatch", ErrorMessageResourceType = typeof(Resources))]
         [Display(Name = "Property_ConfirmPassword", ResourceType = typeof(Resources))]
         public string ConfirmPassword { get; set; }
     }

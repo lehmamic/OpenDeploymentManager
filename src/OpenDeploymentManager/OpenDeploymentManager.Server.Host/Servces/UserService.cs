@@ -1,7 +1,9 @@
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using OpenDeploymentManager.Common.Diagnostics;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
+using OpenDeploymentManager.Server.Host.Properties;
 
 namespace OpenDeploymentManager.Server.Host.Servces
 {
@@ -35,26 +37,37 @@ namespace OpenDeploymentManager.Server.Host.Servces
             throw new System.NotImplementedException();
         }
 
+        [SaveChanges]
         public IdentityResult Create(ApplicationUser user, string password)
         {
+            ApplicationUser existingUser = this.userManager.FindById(user.UserName.ToUserId());
+            if (existingUser != null)
+            {
+                return new IdentityResult(Resources.UserService_UserAlreadyExists);
+            }
+
             return this.userManager.Create(user, password);
         }
 
+        [SaveChanges]
         public IdentityResult Update(ApplicationUser user)
         {
             return this.userManager.Update(user);
         }
 
+        [SaveChanges]
         public IdentityResult Delete(ApplicationUser user)
         {
             return this.userManager.Delete(user);
         }
 
+        [SaveChanges]
         public IdentityResult ChangePassword(string userId, string currentPassword, string newPassword)
         {
             return this.userManager.ChangePassword(userId, currentPassword, newPassword);
         }
 
+        [SaveChanges]
         public IdentityResult SetPassword(ApplicationUser user, string password)
         {
             user.ArgumentNotNull("user");

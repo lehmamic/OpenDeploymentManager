@@ -8,6 +8,7 @@ using NLog;
 using OpenDeploymentManager.Agent.Contracts;
 using OpenDeploymentManager.Agent.Host.Properties;
 using OpenDeploymentManager.Agent.Host.Services;
+using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Common.Projection;
 using OpenDeploymentManager.Common.Unity;
 using OpenDeploymentManager.Deployment;
@@ -21,10 +22,7 @@ namespace OpenDeploymentManager.Agent.Host
         #region Implementation of IUnityRegistration
         public void Register(IUnityContainer container)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
+            container.ArgumentNotNull("container");
 
             Log.Trace(Resources.InitializeContainerTask_ConfiguringContainer);
             container.AddNewExtension<Interception>();

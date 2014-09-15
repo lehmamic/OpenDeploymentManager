@@ -68,13 +68,6 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            ApplicationUser existingUser = this.userService.GetById(model.UserName.ToUserId());
-            if (existingUser != null)
-            {
-                this.ModelState.AddModelError(string.Empty, "A user with this user name already exist.");
-                return this.BadRequest(this.ModelState);
-            }
-
             var user = model.ProjectedAs<ApplicationUser>();
 
             IdentityResult result = this.userService.Create(user, model.Password);
