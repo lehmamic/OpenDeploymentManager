@@ -116,7 +116,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
             var target = client.GetService<IUserRepository>();
 
-            User user = target.CreateUser(new CreateUser { UserName = "UpdateUserTest", Password = "123456", ConfirmPassword = "123456" });
+            User user = target.CreateUser(new CreateUser { UserName = "UpdateUserTest1", Password = "123456", ConfirmPassword = "123456" });
 
             // act
             user.DisplayName = "TestDisplayName";
@@ -136,7 +136,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
             var target = client.GetService<IUserRepository>();
 
-            User user = target.CreateUser(new CreateUser { UserName = "UpdateUserTest", Password = "123456", ConfirmPassword = "123456" });
+            User user = target.CreateUser(new CreateUser { UserName = "UpdateUserTest2", Password = "123456", ConfirmPassword = "123456" });
 
             // act
             user.UserName = "TestDisplayName1";
