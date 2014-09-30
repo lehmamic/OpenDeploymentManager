@@ -27,8 +27,7 @@ namespace OpenDeploymentManager.Client.Http
                 throw new ArgumentNullException("invocation");
             }
 
-            Uri baseAddress = this.endpoint.UriResolver.Resolve("~/api/");
-            using (var request = new HttpRequestInvoker(baseAddress))
+            using (var request = new HttpRequestInvoker(this.endpoint.UriResolver.BaseUri))
             {
                 request.Configure(builder =>
                         {

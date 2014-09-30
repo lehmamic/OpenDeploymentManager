@@ -22,19 +22,15 @@ namespace OpenDeploymentManager.Server.Contracts.Http
                 throw new ArgumentNullException("request");
             }
 
-            var uriBuilder = new StringBuilder(request.RequestUri.ToString());
+            var nameValuePairs = parameter.ParameterInfo.ParameterType.GetProperties()
+                         .Select(p => new { Name = p.Name.ToLowerInvariant(), Value = p.GetValue(parameter.ParameterValue) })
+                         .Where(p => p.Value != null);
 
-            string[] parameterAssignments = parameter.ParameterInfo.ParameterType.GetProperties()
-                      .Select(p => new { Name = p.Name.ToLowerInvariant(), Value = p.GetValue(parameter.ParameterValue) })
-                      .Where(p => p.Value != null)
-                      .Select(p => string.Format(CultureInfo.InvariantCulture, "{0}={1}", p.Name, p.Value))
-                      .ToArray();
-
-            string postQueryString = string.IsNullOrEmpty(request.RequestUri.Query) ? "?" : "&";
-            string queryString = string.Join("&", parameterAssignments).Insert(0, postQueryString);
-
-            uriBuilder.Append(queryString);
-            request.RequestUri = new Uri(uriBuilder.ToString(), UriKind.Relative);
+            var query = request.GetUriQuery();
+            foreach (var item in nameValuePairs)
+            {
+                query.Add(item.Name, item.Value);
+            }
         }
         #endregion
     }

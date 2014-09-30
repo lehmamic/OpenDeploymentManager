@@ -1,9 +1,11 @@
-﻿using OpenDeploymentManager.Server.Contracts.Http;
+﻿using System.Collections;
+using System.Collections.Generic;
+using OpenDeploymentManager.Server.Contracts.Http;
 
 namespace OpenDeploymentManager.Server.Contracts
 {
     [ODataQueryParameterBinding]
-    public class PagingQuery
+    public class PagingQuery<T> : IPagingQuery
     {
         public int Top { get; set; }
         

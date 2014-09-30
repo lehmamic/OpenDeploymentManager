@@ -55,6 +55,8 @@
     <Compile Include="ChangePassword.cs" />
     <Compile Include="CreateUser.cs" />
     <Compile Include="ErrorResult.cs" />
+    <Compile Include="Http\HttpRequestMessageExtensions.cs" />
+    <Compile Include="Http\HttpRequestUriPrefixAttribute.cs" />
     <Compile Include="Http\HttpRouteParameterBindingAttribute.cs" />
     <Compile Include="Http\HttpBodyParameterAttribute.cs" />
     <Compile Include="Http\HttpDeleteContractAttribute.cs" />
@@ -66,7 +68,9 @@
     <Compile Include="Http\HttpPutContractAttribute.cs" />
     <Compile Include="Http\HttpUrlParameterAttribute.cs" />
     <Compile Include="Http\ODataQueryParameterBindingAttribute.cs" />
+    <Compile Include="Http\UriQuery.cs" />
     <Compile Include="IAccountRepository.cs" />
+    <Compile Include="IPagingQuery.cs" />
     <Compile Include="PagingQuery.cs" />
     <Compile Include="ResourceBase.cs" />
     <Compile Include="IResourceRepository.cs" />
@@ -79,7 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Http\HttpRequestContractAttribute.cs" />
+    <Compile Include="Http\HttpRequestUriAttribute.cs" />
     <Compile Include="TokenResponse.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

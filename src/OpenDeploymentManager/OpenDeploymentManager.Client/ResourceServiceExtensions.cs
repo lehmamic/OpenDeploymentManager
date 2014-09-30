@@ -1,37 +1,53 @@
 using System;
-using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 using OpenDeploymentManager.Server.Contracts.Http;
 
 namespace OpenDeploymentManager.Client
 {
     public static class WebApiProxyExtensions
     {
-        public static Uri GetRoute(this MethodInfo serviceOperations)
+        public static string GetRoutePrefix(this Type serviceType)
         {
-            if (serviceOperations == null)
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException("serviceType");
+            }
+
+            string template = string.Empty;
+
+            HttpRequestUriPrefixAttribute attribute = serviceType.GetCustomAttributes(typeof(HttpRequestUriPrefixAttribute), true)
+                                                  .OfType<HttpRequestUriPrefixAttribute>()
+                                                  .FirstOrDefault();
+
+            if (attribute != null)
+            {
+                template = attribute.RoutePrefix;
+            }
+
+            return template;
+        }
+
+        public static string GetRoute(this MethodInfo method)
+        {
+            if (method == null)
             {
                 throw new ArgumentNullException("serviceOperations");
             }
 
             string template = string.Empty;
 
-            HttpRequestContractAttribute attribute = serviceOperations.GetCustomAttributes(typeof(HttpRequestContractAttribute), true)
-                                                  .OfType<HttpRequestContractAttribute>()
+            HttpRequestUriAttribute attribute = method.GetCustomAttributes(typeof(HttpRequestUriAttribute), true)
+                                                  .OfType<HttpRequestUriAttribute>()
                                                   .FirstOrDefault();
 
-            if (attribute == null)
+            if (attribute != null)
             {
-                throw new ArgumentException("The service operation method has no OperationContract attribute", "serviceOperations");
+                template = attribute.Route;
             }
 
-            template = attribute.Route;
-
-            return new Uri(template, UriKind.Relative);
+            return template;
         }
 
         public static HttpMethod GetHttpMethod(this MethodInfo methodInfo)
@@ -70,45 +86,6 @@ namespace OpenDeploymentManager.Client
             }
 
             return method;
-        }
-
-        public static Uri GetRequestUri(this MethodInfo method, object[] arguments)
-        {
-            if (method == null)
-            {
-                throw new ArgumentNullException("method");
-            }
-
-            var uriBuilder = new StringBuilder(method.GetRoute().ToString().ToLowerInvariant());
-
-            ParameterInfo[] parameters = method.GetParameters();
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                ParameterInfo parameter = parameters[i];
-                object parameterValue = arguments[i];
-
-                if (parameterValue == null)
-                {
-                    throw new ArgumentNullException(parameter.Name);
-                }
-
-                string variable = string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameter.Name).ToLowerInvariant();
-                uriBuilder.Replace(variable, parameterValue.ToString());
-
-                if (parameter.IsDefined(typeof(HttpUrlParameterAttribute), true))
-                {
-                    string[] parameterAssignments = parameter.ParameterType.GetProperties()
-                              .Where(p => p.GetValue(parameterValue) != null || p.GetValue(parameterValue) != (object)0)
-                              .Select(p => string.Format(CultureInfo.InvariantCulture, "${0}={1}", p.Name.ToLowerInvariant(), p.GetValue(parameterValue)))
-                              .ToArray();
-
-                    string queryString = string.Join("&", parameterAssignments).Insert(0, "?");
-
-                    uriBuilder.Append(queryString);
-                }
-            }
-
-            return new Uri(uriBuilder.ToString(), UriKind.Relative);
         }
     }
 }

@@ -12,7 +12,6 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
     public class UsersControllerFixture
     {
         [Test]
-        [Ignore]
         public void Query_WithEmptyQuery_ReturnsItems()
         {
             // arrange
@@ -20,7 +19,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             var target = client.GetService<IUserRepository>();
 
             // act
-            var query = new PagingQuery { Top = 1, Skip = 0 };
+            var query = new PagingQuery<User> { Top = 1, Skip = 0 };
             PagingResult<User> result = target.Query(query);
 
             // assert

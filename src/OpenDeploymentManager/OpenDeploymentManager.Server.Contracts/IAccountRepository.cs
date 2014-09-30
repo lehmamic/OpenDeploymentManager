@@ -4,10 +4,10 @@ namespace OpenDeploymentManager.Server.Contracts
 {
     public interface IAccountRepository
     {
-        [HttpRequestContract("Account")]
+        [HttpRequestUri("Account")]
         User GetUser();
 
-        [HttpRequestContract("Account")]
+        [HttpRequestUri("Account")]
         [HttpPostContract]
         void ChangePassword(string password, string confirmPassword);
     }

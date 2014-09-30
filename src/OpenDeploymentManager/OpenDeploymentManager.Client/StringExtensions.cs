@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 
 namespace OpenDeploymentManager.Client
@@ -9,6 +10,21 @@ namespace OpenDeploymentManager.Client
             return source.EndsWith(value)
                        ? source
                        : string.Format(CultureInfo.InvariantCulture, "{0}{1}", source, value);
+        }
+
+        public static Uri ToUri(this string url)
+        {
+            return ToUri(url, UriKind.RelativeOrAbsolute);
+        }
+
+        public static Uri ToUri(this string url, UriKind uriKind)
+        {
+            if (url == null)
+            {
+                throw new ArgumentNullException("url");
+            }
+
+            return new Uri(url, uriKind);
         }
     }
 }

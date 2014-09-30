@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ namespace OpenDeploymentManager.Client
 {
     internal static class TaskExtensions
     {
+        [DebuggerStepThrough]
         public static T WaitOn<T>(this Task<T> task)
         {
             AggregateException exception = null;

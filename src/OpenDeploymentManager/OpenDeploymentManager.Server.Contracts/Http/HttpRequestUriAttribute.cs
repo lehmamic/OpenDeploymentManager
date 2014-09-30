@@ -2,12 +2,12 @@
 
 namespace OpenDeploymentManager.Server.Contracts.Http
 {
-    [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class HttpRequestContractAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public class HttpRequestUriAttribute : Attribute
     {
         private readonly string route;
 
-        public HttpRequestContractAttribute(string route)
+        public HttpRequestUriAttribute(string route)
         {
             if (route == null)
             {
