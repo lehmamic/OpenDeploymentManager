@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.OData;
+using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
 using System.Web.Http.OData.Query;
 using Microsoft.AspNet.Identity;
 using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Common.Projection;
 using OpenDeploymentManager.Server.Contracts;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
 using OpenDeploymentManager.Server.Host.Servces;
@@ -18,6 +21,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Users")]
+    [SaveChanges]
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
@@ -31,13 +35,13 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [Route("")]
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an async method.")]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        public PageResult<User> GetUsers(ODataQueryOptions<User> options)
+        public PagingResult<User> GetUsers(ODataQueryOptions<User, ApplicationUser> options)
         {
-            var users = options.ApplyTo(this.userService.Query())
-                .As<ApplicationUser>()
+            var users = options.ApplyTo<ApplicationUser>(this.userService.Query())
                 .ProjectedAsCollection<User>();
 
-            return new PageResult<User>(
+
+            return new PagingResult<User>(
                 users,
                 Request.ODataProperties().NextLink,
                 Request.ODataProperties().TotalCount);

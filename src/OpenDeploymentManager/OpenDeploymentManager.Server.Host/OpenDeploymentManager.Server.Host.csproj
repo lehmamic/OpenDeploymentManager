@@ -188,9 +188,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DataAccess\ApplicationUserStore.cs" />
+    <Compile Include="DataAccess\ODataQueryParameterBindingAttribute.cs" />
     <Compile Include="DataAccess\DocumentSessionExtensions.cs" />
     <Compile Include="DataAccess\DocumentStoreFactory.cs" />
     <Compile Include="DataAccess\IDocumentStoreFactory.cs" />
+    <Compile Include="DataAccess\ODataQueryOptions.cs" />
+    <Compile Include="DataAccess\ODataQueryOptionsExtensions.cs" />
     <Compile Include="DataAccess\SaveChangesAttribute.cs" />
     <Compile Include="DataAccess\SaveChangesHandler.cs" />
     <Compile Include="GlobalConfiguration.cs" />

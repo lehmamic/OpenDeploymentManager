@@ -37,7 +37,7 @@ namespace OpenDeploymentManager.Server.Host
             container.RegisterTypePerRequest<IDocumentSession>(c => c.Resolve<IDocumentStore>().OpenSession());
 
             // register asp identity
-            container.RegisterTypePerRequest<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
+            container.RegisterTypePerRequest<IUserStore<ApplicationUser>, ApplicationUserStore>(
                 new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));
 
             container.RegisterTypeAsSingleton<ISecureDataFormat<AuthenticationTicket>>(

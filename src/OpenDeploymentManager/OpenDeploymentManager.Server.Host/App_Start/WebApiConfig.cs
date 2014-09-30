@@ -11,10 +11,10 @@ namespace OpenDeploymentManager.Server.Host
             config.ArgumentNotNull("config");
 
             // Web API configuration and services
+            config.AddODataQueryFilter();
 
             // Web API routes
             config.MapHttpAttributeRoutes();
-            config.AddODataQueryFilter();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

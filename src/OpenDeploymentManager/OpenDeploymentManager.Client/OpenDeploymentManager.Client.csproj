@@ -60,7 +60,25 @@
     <Compile Include="Exceptions\CommunicationException.cs" />
     <Compile Include="Exceptions\SecurityException.cs" />
     <Compile Include="Exceptions\ServerException.cs" />
+    <Compile Include="Exceptions\ValidationException.cs" />
+    <Compile Include="Http\Middleware\AuthenticationMiddleware.cs" />
+    <Compile Include="Http\Middleware\DispatchHttpMethodMiddleware.cs" />
+    <Compile Include="Http\Middleware\DispatchHttpRequestParameterMiddleware.cs" />
+    <Compile Include="Http\Middleware\ErrorHandlerMiddleware.cs" />
+    <Compile Include="Http\Middleware\DispatchReturnValueMiddleware.cs" />
+    <Compile Include="Http\Middleware\DispatchRouteMiddleware.cs" />
+    <Compile Include="Http\Middleware\MiddlewareExtensions.cs" />
+    <Compile Include="Http\Pipeline\HttpRequestContext.cs" />
+    <Compile Include="Http\Pipeline\HttpRequestInvoker.cs" />
+    <Compile Include="Http\Pipeline\IHttpRequestContext.cs" />
+    <Compile Include="Http\Pipeline\IHttpResponseContext.cs" />
+    <Compile Include="Http\Pipeline\HttpResponseContext.cs" />
+    <Compile Include="Http\Pipeline\IMiddleware.cs" />
+    <Compile Include="Http\Pipeline\INextInvoker.cs" />
     <Compile Include="Http\IUriResolver.cs" />
+    <Compile Include="Http\Pipeline\IHttpRequestBuilder.cs" />
+    <Compile Include="Http\Pipeline\MiddlewarePipeline.cs" />
+    <Compile Include="Http\Pipeline\NextInvoker.cs" />
     <Compile Include="IOpenDeploymentManagerAuthentication.cs" />
     <Compile Include="IOpenDeploymentManagerClient.cs" />
     <Compile Include="IOpenDeploymentManagerClientFactory.cs" />
@@ -96,6 +114,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

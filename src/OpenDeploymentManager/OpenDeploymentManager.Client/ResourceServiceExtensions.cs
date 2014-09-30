@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using OpenDeploymentManager.Server.Contracts.Http;
 
@@ -19,8 +20,8 @@ namespace OpenDeploymentManager.Client
 
             string template = string.Empty;
 
-            OperationContractAttribute attribute = serviceOperations.GetCustomAttributes(typeof(OperationContractAttribute), true)
-                                                  .OfType<OperationContractAttribute>()
+            HttpRequestContractAttribute attribute = serviceOperations.GetCustomAttributes(typeof(HttpRequestContractAttribute), true)
+                                                  .OfType<HttpRequestContractAttribute>()
                                                   .FirstOrDefault();
 
             if (attribute == null)
@@ -78,16 +79,36 @@ namespace OpenDeploymentManager.Client
                 throw new ArgumentNullException("method");
             }
 
-            string requestUri = method.GetRoute().ToString().ToLowerInvariant();
+            var uriBuilder = new StringBuilder(method.GetRoute().ToString().ToLowerInvariant());
 
             ParameterInfo[] parameters = method.GetParameters();
             for (int i = 0; i < parameters.Length; i++)
             {
-                string variable = string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameters[i].Name).ToLowerInvariant();
-                requestUri = requestUri.Replace(variable, arguments[i].ToString());
+                ParameterInfo parameter = parameters[i];
+                object parameterValue = arguments[i];
+
+                if (parameterValue == null)
+                {
+                    throw new ArgumentNullException(parameter.Name);
+                }
+
+                string variable = string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameter.Name).ToLowerInvariant();
+                uriBuilder.Replace(variable, parameterValue.ToString());
+
+                if (parameter.IsDefined(typeof(HttpUrlParameterAttribute), true))
+                {
+                    string[] parameterAssignments = parameter.ParameterType.GetProperties()
+                              .Where(p => p.GetValue(parameterValue) != null || p.GetValue(parameterValue) != (object)0)
+                              .Select(p => string.Format(CultureInfo.InvariantCulture, "${0}={1}", p.Name.ToLowerInvariant(), p.GetValue(parameterValue)))
+                              .ToArray();
+
+                    string queryString = string.Join("&", parameterAssignments).Insert(0, "?");
+
+                    uriBuilder.Append(queryString);
+                }
             }
 
-            return new Uri(requestUri, UriKind.Relative);
+            return new Uri(uriBuilder.ToString(), UriKind.Relative);
         }
     }
 }

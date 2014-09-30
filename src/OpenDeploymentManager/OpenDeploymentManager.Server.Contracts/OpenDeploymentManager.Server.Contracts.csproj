@@ -30,9 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,26 +54,32 @@
     </Compile>
     <Compile Include="ChangePassword.cs" />
     <Compile Include="CreateUser.cs" />
-    <Compile Include="Http\HttpBodyContentAttribute.cs" />
+    <Compile Include="ErrorResult.cs" />
+    <Compile Include="Http\HttpRouteParameterBindingAttribute.cs" />
+    <Compile Include="Http\HttpBodyParameterAttribute.cs" />
     <Compile Include="Http\HttpDeleteContractAttribute.cs" />
     <Compile Include="Http\HttpGetContractAttribute.cs" />
     <Compile Include="Http\HttpMethodContractAttribute.cs" />
+    <Compile Include="Http\HttpParameterBindingAttribute.cs" />
+    <Compile Include="Http\HttpParameterDescriptor.cs" />
     <Compile Include="Http\HttpPostContractAttribute.cs" />
     <Compile Include="Http\HttpPutContractAttribute.cs" />
-    <Compile Include="Http\HttpUrlContentAttribute.cs" />
+    <Compile Include="Http\HttpUrlParameterAttribute.cs" />
+    <Compile Include="Http\ODataQueryParameterBindingAttribute.cs" />
     <Compile Include="IAccountRepository.cs" />
+    <Compile Include="PagingQuery.cs" />
     <Compile Include="ResourceBase.cs" />
     <Compile Include="IResourceRepository.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="LoginData.cs" />
-    <Compile Include="PageResult.cs" />
+    <Compile Include="PagingResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Http\OperationContractAttribute.cs" />
+    <Compile Include="Http\HttpRequestContractAttribute.cs" />
     <Compile Include="TokenResponse.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
@@ -73,6 +88,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

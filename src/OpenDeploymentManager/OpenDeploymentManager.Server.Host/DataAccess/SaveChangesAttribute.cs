@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using Raven.Client;
 
 namespace OpenDeploymentManager.Server.Host.DataAccess
 {
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class SaveChangesAttribute : HandlerAttribute
     {
         private readonly int order;

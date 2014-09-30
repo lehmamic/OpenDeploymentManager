@@ -4,9 +4,11 @@ using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
+using Raven.Client.Linq;
 
 namespace OpenDeploymentManager.Server.Host.Servces
 {
+    [SaveChanges]
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -37,7 +39,6 @@ namespace OpenDeploymentManager.Server.Host.Servces
             throw new System.NotImplementedException();
         }
 
-        [SaveChanges]
         public IdentityResult Create(ApplicationUser user, string password)
         {
             ApplicationUser existingUser = this.userManager.FindById(user.UserName.ToUserId());
@@ -49,25 +50,21 @@ namespace OpenDeploymentManager.Server.Host.Servces
             return this.userManager.Create(user, password);
         }
 
-        [SaveChanges]
         public IdentityResult Update(ApplicationUser user)
         {
             return this.userManager.Update(user);
         }
 
-        [SaveChanges]
         public IdentityResult Delete(ApplicationUser user)
         {
             return this.userManager.Delete(user);
         }
 
-        [SaveChanges]
         public IdentityResult ChangePassword(string userId, string currentPassword, string newPassword)
         {
             return this.userManager.ChangePassword(userId, currentPassword, newPassword);
         }
 
-        [SaveChanges]
         public IdentityResult SetPassword(ApplicationUser user, string password)
         {
             user.ArgumentNotNull("user");

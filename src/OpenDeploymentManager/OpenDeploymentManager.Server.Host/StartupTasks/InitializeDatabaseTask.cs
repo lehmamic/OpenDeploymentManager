@@ -4,9 +4,9 @@ using System.Security.Claims;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using Raven.Client;
-using RavenDB.AspNet.Identity;
 
 namespace OpenDeploymentManager.Server.Host.StartupTasks
 {
@@ -41,7 +41,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
             bool usersAvailable = session.Query<ApplicationUser>().Any();
             if (!usersAvailable)
             {
-                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(session));
+                var userManager = new UserManager<ApplicationUser>(new ApplicationUserStore(session));
 
                 var userName = "Admin";
                 var password = "123456";
@@ -68,7 +68,6 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
             using (IDocumentSession session = this.container.Resolve<IDocumentStore>().OpenSession())
             {
                 CreateAdminUser(session);
-
                 session.SaveChanges();
             }
         }

@@ -4,5 +4,6 @@ namespace OpenDeploymentManager.Server.Host.Models.Entity
 {
     public class ApplicationUser : IdentityUser
     {
+        public string DisplayName { get; set; }
     }
 }

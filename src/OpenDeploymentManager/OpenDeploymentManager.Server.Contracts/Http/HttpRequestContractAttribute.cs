@@ -3,11 +3,11 @@
 namespace OpenDeploymentManager.Server.Contracts.Http
 {
     [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class OperationContractAttribute : Attribute
+    public class HttpRequestContractAttribute : Attribute
     {
         private readonly string route;
 
-        public OperationContractAttribute(string route)
+        public HttpRequestContractAttribute(string route)
         {
             if (route == null)
             {

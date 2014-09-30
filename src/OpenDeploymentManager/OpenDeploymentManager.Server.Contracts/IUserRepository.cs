@@ -4,22 +4,22 @@ namespace OpenDeploymentManager.Server.Contracts
 {
     public interface IUserRepository
     {
-        [OperationContract("Users")]
-        PagingResult<User> Query();
+        [HttpRequestContract("Users")]
+        PagingResult<User> Query([HttpUrlParameter] PagingQuery query);
 
-        [OperationContract("Users/{id}")]
+        [HttpRequestContract("Users/{id}")]
         User GetUserById(string id);
 
-        [OperationContract("Users")]
-        User CreateUser([HttpBodyContentAttribute]CreateUser user);
+        [HttpRequestContract("Users")]
+        User CreateUser([HttpBodyParameter] CreateUser user);
 
-        [OperationContract("Users/{id}")]
-        void UpdateUser(User user);
+        [HttpRequestContract("Users/{id}")]
+        void UpdateUser(string id, [HttpBodyParameter] User user);
 
-        [OperationContract("Users/{id}")]
+        [HttpRequestContract("Users/{id}")]
         void DeleteUser(string id);
 
-        [OperationContract("Users/{id}/SetPassword")]
+        [HttpRequestContract("Users/{id}/SetPassword")]
         [HttpPostContract]
         void SetPassword(string id, string password, string confirmPassword);
     }
