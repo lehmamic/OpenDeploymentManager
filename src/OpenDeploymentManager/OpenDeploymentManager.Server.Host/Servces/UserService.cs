@@ -4,7 +4,6 @@ using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
-using Raven.Client.Linq;
 
 namespace OpenDeploymentManager.Server.Host.Servces
 {

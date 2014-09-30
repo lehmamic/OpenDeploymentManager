@@ -9,10 +9,10 @@ using OpenDeploymentManager.Server.Host;
 namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 {
     [TestFixture]
-    [Ignore]
     public class UsersControllerFixture
     {
         [Test]
+        [Ignore]
         public void Query_WithEmptyQuery_ReturnsItems()
         {
             // arrange

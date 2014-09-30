@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Bootstrap.Unity;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
@@ -14,7 +16,6 @@ using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
 using OpenDeploymentManager.Server.Host.Servces;
 using Raven.Client;
-using RavenDB.AspNet.Identity;
 
 namespace OpenDeploymentManager.Server.Host
 {

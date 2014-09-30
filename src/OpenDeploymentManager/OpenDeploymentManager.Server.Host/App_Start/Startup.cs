@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Web.Http.Dependencies;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Practices.Unity;
 using OpenDeploymentManager.Common.Diagnostics;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Helpers;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Security;
 using Owin;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace OpenDeploymentManager.Server.Host
 {
@@ -50,6 +53,10 @@ namespace OpenDeploymentManager.Server.Host
 
         private static void ConfigureAuth(IAppBuilder app)
         {
+            // Register the user manager
+            app.CreatePerOwinContext(() => GlobalConfiguration.Configuration.DependencyResolver.BeginScope());
+            app.CreatePerOwinContext<UserManager<ApplicationUser>>((options, context) => context.Get<IDependencyScope>().Resolve<UserManager<ApplicationUser>>());
+
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
@@ -81,12 +88,10 @@ namespace OpenDeploymentManager.Server.Host
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         private static OAuthAuthorizationServerOptions CreateOAuthAuthorizationOptions()
         {
-            Func<UserManager<ApplicationUser>> userManagerFactory = () => GlobalConfiguration.Configuration.DependencyResolver.Resolve<UserManager<ApplicationUser>>();
-
             return new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider(PublicClientId, userManagerFactory),
+                Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
@@ -98,6 +103,15 @@ namespace OpenDeploymentManager.Server.Host
             Func<UserManager<ApplicationUser>> userManagerFactory = () => GlobalConfiguration.Configuration.DependencyResolver.Resolve<UserManager<ApplicationUser>>();
 
             return new ApiKeyAuthenticationOptions(userManagerFactory);
+        }
+    }
+
+    public static class AppBuilderExtensions
+    {
+        public static void Use(this IAppBuilder app)
+        {
+            app.CreatePerOwinContext(() => GlobalConfiguration.Configuration.DependencyResolver.BeginScope());
+            app.CreatePerOwinContext<UserManager<ApplicationUser>>((options, context) => context.Get<IDependencyScope>().Resolve<UserManager<ApplicationUser>>());
         }
     }
 }
