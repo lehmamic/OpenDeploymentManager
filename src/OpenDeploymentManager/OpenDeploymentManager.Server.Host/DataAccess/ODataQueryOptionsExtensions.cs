@@ -18,7 +18,7 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
             var querySettings = new ODataQuerySettings
             {
                 EnableConstantParameterization = false,
-                EnsureStableOrdering = true,
+                EnsureStableOrdering = true
             };
 
             return (IQueryable<T>)queryOptions.ApplyTo(query, querySettings);

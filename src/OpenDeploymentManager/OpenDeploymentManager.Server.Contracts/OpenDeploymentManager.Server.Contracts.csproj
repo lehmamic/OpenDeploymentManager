@@ -70,6 +70,7 @@
     <Compile Include="Http\ODataQueryParameterBindingAttribute.cs" />
     <Compile Include="Http\UriQuery.cs" />
     <Compile Include="IAccountRepository.cs" />
+    <Compile Include="InlineCountOptions.cs" />
     <Compile Include="IPagingQuery.cs" />
     <Compile Include="PagingQuery.cs" />
     <Compile Include="ResourceBase.cs" />

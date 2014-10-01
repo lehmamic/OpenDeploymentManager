@@ -5,5 +5,7 @@
         int Top { get; set; }
 
         int Skip { get; set; }
+
+        InlineCountOptions InlineCount { get; set; }
     }
 }

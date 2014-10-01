@@ -8,22 +8,23 @@ namespace OpenDeploymentManager.Server.Contracts
     {
         public PagingResult()
         {
+            this.Items = new T[0];
         }
 
-        public PagingResult(IEnumerable<T> items, Uri nextLinkCount, long? count)
+        public PagingResult(IEnumerable<T> items, long? totalCount)
         {
+            if (items == null)
+            {
+                throw new ArgumentNullException("items");
+            }
+
             this.Items = items.ToArray();
-            this.NextLinkCount = nextLinkCount;
-            this.Count = count;
+            this.TotalCount = totalCount;
         }
 
         public T[] Items { get; set; }
 
-        public Uri NextLinkCount { get; set; }
-
-        public long? Count { get; set; }
-
-        public Uri NextPageLink { get; set; }
+        public long? TotalCount { get; set; }
 
         ////#region Implementation of IEnumerable
         ////public IEnumerator<T> GetEnumerator()

@@ -12,7 +12,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
     public class UsersControllerFixture
     {
         [Test]
-        public void Query_WithEmptyQuery_ReturnsItems()
+        public void Query_WithTop_ReturnsItems()
         {
             // arrange
             IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
@@ -20,6 +20,42 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             var query = new PagingQuery<User> { Top = 1, Skip = 0 };
+            PagingResult<User> result = target.Query(query);
+
+            // assert
+            Assert.That(result.Items.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Query_WithInlineCount_ReturnsTotalCount()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            var target = client.GetService<IUserRepository>();
+
+            target.Create(new CreateUser { UserName = "NextPageLinkUserTest1", Password = "123456", ConfirmPassword = "123456" });
+            target.Create(new CreateUser { UserName = "NextPageLinkUserTest2", Password = "123456", ConfirmPassword = "123456" });
+
+            // act
+            var query = new PagingQuery<User> { Top = 1, Skip = 0, InlineCount = InlineCountOptions.AllPages };
+            PagingResult<User> result = target.Query(query);
+
+            // assert
+            Assert.That(result.TotalCount, Is.GreaterThanOrEqualTo(2));
+        }
+
+        [Test]
+        public void Query_WithSkip_ReturnsItems()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            var target = client.GetService<IUserRepository>();
+
+            target.Create(new CreateUser { UserName = "SkipUserTest1", Password = "123456", ConfirmPassword = "123456" });
+            target.Create(new CreateUser { UserName = "SkipUserTest2", Password = "123456", ConfirmPassword = "123456" });
+
+            // act
+            var query = new PagingQuery<User> { Top = 1, Skip = 1 };
             PagingResult<User> result = target.Query(query);
 
             // assert

@@ -43,7 +43,6 @@ namespace OpenDeploymentManager.Server.Host.Controllers
 
             return new PagingResult<User>(
                 users,
-                Request.ODataProperties().NextLink,
                 Request.ODataProperties().TotalCount);
         }
 

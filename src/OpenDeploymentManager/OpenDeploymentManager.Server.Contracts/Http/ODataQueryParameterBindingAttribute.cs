@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Net.Http;
-using System.Text;
+﻿using System.Net.Http;
 
 namespace OpenDeploymentManager.Server.Contracts.Http
 {
@@ -22,6 +19,8 @@ namespace OpenDeploymentManager.Server.Contracts.Http
             {
                 query.Add("$top", odataQuery.Top);
             }
+
+            query.Add("$inlinecount", odataQuery.InlineCount.ToString().ToLowerInvariant());
         }
         #endregion
     }
