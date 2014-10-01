@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using NUnit.Framework;
 using OpenDeploymentManager.Client;
 using OpenDeploymentManager.Client.Exceptions;
@@ -129,7 +128,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         }
 
         [Test]
-        [ExpectedException(typeof(ServerException))]
+        [ExpectedException(typeof(NotFoundException))]
         public void UpdateUser_WithUserDoesNotExist_ThrowsException()
         {
             // arrange
@@ -167,6 +166,44 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             AuthenticationHeaderValue result = authentication.Authenticate(endpoint.UriResolver);
 
             Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ValidationException))]
+        public void SetPassword_WithWrongPasswordConfirmation_ThrowsException()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            var target = client.GetService<IUserRepository>();
+
+            User user = target.Create(new CreateUser { UserName = "SetPasswordUserTest1", Password = "123456", ConfirmPassword = "123456" });
+
+            // act
+            var password = new SetPassword
+            {
+                NewPassword = "asdfgh",
+                ConfirmPassword = "asdfgh1",
+            };
+
+            target.SetPassword(user.UserName, password);
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotFoundException))]
+        public void SetPassword_WithUserDoesNotExist_ThrowsException()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            var target = client.GetService<IUserRepository>();
+
+            // act
+            var password = new SetPassword
+            {
+                NewPassword = "asdfgh",
+                ConfirmPassword = "asdfgh1",
+            };
+
+            target.SetPassword("AnyNotExistingUser", password);
         }
 
         private static IOpenDeploymentManagerClient CreateClient(IOpenDeploymentManagerAuthentication authentication)

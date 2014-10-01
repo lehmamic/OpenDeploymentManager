@@ -37,6 +37,10 @@ namespace OpenDeploymentManager.Client.Http.Middleware
             {
                 throw new SecurityException("No access to the requested resource.", (int)response.Response.StatusCode);
             }
+            else if (response.Response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new NotFoundException("The requested resource has not been found.");
+            }
             else if (!response.Response.IsSuccessStatusCode)
             {
                 var waitOn = response.Response.Content.ReadAsStringAsync().WaitOn();
