@@ -25,7 +25,7 @@ namespace OpenDeploymentManager.Server.Host.Servces
 
         public ApplicationUser GetById(string id)
         {
-            return this.userManager.FindById(id);
+            return this.userManager.FindById(id.ToUserId());
         }
 
         public ApplicationUser GetByName(string userName)
@@ -61,17 +61,15 @@ namespace OpenDeploymentManager.Server.Host.Servces
 
         public IdentityResult ChangePassword(string userId, string currentPassword, string newPassword)
         {
-            return this.userManager.ChangePassword(userId, currentPassword, newPassword);
+            return this.userManager.ChangePassword(userId.ToUserId(), currentPassword, newPassword);
         }
 
-        public IdentityResult SetPassword(ApplicationUser user, string password)
+        public IdentityResult SetPassword(string userId, string password)
         {
-            user.ArgumentNotNull("user");
-
-            IdentityResult result = this.userManager.RemovePassword(user.UserName);
+            IdentityResult result = this.userManager.RemovePassword(userId.ToUserId());
             if (result.Succeeded)
             {
-                result = this.userManager.AddPassword(user.UserName, password);
+                result = this.userManager.AddPassword(userId.ToUserId(), password);
             }
 
             return result;

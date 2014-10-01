@@ -52,7 +52,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public User GetUser(string id)
         {
-            ApplicationUser user = this.userService.GetById(id.ToUserId());
+            ApplicationUser user = this.userService.GetById(id);
             if (user == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -93,7 +93,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HttpPut]
         public IHttpActionResult UpdateUser(string id, [FromBody]User model)
         {
-            ApplicationUser user = this.userService.GetById(id.ToUserId());
+            ApplicationUser user = this.userService.GetById(id);
             if (user == null)
             {
                 return this.NotFound();
@@ -122,7 +122,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HttpPut]
         public IHttpActionResult SetPassword(string id, [FromBody]SetPassword model)
         {
-            ApplicationUser user = this.userService.GetById(id.ToUserId());
+            ApplicationUser user = this.userService.GetById(id);
             if (user == null)
             {
                 return this.NotFound();
@@ -133,9 +133,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            model.ProjectedTo(user);
-
-            IdentityResult result = this.userService.SetPassword(user, model.NewPassword);
+            IdentityResult result = this.userService.SetPassword(id, model.NewPassword);
             IHttpActionResult errorResult = this.GetErrorResult(result);
             if (errorResult != null)
             {

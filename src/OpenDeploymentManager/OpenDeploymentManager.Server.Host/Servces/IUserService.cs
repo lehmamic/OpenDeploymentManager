@@ -22,6 +22,6 @@ namespace OpenDeploymentManager.Server.Host.Servces
 
         IdentityResult ChangePassword(string userId, string currentPassword, string newPassword);
 
-        IdentityResult SetPassword(ApplicationUser user, string password);
+        IdentityResult SetPassword(string userId, string password);
     }
 }

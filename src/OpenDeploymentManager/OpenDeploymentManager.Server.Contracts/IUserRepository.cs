@@ -21,7 +21,7 @@ namespace OpenDeploymentManager.Server.Contracts
         void Delete(string id);
 
         [HttpRequestUri("{id}/SetPassword")]
-        [HttpPostContract]
-        void SetPassword(string id, string password, string confirmPassword);
+        [HttpPutContract]
+        void SetPassword(string id, [HttpBodyParameter] SetPassword password);
     }
 }

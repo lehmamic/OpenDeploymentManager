@@ -3,6 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using OpenDeploymentManager.Client;
 using OpenDeploymentManager.Client.Exceptions;
+using OpenDeploymentManager.Common;
 using OpenDeploymentManager.Server.Contracts;
 using OpenDeploymentManager.Server.Host;
 
@@ -142,12 +143,38 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             target.Update(user.UserName, user);
         }
 
+        [Test]
+        public void SetPassword_WithValidPassword_CanUseNewPassword()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            var target = client.GetService<IUserRepository>();
+
+            User user = target.Create(new CreateUser { UserName = "SetPasswordUserTest1", Password = "123456", ConfirmPassword = "123456" });
+
+            // act
+            var password = new SetPassword
+                                     {
+                                         NewPassword = "asdfgh",
+                                         ConfirmPassword = "asdfgh",
+                                     };
+
+            target.SetPassword(user.UserName, password);
+
+            // assert
+            var authentication = new BearerTokenAuthentication(user.UserName, "asdfgh");
+            var endpoint = new OpenDeploymentManagerEndpoint(ServerConfiguration.ServerUrl.ToUri(), authentication);
+            AuthenticationHeaderValue result = authentication.Authenticate(endpoint.UriResolver);
+
+            Assert.That(result, Is.Not.Null);
+        }
+
         private static IOpenDeploymentManagerClient CreateClient(IOpenDeploymentManagerAuthentication authentication)
         {
             var clientFactory = new OpenDeploymentManagerClientFactory();
 
             var endpoint = new OpenDeploymentManagerEndpoint(
-                new Uri(ServerConfiguration.ServerUrl),
+                ServerConfiguration.ServerUrl.ToUri(),
                 authentication);
 
             return clientFactory.CreateClient(endpoint);
