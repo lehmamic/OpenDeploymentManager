@@ -15,7 +15,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void Query_WithTop_ReturnsItems()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -30,7 +30,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void Query_WithInlineCount_ReturnsTotalCount()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             target.Create(new CreateUser { UserName = "NextPageLinkUserTest1", Password = "123456", ConfirmPassword = "123456" });
@@ -48,7 +48,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void Query_WithSkip_ReturnsItems()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             target.Create(new CreateUser { UserName = "SkipUserTest1", Password = "123456", ConfirmPassword = "123456" });
@@ -66,7 +66,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void GetUserById_WithExistingUserId_ReturnsUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -80,7 +80,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void CreateUser_WithValidUser_CreatesUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -97,7 +97,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void CreateUser_WithoutUserName_CreatesUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -110,7 +110,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void CreateUser_WithWrongPasswordConfirmation_CreatesUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -123,7 +123,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void CreateUser_WithPasswordToShort_CreatesUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -136,7 +136,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void CreateUser_WithoutPasswort_CreatesUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -148,7 +148,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void UpdateUser_WithValidUser_CreatesUser()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             User user = target.Create(new CreateUser { UserName = "UpdateUserTest1", Password = "123456", ConfirmPassword = "123456" });
@@ -168,7 +168,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void UpdateUser_WithUserDoesNotExist_ThrowsException()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             User user = target.Create(new CreateUser { UserName = "UpdateUserTest2", Password = "123456", ConfirmPassword = "123456" });
@@ -182,7 +182,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void SetPassword_WithValidPassword_CanUseNewPassword()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             User user = target.Create(new CreateUser { UserName = "SetPasswordUserTest1", Password = "123456", ConfirmPassword = "123456" });
@@ -197,11 +197,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             target.SetPassword(user.UserName, password);
 
             // assert
-            var authentication = new BearerTokenAuthentication(user.UserName, "asdfgh");
-            var endpoint = new OpenDeploymentManagerEndpoint(ServerConfiguration.ServerUrl.ToUri(), authentication);
-            AuthenticationHeaderValue result = authentication.Authenticate(endpoint.UriResolver);
-
-            Assert.That(result, Is.Not.Null);
+            ClientHelper.AssertCanLogin(user.UserName, password.NewPassword);
         }
 
         [Test]
@@ -209,7 +205,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void SetPassword_WithWrongPasswordConfirmation_ThrowsException()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             User user = target.Create(new CreateUser { UserName = "SetPasswordUserTest1", Password = "123456", ConfirmPassword = "123456" });
@@ -229,7 +225,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         public void SetPassword_WithUserDoesNotExist_ThrowsException()
         {
             // arrange
-            IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
             var target = client.GetService<IUserRepository>();
 
             // act
@@ -240,17 +236,6 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             };
 
             target.SetPassword("AnyNotExistingUser", password);
-        }
-
-        private static IOpenDeploymentManagerClient CreateClient(IOpenDeploymentManagerAuthentication authentication)
-        {
-            var clientFactory = new OpenDeploymentManagerClientFactory();
-
-            var endpoint = new OpenDeploymentManagerEndpoint(
-                ServerConfiguration.ServerUrl.ToUri(),
-                authentication);
-
-            return clientFactory.CreateClient(endpoint);
         }
     }
 }

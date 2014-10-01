@@ -2,13 +2,21 @@
 
 namespace OpenDeploymentManager.Server.Contracts
 {
+    [HttpRequestUriPrefix("api/Account")]
     public interface IAccountRepository
     {
-        [HttpRequestUri("Account")]
-        User GetUser();
+        [HttpRequestUri("UserInfo")]
+        User Get();
 
-        [HttpRequestUri("Account")]
+        [HttpRequestUri("UserInfo")]
+        void Update(User user);
+
+        [HttpRequestUri("ChangePassword")]
         [HttpPostContract]
-        void ChangePassword(string password, string confirmPassword);
+        void ChangePassword(ChangePassword password);
+
+        [HttpRequestUri("Logout")]
+        [HttpPostContract]
+        void LogOff();
     }
 }

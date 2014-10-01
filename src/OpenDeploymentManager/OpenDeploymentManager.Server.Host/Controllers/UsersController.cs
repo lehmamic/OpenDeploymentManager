@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.OData;
-using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
-using System.Web.Http.OData.Query;
 using Microsoft.AspNet.Identity;
 using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Common.Projection;
@@ -16,7 +11,6 @@ using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
 using OpenDeploymentManager.Server.Host.Servces;
-using Raven.Client;
 
 namespace OpenDeploymentManager.Server.Host.Controllers
 {

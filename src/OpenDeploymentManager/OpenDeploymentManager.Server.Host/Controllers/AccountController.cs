@@ -63,6 +63,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
 
         // POST api/Account/Logout
         [Route("Logout")]
+        [HttpPost]
         public IHttpActionResult LogOff()
         {
             this.Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
@@ -72,6 +73,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         // POST api/Account/ChangePassword
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("ChangePassword")]
+        [HttpPost]
         public IHttpActionResult ChangePassword(ChangePassword model)
         {
             if (!this.ModelState.IsValid)
@@ -79,7 +81,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            IdentityResult result = this.userService.ChangePassword(this.User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            IdentityResult result = this.userService.ChangePassword(this.User.Identity.Name, model.OldPassword, model.NewPassword);
             IHttpActionResult errorResult = this.GetErrorResult(result);
             if (errorResult != null)
             {
