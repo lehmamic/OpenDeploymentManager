@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Net.Http;
-using System.Reflection;
-using Castle.DynamicProxy;
 using OpenDeploymentManager.Client.Http.Middleware;
-using OpenDeploymentManager.Server.Contracts.Http;
 
 namespace OpenDeploymentManager.Client.Http.Pipeline
 {
-    internal class HttpRequestInvoker : IHttpRequestBuilder, IMiddleware, IDisposable
+    internal class HttpRequestInvoker : IHttpRequestBuilder, IDisposable
     {
         private readonly HttpClient client = HttpClientFactory.Create();
         private readonly List<IMiddleware> middlewarePipeline = new List<IMiddleware>();
@@ -44,7 +40,7 @@ namespace OpenDeploymentManager.Client.Http.Pipeline
             }
 
             var pipeline = new MiddlewarePipeline(this.middlewarePipeline);
-            return pipeline.Invoke(context, this);
+            return pipeline.Invoke(context, new SendRequestMiddleware(this.client));
         }
 
         #region Implementation of IRequestBuilder
@@ -57,25 +53,6 @@ namespace OpenDeploymentManager.Client.Http.Pipeline
 
             this.middlewarePipeline.Add(middleware);
             return this;
-        }
-        #endregion
-
-        #region Implementation of IMiddleware
-        IHttpResponseContext IMiddleware.Invoke(IHttpRequestContext context, INextInvoker next)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException("context");
-            }
-
-            context.Request.RequestUri = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}{1}",
-                context.Request.RequestUri.ToString().TrimEnd('/'),
-                context.Request.GetUriQuery()).ToUri(UriKind.Relative);
-
-            HttpResponseMessage response = this.client.SendAsync(context.Request).WaitOn();
-            return new HttpResponseContext(response);
         }
         #endregion
 

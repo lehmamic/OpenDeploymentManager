@@ -34,7 +34,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             var target = client.GetService<IUserRepository>();
 
             // act
-            var actual = target.GetUserById("Admin");
+            var actual = target.GetById("Admin");
 
             // assert
             Assert.That(actual, Is.Not.Null);
@@ -49,10 +49,10 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             var user = new CreateUser { UserName = "CreateUserTest", Password = "123456", ConfirmPassword = "123456" };
-            target.CreateUser(user);
+            target.Create(user);
 
             // assert
-            var created = target.GetUserById(user.UserName);
+            var created = target.GetById(user.UserName);
             Assert.That(created, Is.Not.Null);
         }
 
@@ -66,7 +66,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             var user = new CreateUser { Password = "123456", ConfirmPassword = "123456" };
-            target.CreateUser(user);
+            target.Create(user);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             var user = new CreateUser { UserName = "CreateUserTest", Password = "123456", ConfirmPassword = "1234567" };
-            target.CreateUser(user);
+            target.Create(user);
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             var user = new CreateUser { UserName = "CreateUserTest", Password = "1234", ConfirmPassword = "1234" };
-            target.CreateUser(user);
+            target.Create(user);
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             var user = new CreateUser { UserName = "CreateUserTest" };
-            target.CreateUser(user);
+            target.Create(user);
         }
 
         [Test]
@@ -115,15 +115,15 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
             var target = client.GetService<IUserRepository>();
 
-            User user = target.CreateUser(new CreateUser { UserName = "UpdateUserTest1", Password = "123456", ConfirmPassword = "123456" });
+            User user = target.Create(new CreateUser { UserName = "UpdateUserTest1", Password = "123456", ConfirmPassword = "123456" });
 
             // act
             user.DisplayName = "TestDisplayName";
-            target.UpdateUser(user.UserName, user);
+            target.Update(user.UserName, user);
 
 
             // assert
-            var updated = target.GetUserById(user.UserName);
+            var updated = target.GetById(user.UserName);
             Assert.That(updated.DisplayName, Is.EqualTo(user.DisplayName));
         }
 
@@ -135,11 +135,11 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             IOpenDeploymentManagerClient client = CreateClient(new BearerTokenAuthentication("Admin", "123456"));
             var target = client.GetService<IUserRepository>();
 
-            User user = target.CreateUser(new CreateUser { UserName = "UpdateUserTest2", Password = "123456", ConfirmPassword = "123456" });
+            User user = target.Create(new CreateUser { UserName = "UpdateUserTest2", Password = "123456", ConfirmPassword = "123456" });
 
             // act
             user.UserName = "TestDisplayName1";
-            target.UpdateUser(user.UserName, user);
+            target.Update(user.UserName, user);
         }
 
         private static IOpenDeploymentManagerClient CreateClient(IOpenDeploymentManagerAuthentication authentication)

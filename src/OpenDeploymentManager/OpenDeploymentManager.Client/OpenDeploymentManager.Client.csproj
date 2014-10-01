@@ -68,6 +68,7 @@
     <Compile Include="Http\Middleware\DispatchReturnValueMiddleware.cs" />
     <Compile Include="Http\Middleware\DispatchRouteMiddleware.cs" />
     <Compile Include="Http\Middleware\MiddlewareExtensions.cs" />
+    <Compile Include="Http\Middleware\SendRequestMiddleware.cs" />
     <Compile Include="Http\Pipeline\HttpRequestContext.cs" />
     <Compile Include="Http\Pipeline\HttpRequestInvoker.cs" />
     <Compile Include="Http\Pipeline\IHttpRequestContext.cs" />

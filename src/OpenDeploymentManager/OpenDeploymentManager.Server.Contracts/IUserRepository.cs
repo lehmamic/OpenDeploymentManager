@@ -9,16 +9,16 @@ namespace OpenDeploymentManager.Server.Contracts
         PagingResult<User> Query(PagingQuery<User> query);
 
         [HttpRequestUri("{id}")]
-        User GetUserById(string id);
+        User GetById(string id);
 
         [HttpRequestUri("")]
-        User CreateUser([HttpBodyParameter] CreateUser user);
+        User Create([HttpBodyParameter] CreateUser user);
 
         [HttpRequestUri("{id}")]
-        void UpdateUser(string id, [HttpBodyParameter] User user);
+        void Update(string id, [HttpBodyParameter] User user);
 
         [HttpRequestUri("{id}")]
-        void DeleteUser(string id);
+        void Delete(string id);
 
         [HttpRequestUri("{id}/SetPassword")]
         [HttpPostContract]
