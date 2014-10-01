@@ -4,6 +4,7 @@ using Microsoft.Owin.Security.Cookies;
 using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Common.Projection;
 using OpenDeploymentManager.Server.Contracts;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Servces;
 
@@ -11,6 +12,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
+    [SaveChanges]
     public class AccountController : ControllerBase
     {
         private readonly IUserService userService;

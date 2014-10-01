@@ -1,13 +1,11 @@
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using OpenDeploymentManager.Common.Diagnostics;
-using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
 
 namespace OpenDeploymentManager.Server.Host.Servces
 {
-    [SaveChanges]
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> userManager;

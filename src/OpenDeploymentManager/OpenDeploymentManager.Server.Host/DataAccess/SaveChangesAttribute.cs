@@ -1,30 +1,20 @@
 ﻿using System;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.InterceptionExtension;
+using System.Net.Http;
+using System.Web.Http.Filters;
+using OpenDeploymentManager.Server.Host.Helpers;
 using Raven.Client;
 
 namespace OpenDeploymentManager.Server.Host.DataAccess
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
-    public class SaveChangesAttribute : HandlerAttribute
+    public class SaveChangesAttribute : ActionFilterAttribute
     {
-        private readonly int order;
-
-        public SaveChangesAttribute()
-            : this(0)
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-        }
+            base.OnActionExecuted(actionExecutedContext);
 
-        public SaveChangesAttribute(int order)
-        {
-            this.order = order;
+            var documentSession = actionExecutedContext.Request.GetDependencyScope().Resolve<IDocumentSession>();
+            documentSession.SaveChanges();
         }
-
-        #region Overrides of HandlerAttribute
-        public override ICallHandler CreateHandler(IUnityContainer container)
-        {
-            return new SaveChangesHandler(container.Resolve<IDocumentSession>()) { Order = this.order };
-        }
-        #endregion
     }
 }

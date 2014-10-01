@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using Bootstrap.Unity;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.InterceptionExtension;
 using NLog;
 using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Common.Projection;
@@ -29,7 +26,6 @@ namespace OpenDeploymentManager.Server.Host
             container.ArgumentNotNull("container");
 
             Log.Trace(Resources.InitializeContainerTask_ConfiguringContainer);
-            container.AddNewExtension<Interception>();
 
             // register db
             container.RegisterTypeAsSingleton<IDocumentStoreFactory, DocumentStoreFactory>(
@@ -45,9 +41,7 @@ namespace OpenDeploymentManager.Server.Host
                 c => Startup.OAuthOptions.AccessTokenFormat);
 
             // register services
-            container.RegisterTypePerRequest<IUserService, UserService>(
-                new InterceptionBehavior<PolicyInjectionBehavior>(),
-                new Interceptor<InterfaceInterceptor>());
+            container.RegisterTypePerRequest<IUserService, UserService>();
 
             ////container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
 
