@@ -181,7 +181,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DataAccess\ApplicationUserManager.cs" />
     <Compile Include="DataAccess\ApplicationUserStore.cs" />
     <Compile Include="DataAccess\ODataQueryParameterBindingAttribute.cs" />
     <Compile Include="DataAccess\DocumentSessionExtensions.cs" />
@@ -207,7 +209,9 @@
     <Compile Include="Security\ApiKeyAuthenticationHandler.cs" />
     <Compile Include="Security\ApiKeyConstants.cs" />
     <Compile Include="Security\ApiKeyAuthenticationOptions.cs" />
+    <Compile Include="Servces\ISecurityService.cs" />
     <Compile Include="Servces\IUserService.cs" />
+    <Compile Include="Servces\SecurityService.cs" />
     <Compile Include="Servces\UserService.cs" />
     <Compile Include="ServerConfiguration.cs" />
     <Compile Include="Program.cs">

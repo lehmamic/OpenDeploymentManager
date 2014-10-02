@@ -37,11 +37,14 @@ namespace OpenDeploymentManager.Server.Host
             container.RegisterTypePerRequest<IUserStore<ApplicationUser>, ApplicationUserStore>(
                 new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));
 
+            container.RegisterTypePerRequest<UserManager<ApplicationUser>, ApplicationUserManager>();
+
             container.RegisterTypeAsSingleton<ISecureDataFormat<AuthenticationTicket>>(
                 c => Startup.OAuthOptions.AccessTokenFormat);
 
             // register services
             container.RegisterTypePerRequest<IUserService, UserService>();
+            container.RegisterTypePerRequest<ISecurityService, SecurityService>();
 
             ////container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
 

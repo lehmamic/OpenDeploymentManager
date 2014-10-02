@@ -4,7 +4,6 @@ using System.Security.Claims;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
-using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using Raven.Client;
 
@@ -36,13 +35,11 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         }
         #endregion
 
-        private static void CreateAdminUser(IDocumentSession session)
+        private static void CreateAdminUser(UserManager<ApplicationUser> userManager)
         {
-            bool usersAvailable = session.Query<ApplicationUser>().Any();
+            bool usersAvailable = userManager.Users.Any();
             if (!usersAvailable)
             {
-                var userManager = new UserManager<ApplicationUser>(new ApplicationUserStore(session));
-
                 var userName = "Admin";
                 var password = "123456";
                 var administratorRole = "Administrator";
@@ -65,10 +62,11 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The handling of the lifetime is under control.")]
         private void Seed()
         {
-            using (IDocumentSession session = this.container.Resolve<IDocumentStore>().OpenSession())
+            using (IUnityContainer childContainer = this.container.CreateChildContainer())
             {
-                CreateAdminUser(session);
-                session.SaveChanges();
+                CreateAdminUser(childContainer.Resolve<UserManager<ApplicationUser>>());
+
+                childContainer.Resolve<IDocumentSession>().SaveChanges();
             }
         }
     }

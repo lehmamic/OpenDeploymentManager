@@ -1,5 +1,4 @@
 ﻿using System;
-using JetBrains.Annotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using OpenDeploymentManager.Server.Host.Models.Entity;
