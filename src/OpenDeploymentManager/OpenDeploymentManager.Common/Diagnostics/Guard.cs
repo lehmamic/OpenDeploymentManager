@@ -19,5 +19,25 @@ namespace OpenDeploymentManager.Common.Diagnostics
 
             return value;
         }
+
+        public static string ArgumentNotNullOrEmpty(this string value, string parameterName)
+        {
+            if (parameterName == null)
+            {
+                throw new ArgumentNullException("parameterName");
+            }
+
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentException("The parameter string {0} is empty".Invariant(parameterName), parameterName);
+            }
+
+            return value;
+        }
     }
 }

@@ -4,7 +4,9 @@ using System.Security.Claims;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
+using OpenDeploymentManager.Server.Host.Security;
 using Raven.Client;
 
 namespace OpenDeploymentManager.Server.Host.StartupTasks
@@ -35,6 +37,11 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         }
         #endregion
 
+        private static void CreateRoles(RoleManager<ApplicationRole> roleManager)
+        {
+            roleManager.CreateIfNotExist(RoleNames.Administrator);
+        }
+
         private static void CreateAdminUser(UserManager<ApplicationUser> userManager)
         {
             bool usersAvailable = userManager.Users.Any();
@@ -42,13 +49,12 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
             {
                 var userName = "Admin";
                 var password = "123456";
-                var administratorRole = "Administrator";
 
                 var adminUser = new ApplicationUser { UserName = userName };
                 IdentityResult result = userManager.Create(adminUser, password);
                 if (result.Succeeded)
                 {
-                    var adminRoleClaim = new Claim(ClaimTypes.Role, administratorRole);
+                    var adminRoleClaim = new Claim(ClaimTypes.Role, RoleNames.Administrator);
                     userManager.AddClaim(adminUser.Id, adminRoleClaim);
                 }
             }
@@ -64,6 +70,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         {
             using (IUnityContainer childContainer = this.container.CreateChildContainer())
             {
+                CreateRoles(childContainer.Resolve<RoleManager<ApplicationRole>>());
                 CreateAdminUser(childContainer.Resolve<UserManager<ApplicationUser>>());
 
                 childContainer.Resolve<IDocumentSession>().SaveChanges();

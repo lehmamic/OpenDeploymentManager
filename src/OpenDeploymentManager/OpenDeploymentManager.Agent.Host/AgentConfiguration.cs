@@ -8,7 +8,7 @@ namespace OpenDeploymentManager.Agent.Host
         {
             get
             {
-                return ConfigurationManager.AppSettings["OpenDeploymentManager:AgentUrl"];
+                return ConfigurationManager.AppSettings["OpenDeploymentManager/AgentUrl"];
             }
         }
     }

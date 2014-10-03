@@ -8,7 +8,23 @@ namespace OpenDeploymentManager.Server.Host
         {
             get
             {
-                return ConfigurationManager.AppSettings["OpenDeploymentManager:ServerUrl"];
+                return ConfigurationManager.AppSettings["OpenDeploymentManager/ServerUrl"];
+            }
+        }
+
+        public static string UseEmbeddedHttpServer
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["Raven/UseEmbeddedHttpServer"];
+            }
+        }
+
+        public static string RavenDbPort
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["Raven/Port"];
             }
         }
     }

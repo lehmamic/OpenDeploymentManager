@@ -9,6 +9,7 @@ using System.Web.Http.Metadata;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Query;
 using OpenDeploymentManager.Common.Diagnostics;
+using OpenDeploymentManager.Common.Theading;
 
 namespace OpenDeploymentManager.Server.Host.DataAccess
 {
@@ -21,10 +22,6 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
         public override HttpParameterBinding GetBinding(HttpParameterDescriptor parameter)
         {
             return (HttpParameterBinding)new ODataQueryParameterBindingAttribute.ODataQueryParameterBinding(parameter);
-        }
-
-        internal struct AsyncVoid
-        {
         }
 
         internal class ODataQueryParameterBinding : HttpParameterBinding
@@ -66,7 +63,7 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
 
 
                 this.SetValue(actionContext, (object)odataQueryOptions);
-                return Task.FromResult(new AsyncVoid());
+                return AsyncHelper.Void;
             }
 
             internal static Type GetEntityClrTypeFromParameterType(HttpParameterDescriptor parameterDescriptor)

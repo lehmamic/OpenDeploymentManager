@@ -1,6 +1,8 @@
 ﻿using System;
+using OpenDeploymentManager.Common;
 using Raven.Client;
 using Raven.Client.Embedded;
+using Raven.Database.Server;
 
 namespace OpenDeploymentManager.Server.Host.DataAccess
 {
@@ -26,6 +28,13 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
         public IDocumentStore CreateDocumentStore()
         {
             var documentStore = !string.IsNullOrEmpty(this.connectionStringName) ? new EmbeddableDocumentStore { ConnectionStringName = this.connectionStringName } : new EmbeddableDocumentStore();
+
+            documentStore.UseEmbeddedHttpServer = ServerConfiguration.UseEmbeddedHttpServer.ToBool(false);
+            if (documentStore.UseEmbeddedHttpServer)
+            {
+                NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(ServerConfiguration.RavenDbPort.ToInt(0));
+            }
+
             documentStore.Initialize();
 
             return documentStore;

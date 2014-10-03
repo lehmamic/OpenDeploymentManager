@@ -183,6 +183,8 @@
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DataAccess\ApplicationRoleManager.cs" />
+    <Compile Include="DataAccess\ApplicationRoleStore.cs" />
     <Compile Include="DataAccess\ApplicationUserManager.cs" />
     <Compile Include="DataAccess\ApplicationUserStore.cs" />
     <Compile Include="DataAccess\ODataQueryParameterBindingAttribute.cs" />
@@ -191,9 +193,11 @@
     <Compile Include="DataAccess\IDocumentStoreFactory.cs" />
     <Compile Include="DataAccess\ODataQueryOptions.cs" />
     <Compile Include="DataAccess\ODataQueryOptionsExtensions.cs" />
+    <Compile Include="DataAccess\RoleManagerExtensions.cs" />
     <Compile Include="DataAccess\SaveChangesAttribute.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Helpers\HeaderDictionaryExtensions.cs" />
+    <Compile Include="Models\Entity\ApplicationRole.cs" />
     <Compile Include="Models\Entity\ApplicationUser.cs" />
     <Compile Include="Models\Entity\ApplicationUserExtensions.cs" />
     <Compile Include="Models\Mapping\ApplicationUserProfile.cs" />
@@ -209,6 +213,7 @@
     <Compile Include="Security\ApiKeyAuthenticationHandler.cs" />
     <Compile Include="Security\ApiKeyConstants.cs" />
     <Compile Include="Security\ApiKeyAuthenticationOptions.cs" />
+    <Compile Include="Security\RoleNames.cs" />
     <Compile Include="Servces\ISecurityService.cs" />
     <Compile Include="Servces\IUserService.cs" />
     <Compile Include="Servces\SecurityService.cs" />
@@ -224,7 +229,9 @@
     <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

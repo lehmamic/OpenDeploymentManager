@@ -39,6 +39,11 @@ namespace OpenDeploymentManager.Server.Host
 
             container.RegisterTypePerRequest<UserManager<ApplicationUser>, ApplicationUserManager>();
 
+            container.RegisterTypePerRequest<IRoleStore<ApplicationRole>, ApplicationRoleStore>(
+                new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));
+
+            container.RegisterTypePerRequest<RoleManager<ApplicationRole>, ApplicationRoleManager>();
+
             container.RegisterTypeAsSingleton<ISecureDataFormat<AuthenticationTicket>>(
                 c => Startup.OAuthOptions.AccessTokenFormat);
 

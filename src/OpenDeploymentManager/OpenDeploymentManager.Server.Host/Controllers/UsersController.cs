@@ -10,11 +10,12 @@ using OpenDeploymentManager.Server.Contracts;
 using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Properties;
+using OpenDeploymentManager.Server.Host.Security;
 using OpenDeploymentManager.Server.Host.Servces;
 
 namespace OpenDeploymentManager.Server.Host.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = RoleNames.Administrator)]
     [RoutePrefix("api/Users")]
     [SaveChanges]
     public class UsersController : ControllerBase
