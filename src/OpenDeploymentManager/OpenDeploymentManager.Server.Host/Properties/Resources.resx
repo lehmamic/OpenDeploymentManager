@@ -153,6 +153,9 @@
   <data name="ApplicationUserExtensions_ApplicationUserIdFormat" xml:space="preserve">
     <value>ApplicationUsers/{0}</value>
   </data>
+  <data name="ApplicationRoleExtensions_ApplicationRoleIdFormat" xml:space="preserve">
+    <value>ApplicationRoles/{0}</value>
+  </data>
   <data name="SaveChangesHandler_SaveChanges" xml:space="preserve">
     <value>Saving the changes to the database.</value>
   </data>

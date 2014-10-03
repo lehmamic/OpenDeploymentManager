@@ -27,9 +27,8 @@ namespace OpenDeploymentManager.Server.Host.Controllers
             this.userService = userService.ArgumentNotNull("userService");
         }
 
-        // GET api/users
+        // GET api/users?$top=10&$skip=10
         [Route("")]
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an async method.")]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public PagingResult<User> GetUsers(ODataQueryOptions<User, ApplicationUser> options)
         {

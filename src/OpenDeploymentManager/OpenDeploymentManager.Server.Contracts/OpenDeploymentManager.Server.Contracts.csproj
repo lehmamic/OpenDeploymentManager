@@ -85,6 +85,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Http\HttpRequestUriAttribute.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="TokenResponse.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

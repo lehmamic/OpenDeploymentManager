@@ -61,6 +61,15 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ApplicationRoles/{0}.
+        /// </summary>
+        internal static string ApplicationRoleExtensions_ApplicationRoleIdFormat {
+            get {
+                return ResourceManager.GetString("ApplicationRoleExtensions_ApplicationRoleIdFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ApplicationUsers/{0}.
         /// </summary>
         internal static string ApplicationUserExtensions_ApplicationUserIdFormat {

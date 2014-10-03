@@ -198,8 +198,10 @@
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Helpers\HeaderDictionaryExtensions.cs" />
     <Compile Include="Models\Entity\ApplicationRole.cs" />
+    <Compile Include="Models\Entity\ApplicationRoleExtensions.cs" />
     <Compile Include="Models\Entity\ApplicationUser.cs" />
     <Compile Include="Models\Entity\ApplicationUserExtensions.cs" />
+    <Compile Include="Models\Mapping\ApplicationRoleProfile.cs" />
     <Compile Include="Models\Mapping\ApplicationUserProfile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -215,8 +217,10 @@
     <Compile Include="Security\ApiKeyAuthenticationOptions.cs" />
     <Compile Include="Security\RoleNames.cs" />
     <Compile Include="Servces\ISecurityService.cs" />
+    <Compile Include="Servces\IUserRoleService.cs" />
     <Compile Include="Servces\IUserService.cs" />
     <Compile Include="Servces\SecurityService.cs" />
+    <Compile Include="Servces\UserRoleService.cs" />
     <Compile Include="Servces\UserService.cs" />
     <Compile Include="ServerConfiguration.cs" />
     <Compile Include="Program.cs">
@@ -238,6 +242,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

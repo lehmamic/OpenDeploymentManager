@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
+using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using OpenDeploymentManager.Server.Host.Security;
@@ -17,12 +17,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
 
         public InitializeDatabaseTask(IUnityContainer container)
         {
-            if (container == null)
-            {
-                throw new ArgumentNullException("container");
-            }
-
-            this.container = container;
+            this.container = container.ArgumentNotNull("container");
         }
 
         #region Implementation of IStartupTask

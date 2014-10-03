@@ -162,4 +162,7 @@
   <data name="ValidationError_ConfirmPasswordNotMatch" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
   </data>
+  <data name="Property_RoleName" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>
