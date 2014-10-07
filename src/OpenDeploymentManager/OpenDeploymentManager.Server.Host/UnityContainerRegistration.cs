@@ -49,6 +49,7 @@ namespace OpenDeploymentManager.Server.Host
 
             // register services
             container.RegisterTypePerRequest<IUserService, UserService>();
+            container.RegisterTypePerRequest<IUserGroupService, UserGroupService>();
             container.RegisterTypePerRequest<IUserRoleService, UserRoleService>();
             container.RegisterTypePerRequest<ISecurityService, SecurityService>();
 

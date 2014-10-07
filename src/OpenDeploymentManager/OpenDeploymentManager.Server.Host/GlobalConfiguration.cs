@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using OpenDeploymentManager.Common.Diagnostics;
 
 namespace OpenDeploymentManager.Server.Host
 {
@@ -22,10 +23,7 @@ namespace OpenDeploymentManager.Server.Host
 
         public static void Configure(Action<HttpConfiguration> configurationCallback)
         {
-            if (configurationCallback == null)
-            {
-                throw new ArgumentNullException("configurationCallback");
-            }
+            configurationCallback.ArgumentNotNull("configurationCallback");
 
             configurationCallback(Configuration);
         }

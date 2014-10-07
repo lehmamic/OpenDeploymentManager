@@ -59,6 +59,7 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Annotations\ResharperAnnotations.cs" />
     <Compile Include="Diagnostics\Guard.cs" />
     <Compile Include="Projection\AutomapperTypeAdapter.cs" />
     <Compile Include="Projection\AutomapperTypeAdapterFactory.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Projection\ITypeAdapterFactory.cs" />
     <Compile Include="Projection\ProjectionsExtensions.cs" />
     <Compile Include="Projection\TypeAdapterFactory.cs" />
+    <Compile Include="Reflection\MemberInfoExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Theading\AsyncHelper.cs" />
     <Compile Include="Theading\AsyncVoid.cs" />

@@ -162,4 +162,7 @@
   <data name="UserService_UserAlreadyExists" xml:space="preserve">
     <value>A user with this user name already exist.</value>
   </data>
+  <data name="UniqueConstraintExceptionHandlerAttribute_MustBeUnique" xml:space="preserve">
+    <value>{0} must be unique.</value>
+  </data>
 </root>

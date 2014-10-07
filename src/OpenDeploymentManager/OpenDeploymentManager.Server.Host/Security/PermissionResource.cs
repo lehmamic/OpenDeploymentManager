@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel;
 
-namespace Jetpack.NET.API.Security
+namespace OpenDeploymentManager.Server.Host.Security
 {
-    public enum PermissionResource
+    public enum GlobalResourcePermission
     {
         [Description("auth.ResourceAccessRule")]
         ResourceAccessRuleResource,
 
-        [Description("auth.Role")]
-        RoleResource,
+        [Description("auth.UserGroup")]
+        UserGroupResource,
 
         [Description("auth.User")]
         UserResource

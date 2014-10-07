@@ -178,6 +178,15 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} must be unique..
+        /// </summary>
+        internal static string UniqueConstraintExceptionHandlerAttribute_MustBeUnique {
+            get {
+                return ResourceManager.GetString("UniqueConstraintExceptionHandlerAttribute_MustBeUnique", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not delete the user you currently are logged in with..
         /// </summary>
         internal static string UsersController_CanNotDeleteCurrentUser {

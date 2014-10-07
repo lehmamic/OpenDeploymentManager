@@ -2,9 +2,7 @@
 using NUnit.Framework;
 using OpenDeploymentManager.Client;
 using OpenDeploymentManager.Client.Exceptions;
-using OpenDeploymentManager.Common;
 using OpenDeploymentManager.Server.Contracts;
-using OpenDeploymentManager.Server.Host;
 
 namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 {

@@ -2,6 +2,7 @@
 using OpenDeploymentManager.Common;
 using Raven.Client;
 using Raven.Client.Embedded;
+using Raven.Client.UniqueConstraints;
 using Raven.Database.Server;
 
 namespace OpenDeploymentManager.Server.Host.DataAccess
@@ -34,6 +35,8 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
             {
                 NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(ServerConfiguration.RavenDbPort.ToInt(0));
             }
+
+            documentStore.RegisterListener(new UniqueConstraintsStoreListener());
 
             documentStore.Initialize();
 

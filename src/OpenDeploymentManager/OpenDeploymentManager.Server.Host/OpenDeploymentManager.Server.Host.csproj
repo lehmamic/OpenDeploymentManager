@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\UserGroupsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DataAccess\ApplicationRoleManager.cs" />
     <Compile Include="DataAccess\ApplicationRoleStore.cs" />
@@ -195,13 +196,17 @@
     <Compile Include="DataAccess\ODataQueryOptionsExtensions.cs" />
     <Compile Include="DataAccess\RoleManagerExtensions.cs" />
     <Compile Include="DataAccess\SaveChangesAttribute.cs" />
+    <Compile Include="DataAccess\UniqueConstraintsException.cs" />
     <Compile Include="GlobalConfiguration.cs" />
+    <Compile Include="Helpers\UniqueConstraintExceptionHandlerAttribute.cs" />
     <Compile Include="Helpers\HeaderDictionaryExtensions.cs" />
     <Compile Include="Models\Entity\ApplicationRole.cs" />
     <Compile Include="Models\Entity\ApplicationRoleExtensions.cs" />
     <Compile Include="Models\Entity\ApplicationUser.cs" />
     <Compile Include="Models\Entity\ApplicationUserExtensions.cs" />
+    <Compile Include="Models\Entity\ApplicationUserGroup.cs" />
     <Compile Include="Models\Mapping\ApplicationRoleProfile.cs" />
+    <Compile Include="Models\Mapping\ApplicationUserGroupProfile.cs" />
     <Compile Include="Models\Mapping\ApplicationUserProfile.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -215,11 +220,15 @@
     <Compile Include="Security\ApiKeyAuthenticationHandler.cs" />
     <Compile Include="Security\ApiKeyConstants.cs" />
     <Compile Include="Security\ApiKeyAuthenticationOptions.cs" />
+    <Compile Include="Security\PermissionResource.cs" />
+    <Compile Include="Security\ResourceOperations.cs" />
     <Compile Include="Security\RoleNames.cs" />
     <Compile Include="Servces\ISecurityService.cs" />
+    <Compile Include="Servces\IUserGroupService.cs" />
     <Compile Include="Servces\IUserRoleService.cs" />
     <Compile Include="Servces\IUserService.cs" />
     <Compile Include="Servces\SecurityService.cs" />
+    <Compile Include="Servces\UserGroupService.cs" />
     <Compile Include="Servces\UserRoleService.cs" />
     <Compile Include="Servces\UserService.cs" />
     <Compile Include="ServerConfiguration.cs" />

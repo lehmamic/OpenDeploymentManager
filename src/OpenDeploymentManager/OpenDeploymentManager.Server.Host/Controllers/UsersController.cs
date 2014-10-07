@@ -20,6 +20,8 @@ namespace OpenDeploymentManager.Server.Host.Controllers
     [SaveChanges]
     public class UsersController : ControllerBase
     {
+        private const string UserById = "UserById";
+
         private readonly IUserService userService;
 
         public UsersController(IUserService userService)
@@ -41,7 +43,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         }
 
         // GET api/users/5
-        [Route("{id}", Name = "GetUserById")]
+        [Route("{id}", Name = UserById)]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public User GetUser(string id)
         {
@@ -74,7 +76,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return errorResult;
             }
 
-            string location = this.Url.Link("GetUserById", new { id = user.UserName });
+            string location = this.Url.Link(UserById, new { id = user.UserName });
             var content = user.ProjectedAs<User>();
 
             return this.Created(location, content);

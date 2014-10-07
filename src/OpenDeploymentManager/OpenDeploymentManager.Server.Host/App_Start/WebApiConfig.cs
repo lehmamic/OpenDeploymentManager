@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.OData.Extensions;
 using OpenDeploymentManager.Common.Diagnostics;
+using OpenDeploymentManager.Server.Host.Helpers;
 
 namespace OpenDeploymentManager.Server.Host
 {
@@ -12,6 +13,8 @@ namespace OpenDeploymentManager.Server.Host
 
             // Web API configuration and services
             config.AddODataQueryFilter();
+
+            config.Filters.Add(new UniqueConstraintExceptionHandlerAttribute());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
