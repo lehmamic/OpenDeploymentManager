@@ -32,8 +32,7 @@ namespace OpenDeploymentManager.Server.Host.Servces
         {
             userGroup.ArgumentNotNull("userGroup");
 
-            this.session.AreConstraintsFree(userGroup);
-            this.session.Store(userGroup);
+            this.session.StoreUnique(userGroup);
         }
 
         public void Update(ApplicationUserGroup userGroup)

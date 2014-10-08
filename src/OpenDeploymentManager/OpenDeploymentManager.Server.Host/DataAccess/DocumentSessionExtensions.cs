@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using OpenDeploymentManager.Common;
@@ -22,6 +23,14 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
                 IEnumerable<PropertyInfo> uniqueConstraintProperties = typeof(TDocument).GetProperties().Where(p => p.IsDefined<UniqueConstraintAttribute>(false));
                 throw new UniqueConstraintException("The unique constraints for type {0} are violated.".Invariant(typeof(TDocument)), uniqueConstraintProperties);
             }
+        }
+
+        public static void StoreUnique<TDocument>([NotNull] this IDocumentSession session, TDocument document)
+        {
+            session.ArgumentNotNull("session");
+
+            session.AreConstraintsFree(document);
+            session.Store(document);
         }
 
         public static void SaveChanges([NotNull] this IAsyncDocumentSession session)
