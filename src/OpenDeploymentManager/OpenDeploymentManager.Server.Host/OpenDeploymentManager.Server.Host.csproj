@@ -188,6 +188,7 @@
     <Compile Include="DataAccess\ApplicationRoleStore.cs" />
     <Compile Include="DataAccess\ApplicationUserManager.cs" />
     <Compile Include="DataAccess\ApplicationUserStore.cs" />
+    <Compile Include="Models\Entity\DefaultEntityKeys.cs" />
     <Compile Include="DataAccess\ODataQueryParameterBindingAttribute.cs" />
     <Compile Include="DataAccess\DocumentSessionExtensions.cs" />
     <Compile Include="DataAccess\DocumentStoreFactory.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="DataAccess\RoleManagerExtensions.cs" />
     <Compile Include="DataAccess\SaveChangesAttribute.cs" />
     <Compile Include="DataAccess\UniqueConstraintsException.cs" />
+    <Compile Include="DataAccess\UserManagerExtensions.cs" />
     <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Helpers\UniqueConstraintExceptionHandlerAttribute.cs" />
     <Compile Include="Helpers\HeaderDictionaryExtensions.cs" />
@@ -266,6 +268,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Dto\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\RavenDB.Bundles.UniqueConstraints.2.5.2916\lib\net45\Raven.Bundles.UniqueConstraints.dll">
+      <Link>Plugins\Raven.Bundles.UniqueConstraints.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

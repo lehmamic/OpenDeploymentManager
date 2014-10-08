@@ -73,6 +73,7 @@
     <Compile Include="InlineCountOptions.cs" />
     <Compile Include="IPagingQuery.cs" />
     <Compile Include="IRoleRepository.cs" />
+    <Compile Include="IUserGroupRepository.cs" />
     <Compile Include="PagingQuery.cs" />
     <Compile Include="ResourceBase.cs" />
     <Compile Include="IResourceRepository.cs" />
@@ -95,6 +96,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

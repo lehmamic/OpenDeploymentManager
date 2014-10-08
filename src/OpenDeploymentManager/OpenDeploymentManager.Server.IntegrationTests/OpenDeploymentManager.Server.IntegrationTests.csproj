@@ -72,6 +72,7 @@
     <Compile Include="Controllers\AccountControllerFixture.cs" />
     <Compile Include="Controllers\ClientHelper.cs" />
     <Compile Include="Controllers\RolesControllerFixture.cs" />
+    <Compile Include="Controllers\UserGroupsControllerFixture.cs" />
     <Compile Include="Controllers\UsersControllerFixture.cs" />
     <Compile Include="ServerHost.cs">
       <SubType>Component</SubType>
@@ -113,6 +114,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\ravendb.bundles.uniqueconstraints.2.5.2916\lib\net45\Raven.Bundles.UniqueConstraints.dll">
+      <Link>Plugins\Raven.Bundles.UniqueConstraints.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

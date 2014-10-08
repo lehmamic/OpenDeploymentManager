@@ -165,4 +165,7 @@
   <data name="Property_RoleName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="Property_UserGroupName" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

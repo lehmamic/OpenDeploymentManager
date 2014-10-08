@@ -187,6 +187,15 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Administrators.
+        /// </summary>
+        internal static string UserGroup_Administrators {
+            get {
+                return ResourceManager.GetString("UserGroup_Administrators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can not delete the user you currently are logged in with..
         /// </summary>
         internal static string UsersController_CanNotDeleteCurrentUser {

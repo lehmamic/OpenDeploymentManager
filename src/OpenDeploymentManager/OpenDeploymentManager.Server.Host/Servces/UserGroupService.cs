@@ -30,8 +30,22 @@ namespace OpenDeploymentManager.Server.Host.Servces
 
         public void Create(ApplicationUserGroup userGroup)
         {
-            session.AreConstraintsFree(userGroup);
-            session.Store(userGroup);
+            userGroup.ArgumentNotNull("userGroup");
+
+            this.session.AreConstraintsFree(userGroup);
+            this.session.Store(userGroup);
+        }
+
+        public void Update(ApplicationUserGroup userGroup)
+        {
+            userGroup.ArgumentNotNull("userGroup");
+            this.session.AreConstraintsFree(userGroup);
+        }
+
+        public void Delete(ApplicationUserGroup userGroup)
+        {
+            userGroup.ArgumentNotNull("userGroup");
+            this.session.Delete(userGroup);
         }
         #endregion
     }

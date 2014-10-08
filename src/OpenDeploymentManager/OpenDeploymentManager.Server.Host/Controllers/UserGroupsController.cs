@@ -32,11 +32,11 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public PagingResult<UserGroup> GetUserGroups(ODataQueryOptions<UserGroup, ApplicationUserGroup> options)
         {
-            var roles = options.ApplyTo<ApplicationUserGroup>(this.userGroupService.Query())
+            var userGroups = options.ApplyTo<ApplicationUserGroup>(this.userGroupService.Query())
                 .ProjectedAsCollection<UserGroup>();
 
             return new PagingResult<UserGroup>(
-                roles,
+                userGroups,
                 Request.ODataProperties().TotalCount);
         }
 
@@ -45,13 +45,13 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public UserGroup GetUserGroup(Guid id)
         {
-            ApplicationUserGroup role = this.userGroupService.GetById(id);
-            if (role == null)
+            ApplicationUserGroup userGroup = this.userGroupService.GetById(id);
+            if (userGroup == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            return role.ProjectedAs<UserGroup>();
+            return userGroup.ProjectedAs<UserGroup>();
         }
 
         // POST api/usergroups/
@@ -72,6 +72,44 @@ namespace OpenDeploymentManager.Server.Host.Controllers
             var content = userGroup.ProjectedAs<UserGroup>();
 
             return this.Created(location, content);
+        }
+
+        // PUT api/usergroups/5
+        [Route("{id}")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [HttpPut]
+        public IHttpActionResult UpdateUserGroup(Guid id, [FromBody]UserGroup model)
+        {
+            ApplicationUserGroup userGroup = this.userGroupService.GetById(id);
+            if (userGroup == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(this.ModelState);
+            }
+
+            model.ProjectedTo(userGroup);
+            this.userGroupService.Update(userGroup);
+
+            return this.Ok();
+        }
+
+        // DELETE api/usergroups/5
+        [Route("{id}")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [HttpDelete]
+        public IHttpActionResult DeleteUserGroup(Guid id)
+        {
+            ApplicationUserGroup userGroup = this.userGroupService.GetById(id);
+            if (userGroup != null)
+            {
+                this.userGroupService.Delete(userGroup);
+            }
+
+            return this.Ok();
         }
     }
 }

@@ -5,8 +5,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using OpenDeploymentManager.Common.Diagnostics;
 using OpenDeploymentManager.Server.Host.DataAccess;
+using OpenDeploymentManager.Server.Host.Models;
 using OpenDeploymentManager.Server.Host.Models.Entity;
+using OpenDeploymentManager.Server.Host.Properties;
 using OpenDeploymentManager.Server.Host.Security;
+using OpenDeploymentManager.Server.Host.Servces;
 using Raven.Client;
 
 namespace OpenDeploymentManager.Server.Host.StartupTasks
@@ -32,6 +35,20 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         }
         #endregion
 
+        private static void CreateUserGroups(IUserGroupService userGroupService)
+        {
+            if (userGroupService.GetById(DefaultEntityKeys.AdministratorsUserGroup) == null)
+            {
+                var administratorsGroup = new ApplicationUserGroup
+                                              {
+                                                  Id = DefaultEntityKeys.AdministratorsUserGroup,
+                                                  Name = Resources.UserGroup_Administrators
+                                              };
+
+                userGroupService.Create(administratorsGroup);
+            }
+        }
+
         private static void CreateRoles(RoleManager<ApplicationRole> roleManager)
         {
             roleManager.CreateIfNotExist(RoleNames.Administrator);
@@ -49,8 +66,8 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
                 IdentityResult result = userManager.Create(adminUser, password);
                 if (result.Succeeded)
                 {
-                    var adminRoleClaim = new Claim(ClaimTypes.Role, RoleNames.Administrator);
-                    userManager.AddClaim(adminUser.Id, adminRoleClaim);
+                    userManager.AddClaim(adminUser.Id, ClaimTypes.Role, RoleNames.Administrator);
+                    userManager.AddClaim(adminUser.Id, ClaimTypes.GroupSid, DefaultEntityKeys.AdministratorsUserGroup.ToString());
                 }
             }
         }
@@ -65,6 +82,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         {
             using (IUnityContainer childContainer = this.container.CreateChildContainer())
             {
+                CreateUserGroups(childContainer.Resolve<IUserGroupService>());
                 CreateRoles(childContainer.Resolve<RoleManager<ApplicationRole>>());
                 CreateAdminUser(childContainer.Resolve<UserManager<ApplicationUser>>());
 

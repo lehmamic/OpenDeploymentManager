@@ -169,6 +169,15 @@ namespace OpenDeploymentManager.Server.Contracts.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Property_UserGroupName {
+            get {
+                return ResourceManager.GetString("Property_UserGroupName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User name.
         /// </summary>
         public static string Property_UserName {
