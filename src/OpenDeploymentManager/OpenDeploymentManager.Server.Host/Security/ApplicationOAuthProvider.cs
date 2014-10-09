@@ -8,6 +8,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using OpenDeploymentManager.Common.Diagnostics;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 
 namespace OpenDeploymentManager.Server.Host.Security
@@ -34,7 +35,7 @@ namespace OpenDeploymentManager.Server.Host.Security
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<UserManager<ApplicationUser>>();
+            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
             if (user == null)
             {

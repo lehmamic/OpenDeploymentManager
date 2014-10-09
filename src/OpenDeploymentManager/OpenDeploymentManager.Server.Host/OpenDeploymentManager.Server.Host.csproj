@@ -187,7 +187,8 @@
     <Compile Include="DataAccess\ApplicationRoleManager.cs" />
     <Compile Include="DataAccess\ApplicationRoleStore.cs" />
     <Compile Include="DataAccess\ApplicationUserManager.cs" />
-    <Compile Include="DataAccess\ApplicationUserStore.cs" />
+    <Compile Include="DataAccess\UserStore.cs" />
+    <Compile Include="DataAccess\IdentityUserStoreSupport.cs" />
     <Compile Include="Models\Entity\DefaultEntityKeys.cs" />
     <Compile Include="DataAccess\ODataQueryParameterBindingAttribute.cs" />
     <Compile Include="DataAccess\DocumentSessionExtensions.cs" />
@@ -207,6 +208,9 @@
     <Compile Include="Models\Entity\ApplicationUser.cs" />
     <Compile Include="Models\Entity\ApplicationUserExtensions.cs" />
     <Compile Include="Models\Entity\ApplicationUserGroup.cs" />
+    <Compile Include="Models\Entity\IdentityUser.cs" />
+    <Compile Include="Models\Entity\IdentityUserClaim.cs" />
+    <Compile Include="Models\Entity\IdentityUserLogin.cs" />
     <Compile Include="Models\Mapping\ApplicationRoleProfile.cs" />
     <Compile Include="Models\Mapping\ApplicationUserGroupProfile.cs" />
     <Compile Include="Models\Mapping\ApplicationUserProfile.cs" />

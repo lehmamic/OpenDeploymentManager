@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using OpenDeploymentManager.Client;
 using OpenDeploymentManager.Client.Exceptions;
 using OpenDeploymentManager.Server.Contracts;
+using OpenDeploymentManager.Server.Host.Models.Entity;
 
 namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 {
@@ -68,7 +70,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             var target = client.GetService<IUserRepository>();
 
             // act
-            var actual = target.GetById("Admin");
+            var actual = target.GetById(WellKnownEntityKeys.AdministratorUser);
 
             // assert
             Assert.That(actual, Is.Not.Null);
@@ -83,16 +85,16 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             var user = new CreateUser { UserName = "CreateUserTest", Password = "123456", ConfirmPassword = "123456" };
-            target.Create(user);
+            User result = target.Create(user);
 
             // assert
-            var created = target.GetById(user.UserName);
+            User created = target.GetById(result.Id);
             Assert.That(created, Is.Not.Null);
         }
 
         [Test]
         [ExpectedException(typeof(ValidationException))]
-        public void CreateUser_WithoutUserName_CreatesUser()
+        public void CreateUser_WithoutUserName_ThrowsException()
         {
             // arrange
             IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
@@ -131,7 +133,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
         [Test]
         [ExpectedException(typeof(ValidationException))]
-        public void CreateUser_WithoutPasswort_CreatesUser()
+        public void CreateUser_WithoutPasswort_ThrowsException()
         {
             // arrange
             IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
@@ -143,7 +145,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         }
 
         [Test]
-        public void UpdateUser_WithValidUser_CreatesUser()
+        public void UpdateUser_WithValidUser_UpdatesUser()
         {
             // arrange
             IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
@@ -153,11 +155,11 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             user.DisplayName = "TestDisplayName";
-            target.Update(user.UserName, user);
+            target.Update(user.Id, user);
 
 
             // assert
-            var updated = target.GetById(user.UserName);
+            var updated = target.GetById(user.Id);
             Assert.That(updated.DisplayName, Is.EqualTo(user.DisplayName));
         }
 
@@ -173,7 +175,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // act
             user.UserName = "TestDisplayName1";
-            target.Update(user.UserName, user);
+            target.Update(Guid.NewGuid(), user);
         }
 
         [Test]
@@ -192,7 +194,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
                                          ConfirmPassword = "asdfgh",
                                      };
 
-            target.SetPassword(user.UserName, password);
+            target.SetPassword(user.Id, password);
 
             // assert
             ClientHelper.AssertCanLogin(user.UserName, password.NewPassword);
@@ -215,7 +217,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
                 ConfirmPassword = "asdfgh1",
             };
 
-            target.SetPassword(user.UserName, password);
+            target.SetPassword(user.Id, password);
         }
 
         [Test]
@@ -233,7 +235,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
                 ConfirmPassword = "asdfgh1",
             };
 
-            target.SetPassword("AnyNotExistingUser", password);
+            target.SetPassword(Guid.NewGuid(), password);
         }
     }
 }

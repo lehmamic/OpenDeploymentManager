@@ -33,7 +33,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             var target = client.GetService<IUserGroupRepository>();
 
             // act
-            var actual = target.GetById(DefaultEntityKeys.AdministratorsUserGroup);
+            var actual = target.GetById(WellKnownEntityKeys.AdministratorsUserGroup);
 
             // assert
             Assert.That(actual, Is.Not.Null);

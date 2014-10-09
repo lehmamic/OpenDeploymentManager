@@ -47,7 +47,7 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             User user;
             try
             {
-                user = client.GetService<IUserRepository>().GetById(username);
+                user = client.GetService<IUserRepository>().GetByName(username);
             }
             catch (NotFoundException)
             {

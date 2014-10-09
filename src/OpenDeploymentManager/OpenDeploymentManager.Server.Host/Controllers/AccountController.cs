@@ -27,7 +27,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [Route("UserInfo")]
         public User GetUser()
         {
-            ApplicationUser user = this.userService.GetById(this.User.Identity.Name);
+            ApplicationUser user = this.userService.GetByName(this.User.Identity.Name);
 
             return user.ProjectedAs<User>();
         }
@@ -43,7 +43,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            ApplicationUser user = this.userService.GetById(this.User.Identity.Name);
+            ApplicationUser user = this.userService.GetByName(this.User.Identity.Name);
             if (user == null)
             {
                 return this.BadRequest();
@@ -81,7 +81,13 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            IdentityResult result = this.userService.ChangePassword(this.User.Identity.Name, model.OldPassword, model.NewPassword);
+            ApplicationUser user = this.userService.GetByName(this.User.Identity.Name);
+            if (user == null)
+            {
+                return this.BadRequest();
+            }
+
+            IdentityResult result = this.userService.ChangePassword(user.Id, model.OldPassword, model.NewPassword);
             IHttpActionResult errorResult = this.GetErrorResult(result);
             if (errorResult != null)
             {

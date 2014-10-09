@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.OData.Extensions;
@@ -45,9 +44,23 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         // GET api/users/5
         [Route("{id}", Name = UserById)]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        public User GetUser(string id)
+        public User GetUser(Guid id)
         {
             ApplicationUser user = this.userService.GetById(id);
+            if (user == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            return user.ProjectedAs<User>();
+        }
+
+        // GET api/users/byname/admin
+        [Route("byname/{userName}")]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        public User GetUser(string userName)
+        {
+            ApplicationUser user = this.userService.GetByName(userName);
             if (user == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -76,7 +89,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return errorResult;
             }
 
-            string location = this.Url.Link(UserById, new { id = user.UserName });
+            string location = this.Url.Link(UserById, new { id = user.Id });
             var content = user.ProjectedAs<User>();
 
             return this.Created(location, content);
@@ -86,7 +99,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [Route("{id}")]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPut]
-        public IHttpActionResult UpdateUser(string id, [FromBody]User model)
+        public IHttpActionResult UpdateUser(Guid id, [FromBody]User model)
         {
             ApplicationUser user = this.userService.GetById(id);
             if (user == null)
@@ -115,7 +128,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [Route("{id}/SetPassword")]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpPut]
-        public IHttpActionResult SetPassword(string id, [FromBody]SetPassword model)
+        public IHttpActionResult SetPassword(Guid id, [FromBody]SetPassword model)
         {
             ApplicationUser user = this.userService.GetById(id);
             if (user == null)
@@ -142,17 +155,17 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [Route("{id}")]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [HttpDelete]
-        public IHttpActionResult DeleteUser(string id)
+        public IHttpActionResult DeleteUser(Guid id)
         {
-            if (string.Equals(id, this.User.Identity.Name, StringComparison.OrdinalIgnoreCase))
-            {
-                this.ModelState.AddModelError(string.Empty, Resources.UsersController_CanNotDeleteCurrentUser);
-                return this.BadRequest(this.ModelState);
-            }
-
-            ApplicationUser user = this.userService.GetById(id.ToUserId());
+            ApplicationUser user = this.userService.GetById(id);
             if (user != null)
             {
+                if (string.Equals(user.UserName, this.User.Identity.Name, StringComparison.OrdinalIgnoreCase))
+                {
+                    this.ModelState.AddModelError(string.Empty, Resources.UsersController_CanNotDeleteCurrentUser);
+                    return this.BadRequest(this.ModelState);
+                }
+
                 IdentityResult result = this.userService.Delete(user);
                 IHttpActionResult errorResult = this.GetErrorResult(result);
                 if (errorResult != null)

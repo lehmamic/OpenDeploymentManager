@@ -37,11 +37,11 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
 
         private static void CreateUserGroups(IUserGroupService userGroupService)
         {
-            if (userGroupService.GetById(DefaultEntityKeys.AdministratorsUserGroup) == null)
+            if (userGroupService.GetById(WellKnownEntityKeys.AdministratorsUserGroup) == null)
             {
                 var administratorsGroup = new ApplicationUserGroup
                                               {
-                                                  Id = DefaultEntityKeys.AdministratorsUserGroup,
+                                                  Id = WellKnownEntityKeys.AdministratorsUserGroup,
                                                   Name = Resources.UserGroup_Administrators
                                               };
 
@@ -54,7 +54,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
             roleManager.CreateIfNotExist(RoleNames.Administrator);
         }
 
-        private static void CreateAdminUser(UserManager<ApplicationUser> userManager)
+        private static void CreateAdminUser(ApplicationUserManager userManager)
         {
             bool usersAvailable = userManager.Users.Any();
             if (!usersAvailable)
@@ -62,12 +62,12 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
                 var userName = "Admin";
                 var password = "123456";
 
-                var adminUser = new ApplicationUser { UserName = userName };
+                var adminUser = new ApplicationUser { Id = WellKnownEntityKeys.AdministratorUser, UserName = userName };
                 IdentityResult result = userManager.Create(adminUser, password);
                 if (result.Succeeded)
                 {
                     userManager.AddClaim(adminUser.Id, ClaimTypes.Role, RoleNames.Administrator);
-                    userManager.AddClaim(adminUser.Id, ClaimTypes.GroupSid, DefaultEntityKeys.AdministratorsUserGroup.ToString());
+                    userManager.AddClaim(adminUser.Id, ClaimTypes.GroupSid, WellKnownEntityKeys.AdministratorsUserGroup.ToString());
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
             {
                 CreateUserGroups(childContainer.Resolve<IUserGroupService>());
                 CreateRoles(childContainer.Resolve<RoleManager<ApplicationRole>>());
-                CreateAdminUser(childContainer.Resolve<UserManager<ApplicationUser>>());
+                CreateAdminUser(childContainer.Resolve<ApplicationUserManager>());
 
                 childContainer.Resolve<IDocumentSession>().SaveChanges();
             }

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Bootstrap.Unity;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
@@ -34,10 +35,8 @@ namespace OpenDeploymentManager.Server.Host
             container.RegisterTypePerRequest<IDocumentSession>(c => c.Resolve<IDocumentStore>().OpenSession());
 
             // register asp identity
-            container.RegisterTypePerRequest<IUserStore<ApplicationUser>, ApplicationUserStore>(
+            container.RegisterTypePerRequest<IUserStore<ApplicationUser, Guid>, UserStore<ApplicationUser, Guid>>(
                 new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));
-
-            container.RegisterTypePerRequest<UserManager<ApplicationUser>, ApplicationUserManager>();
 
             container.RegisterTypePerRequest<IRoleStore<ApplicationRole>, ApplicationRoleStore>(
                 new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));

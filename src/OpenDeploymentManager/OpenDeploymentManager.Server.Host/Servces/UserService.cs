@@ -1,16 +1,17 @@
+using System;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using OpenDeploymentManager.Common.Diagnostics;
+using OpenDeploymentManager.Server.Host.DataAccess;
 using OpenDeploymentManager.Server.Host.Models.Entity;
-using OpenDeploymentManager.Server.Host.Properties;
 
 namespace OpenDeploymentManager.Server.Host.Servces
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationUserManager userManager;
 
-        public UserService(UserManager<ApplicationUser> userManager)
+        public UserService(ApplicationUserManager userManager)
         {
             this.userManager = userManager.ArgumentNotNull("userManager");
         }
@@ -21,9 +22,9 @@ namespace OpenDeploymentManager.Server.Host.Servces
             return this.userManager.Users;
         }
 
-        public ApplicationUser GetById(string id)
+        public ApplicationUser GetById(Guid id)
         {
-            return this.userManager.FindById(id.ToUserId());
+            return this.userManager.FindById(id);
         }
 
         public ApplicationUser GetByName(string userName)
@@ -38,12 +39,6 @@ namespace OpenDeploymentManager.Server.Host.Servces
 
         public IdentityResult Create(ApplicationUser user, string password)
         {
-            ApplicationUser existingUser = this.userManager.FindById(user.UserName.ToUserId());
-            if (existingUser != null)
-            {
-                return new IdentityResult(Resources.UserService_UserAlreadyExists);
-            }
-
             return this.userManager.Create(user, password);
         }
 
@@ -57,17 +52,17 @@ namespace OpenDeploymentManager.Server.Host.Servces
             return this.userManager.Delete(user);
         }
 
-        public IdentityResult ChangePassword(string userId, string currentPassword, string newPassword)
+        public IdentityResult ChangePassword(Guid userId, string currentPassword, string newPassword)
         {
-            return this.userManager.ChangePassword(userId.ToUserId(), currentPassword, newPassword);
+            return this.userManager.ChangePassword(userId, currentPassword, newPassword);
         }
 
-        public IdentityResult SetPassword(string userId, string password)
+        public IdentityResult SetPassword(Guid userId, string password)
         {
-            IdentityResult result = this.userManager.RemovePassword(userId.ToUserId());
+            IdentityResult result = this.userManager.RemovePassword(userId);
             if (result.Succeeded)
             {
-                result = this.userManager.AddPassword(userId.ToUserId(), password);
+                result = this.userManager.AddPassword(userId, password);
             }
 
             return result;

@@ -20,7 +20,7 @@ namespace OpenDeploymentManager.Server.Host
         public const string PublicClientId = "self";
 
         private static OAuthAuthorizationServerOptions authorizationServerOptions;
-        private static ApiKeyAuthenticationOptions apiAuthorizationOptions;
+        ////private static ApiKeyAuthenticationOptions apiAuthorizationOptions;
 
         public static OAuthAuthorizationServerOptions OAuthOptions
         {
@@ -30,13 +30,13 @@ namespace OpenDeploymentManager.Server.Host
             }
         }
 
-        public static ApiKeyAuthenticationOptions ApiAuthOptions
-        {
-            get
-            {
-                return apiAuthorizationOptions ?? (apiAuthorizationOptions = CreateApiAuthorizationOptions());
-            }
-        }
+        ////public static ApiKeyAuthenticationOptions ApiAuthOptions
+        ////{
+        ////    get
+        ////    {
+        ////        return apiAuthorizationOptions ?? (apiAuthorizationOptions = CreateApiAuthorizationOptions());
+        ////    }
+        ////}
 
         public static void Configuration(IAppBuilder app, IUnityContainer container)
         {
@@ -55,7 +55,7 @@ namespace OpenDeploymentManager.Server.Host
         {
             // Register the user manager
             app.CreatePerOwinContext(() => GlobalConfiguration.Configuration.DependencyResolver.BeginScope());
-            app.CreatePerOwinContext<UserManager<ApplicationUser>>((options, context) => context.Get<IDependencyScope>().Resolve<UserManager<ApplicationUser>>());
+            app.CreatePerOwinContext<ApplicationUserManager>((options, context) => context.Get<IDependencyScope>().Resolve<ApplicationUserManager>());
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
@@ -98,12 +98,12 @@ namespace OpenDeploymentManager.Server.Host
             };
         }
 
-        private static ApiKeyAuthenticationOptions CreateApiAuthorizationOptions()
-        {
-            Func<UserManager<ApplicationUser>> userManagerFactory = () => GlobalConfiguration.Configuration.DependencyResolver.Resolve<UserManager<ApplicationUser>>();
+        ////private static ApiKeyAuthenticationOptions CreateApiAuthorizationOptions()
+        ////{
+        ////    Func<UserManager<ApplicationUser>> userManagerFactory = () => GlobalConfiguration.Configuration.DependencyResolver.Resolve<UserManager<ApplicationUser>>();
 
-            return new ApiKeyAuthenticationOptions(userManagerFactory);
-        }
+        ////    return new ApiKeyAuthenticationOptions(userManagerFactory);
+        ////}
     }
 
     public static class AppBuilderExtensions
@@ -111,7 +111,7 @@ namespace OpenDeploymentManager.Server.Host
         public static void Use(this IAppBuilder app)
         {
             app.CreatePerOwinContext(() => GlobalConfiguration.Configuration.DependencyResolver.BeginScope());
-            app.CreatePerOwinContext<UserManager<ApplicationUser>>((options, context) => context.Get<IDependencyScope>().Resolve<UserManager<ApplicationUser>>());
+            app.CreatePerOwinContext<ApplicationUserManager>((options, context) => context.Get<IDependencyScope>().Resolve<ApplicationUserManager>());
         }
     }
 }

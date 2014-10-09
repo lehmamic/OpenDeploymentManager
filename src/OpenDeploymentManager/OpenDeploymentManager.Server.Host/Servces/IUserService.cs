@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNet.Identity;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 
@@ -8,7 +9,7 @@ namespace OpenDeploymentManager.Server.Host.Servces
     {
         IQueryable<ApplicationUser> Query();
 
-        ApplicationUser GetById(string id);
+        ApplicationUser GetById(Guid id);
 
         ApplicationUser GetByName(string userName);
 
@@ -20,8 +21,8 @@ namespace OpenDeploymentManager.Server.Host.Servces
 
         IdentityResult Delete(ApplicationUser user);
 
-        IdentityResult ChangePassword(string userId, string currentPassword, string newPassword);
+        IdentityResult ChangePassword(Guid userId, string currentPassword, string newPassword);
 
-        IdentityResult SetPassword(string userId, string password);
+        IdentityResult SetPassword(Guid userId, string password);
     }
 }
