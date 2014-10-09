@@ -7,50 +7,52 @@ using OpenDeploymentManager.Common.Theading;
 using OpenDeploymentManager.Server.Host.Models.Entity;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.UniqueConstraints;
 
 namespace OpenDeploymentManager.Server.Host.DataAccess
 {
-    public class ApplicationRoleStore : IRoleStore<ApplicationRole>, IQueryableRoleStore<ApplicationRole>
+    public class IdentityRoleStore<TRole, TKey> : IRoleStore<TRole, TKey>, IQueryableRoleStore<TRole, TKey>
+        where TRole : IdentityRole<TKey>
+        where TKey : struct
     {
         private readonly IDocumentSession session;
         private bool disposed;
 
-        public ApplicationRoleStore(IDocumentSession session)
+        public IdentityRoleStore(IDocumentSession session)
         {
             this.session = session.ArgumentNotNull("session");
         }
 
         #region Implementation of IQueryableRoleStore<ApplicationRole,in string>
-        public IQueryable<ApplicationRole> Roles
+        public IQueryable<TRole> Roles
         {
             get
             {
                 this.ThrowIfDisposed();
 
-                return this.session.Query<ApplicationRole>();
+                return this.session.Query<TRole>();
             }
         }
         #endregion
 
         #region Implementation of IRoleStore<ApplicationRole,in Guid>
-        public Task CreateAsync(ApplicationRole role)
+        public Task CreateAsync(TRole role)
         {
             this.ThrowIfDisposed();
 
             role.ArgumentNotNull("role");
 
-            role.Id = this.RolenameToDocumentId(role.Name);
             return Task.Run(() => this.session.Store(role));
         }
 
-        public Task UpdateAsync(ApplicationRole role)
+        public Task UpdateAsync(TRole role)
         {
             this.ThrowIfDisposed();
 
             return AsyncHelper.Void;
         }
 
-        public Task DeleteAsync(ApplicationRole role)
+        public Task DeleteAsync(TRole role)
         {
             this.ThrowIfDisposed();
 
@@ -59,18 +61,18 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
             return Task.Run(() => this.session.Delete(role));
         }
 
-        public Task<ApplicationRole> FindByIdAsync(string roleId)
+        public Task<TRole> FindByIdAsync(TKey roleId)
         {
             this.ThrowIfDisposed();
 
-            return Task.Run(() => this.session.Load<ApplicationRole>(roleId));
+            return Task.Run(() => this.session.Load<TRole>(roleId));
         }
 
-        public Task<ApplicationRole> FindByNameAsync(string roleName)
+        public Task<TRole> FindByNameAsync(string roleName)
         {
             this.ThrowIfDisposed();
 
-            return this.FindByIdAsync(this.RolenameToDocumentId(roleName));
+            return Task.FromResult(this.session.LoadByUniqueConstraint<TRole>("Name", roleName));
         }
         #endregion
 
@@ -87,13 +89,6 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
             {
                 throw new ObjectDisposedException(this.GetType().Name);
             }
-        }
-
-        private string RolenameToDocumentId(string userName)
-        {
-            DocumentConvention conventions = this.session.Advanced.DocumentStore.Conventions;
-            string typeTagName = conventions.GetTypeTagName(typeof(ApplicationRole));
-            return string.Format("{0}{1}{2}", (object)conventions.TransformTypeTagNameToDocumentKeyPrefix(typeTagName), (object)conventions.IdentityPartsSeparator, (object)userName);
         }
     }
 }

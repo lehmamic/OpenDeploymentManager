@@ -71,7 +71,6 @@
     <Compile Include="Authentication\BearerTokenAuthenticationFixture.cs" />
     <Compile Include="Controllers\AccountControllerFixture.cs" />
     <Compile Include="Controllers\ClientHelper.cs" />
-    <Compile Include="Controllers\RolesControllerFixture.cs" />
     <Compile Include="Controllers\UserGroupsControllerFixture.cs" />
     <Compile Include="Controllers\UsersControllerFixture.cs" />
     <Compile Include="ServerHost.cs">

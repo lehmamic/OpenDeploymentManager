@@ -12,7 +12,7 @@ using Raven.Client.UniqueConstraints;
 
 namespace OpenDeploymentManager.Server.Host.DataAccess
 {
-    public class UserStore<TUser, TKey> : IUserLoginStore<TUser, TKey>, IUserClaimStore<TUser, TKey>, IUserRoleStore<TUser, TKey>, IUserPasswordStore<TUser, TKey>, IUserSecurityStampStore<TUser, TKey>, IUserStore<TUser, TKey>, IQueryableUserStore<TUser, TKey>, IDisposable
+    public class IdentityUserStore<TUser, TKey> : IUserLoginStore<TUser, TKey>, IUserClaimStore<TUser, TKey>, IUserRoleStore<TUser, TKey>, IUserPasswordStore<TUser, TKey>, IUserSecurityStampStore<TUser, TKey>, IUserStore<TUser, TKey>, IQueryableUserStore<TUser, TKey>, IDisposable
         where TUser : IdentityUser<TKey>
         where TKey : struct
     {
@@ -21,12 +21,12 @@ namespace OpenDeploymentManager.Server.Host.DataAccess
         private IDocumentSession session;
         private bool disposed;
 
-        public UserStore(Func<IDocumentSession> getSession)
+        public IdentityUserStore(Func<IDocumentSession> getSession)
         {
             this.getSessionFunc = getSession;
         }
 
-        public UserStore(IDocumentSession session)
+        public IdentityUserStore(IDocumentSession session)
         {
             this.session = session;
         }

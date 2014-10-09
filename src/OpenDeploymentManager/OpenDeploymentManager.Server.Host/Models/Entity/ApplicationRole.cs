@@ -1,23 +1,16 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
 
 namespace OpenDeploymentManager.Server.Host.Models.Entity
 {
-    public class ApplicationRole : IRole
+    public class ApplicationRole : IdentityRole<Guid>
     {
         public ApplicationRole()
         {
         }
 
         public ApplicationRole(string roleName)
-            : this()
+            : base(roleName)
         {
-            this.Name = roleName;
         }
-
-        #region Implementation of IRole
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-        #endregion
     }
 }

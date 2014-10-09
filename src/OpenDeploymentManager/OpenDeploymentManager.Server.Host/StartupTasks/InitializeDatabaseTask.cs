@@ -49,7 +49,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
             }
         }
 
-        private static void CreateRoles(RoleManager<ApplicationRole> roleManager)
+        private static void CreateRoles(ApplicationRoleManager roleManager)
         {
             roleManager.CreateIfNotExist(RoleNames.Administrator);
         }
@@ -83,7 +83,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
             using (IUnityContainer childContainer = this.container.CreateChildContainer())
             {
                 CreateUserGroups(childContainer.Resolve<IUserGroupService>());
-                CreateRoles(childContainer.Resolve<RoleManager<ApplicationRole>>());
+                CreateRoles(childContainer.Resolve<ApplicationRoleManager>());
                 CreateAdminUser(childContainer.Resolve<ApplicationUserManager>());
 
                 childContainer.Resolve<IDocumentSession>().SaveChanges();

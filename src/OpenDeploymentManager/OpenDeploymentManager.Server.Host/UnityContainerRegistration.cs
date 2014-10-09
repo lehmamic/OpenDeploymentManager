@@ -35,13 +35,11 @@ namespace OpenDeploymentManager.Server.Host
             container.RegisterTypePerRequest<IDocumentSession>(c => c.Resolve<IDocumentStore>().OpenSession());
 
             // register asp identity
-            container.RegisterTypePerRequest<IUserStore<ApplicationUser, Guid>, UserStore<ApplicationUser, Guid>>(
+            container.RegisterTypePerRequest<IUserStore<ApplicationUser, Guid>, IdentityUserStore<ApplicationUser, Guid>>(
                 new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));
 
-            container.RegisterTypePerRequest<IRoleStore<ApplicationRole>, ApplicationRoleStore>(
+            container.RegisterTypePerRequest<IRoleStore<ApplicationRole, Guid>, IdentityRoleStore<ApplicationRole, Guid>>(
                 new InjectionConstructor(new ResolvedParameter<IDocumentSession>()));
-
-            container.RegisterTypePerRequest<RoleManager<ApplicationRole>, ApplicationRoleManager>();
 
             container.RegisterTypeAsSingleton<ISecureDataFormat<AuthenticationTicket>>(
                 c => Startup.OAuthOptions.AccessTokenFormat);
@@ -49,7 +47,6 @@ namespace OpenDeploymentManager.Server.Host
             // register services
             container.RegisterTypePerRequest<IUserService, UserService>();
             container.RegisterTypePerRequest<IUserGroupService, UserGroupService>();
-            container.RegisterTypePerRequest<IUserRoleService, UserRoleService>();
             container.RegisterTypePerRequest<ISecurityService, SecurityService>();
 
             ////container.RegisterTypeAsSingleton<IDeploymentManager, DeploymentManager>();
