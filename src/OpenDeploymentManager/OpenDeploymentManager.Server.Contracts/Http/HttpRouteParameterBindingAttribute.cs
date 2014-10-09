@@ -11,7 +11,7 @@ namespace OpenDeploymentManager.Server.Contracts.Http
         #region Overrides of HttpParameterBindingAttribute
         public override void BindParameter(HttpParameterDescriptor parameter, HttpRequestMessage request)
         {
-            var uriBuilder = new StringBuilder(request.RequestUri.ToString());
+            var uriBuilder = new StringBuilder(request.RequestUri.ToString().ToLowerInvariant());
 
             string variable = string.Format(CultureInfo.InvariantCulture, "{{{0}}}", parameter.ParameterName).ToLowerInvariant();
             uriBuilder.Replace(variable, parameter.ParameterValue.ToString());

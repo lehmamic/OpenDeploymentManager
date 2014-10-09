@@ -77,6 +77,20 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
         }
 
         [Test]
+        public void GetUserByName_WithExistingUserName_ReturnsUser()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
+            var target = client.GetService<IUserRepository>();
+
+            // act
+            var actual = target.GetByName("Admin");
+
+            // assert
+            Assert.That(actual, Is.Not.Null);
+        }
+
+        [Test]
         public void CreateUser_WithValidUser_CreatesUser()
         {
             // arrange
@@ -161,6 +175,24 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             // assert
             var updated = target.GetById(user.Id);
             Assert.That(updated.DisplayName, Is.EqualTo(user.DisplayName));
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotFoundException))]
+        public void DeleteUser_WithValidUser_DeletesUser()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
+            var target = client.GetService<IUserRepository>();
+
+            User user = target.Create(new CreateUser { UserName = "UpdateUserTest1", Password = "123456", ConfirmPassword = "123456" });
+
+            // act
+            target.Delete(user.Id);
+
+
+            // assert
+            target.GetById(user.Id);
         }
 
         [Test]
