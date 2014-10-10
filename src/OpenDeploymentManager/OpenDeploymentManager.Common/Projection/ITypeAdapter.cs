@@ -13,7 +13,7 @@
         /// <param name="source">Instance to adapt</param>
         /// <returns><paramref name="source"/> mapped to <typeparamref name="TTarget"/></returns>
         TTarget Adapt<TSource, TTarget>(TSource source)
-            where TTarget : class, new()
+            where TTarget : class
             where TSource : class;
 
         /// <summary>

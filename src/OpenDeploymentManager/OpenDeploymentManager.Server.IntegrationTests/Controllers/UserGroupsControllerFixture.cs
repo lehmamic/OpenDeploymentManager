@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using OpenDeploymentManager.Client;
 using OpenDeploymentManager.Client.Exceptions;
 using OpenDeploymentManager.Server.Contracts;
 using OpenDeploymentManager.Server.Host.Models.Entity;
+using OpenDeploymentManager.Server.Host.Security;
 
 namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 {
@@ -114,6 +116,34 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
 
             // assert
             Assert.Throws<NotFoundException>(() => target.GetById(userGroup.Id));
+        }
+
+        [Test]
+        public void GetResources_ReturnsResources()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
+            var target = client.GetService<IUserGroupRepository>();
+
+            // act
+            IEnumerable<string> resources = target.GetResources();
+
+            // arrange
+            CollectionAssert.IsNotEmpty(resources);
+        }
+
+        [Test]
+        public void GetResoureOperations_WithValidResoureName_ReturnsResources()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
+            var target = client.GetService<IUserGroupRepository>();
+
+            // act
+            IEnumerable<string> operations = target.GetResourceOperations(GlobalResources.User.ToResourceName());
+
+            // arrange
+            CollectionAssert.IsNotEmpty(operations);
         }
     }
 }

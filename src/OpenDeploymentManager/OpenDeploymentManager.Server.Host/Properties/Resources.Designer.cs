@@ -79,6 +79,15 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown resource name..
+        /// </summary>
+        internal static string GlobalResources_UnknownResourceName {
+            get {
+                return ResourceManager.GetString("GlobalResources_UnknownResourceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuring the dependency injection container..
         /// </summary>
         internal static string InitializeContainerTask_ConfiguringContainer {
@@ -165,6 +174,15 @@ namespace OpenDeploymentManager.Server.Host.Properties {
         internal static string Program_UnhanldedException {
             get {
                 return ResourceManager.GetString("Program_UnhanldedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown resource operation name..
+        /// </summary>
+        internal static string ResourceOperations_UnknownOperationName {
+            get {
+                return ResourceManager.GetString("ResourceOperations_UnknownOperationName", resourceCulture);
             }
         }
         

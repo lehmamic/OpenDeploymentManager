@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenDeploymentManager.Server.Contracts.Http;
 
 namespace OpenDeploymentManager.Server.Contracts
@@ -20,5 +21,11 @@ namespace OpenDeploymentManager.Server.Contracts
 
         [HttpRequestUri("{id}")]
         void Delete(Guid id);
+
+        [HttpRequestUri("resources")]
+        IEnumerable<string> GetResources();
+
+        [HttpRequestUri("resources/{resource}/operations")]
+        IEnumerable<string> GetResourceOperations(string resource);
     }
 }

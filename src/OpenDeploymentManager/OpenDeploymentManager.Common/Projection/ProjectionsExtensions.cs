@@ -11,7 +11,7 @@ namespace OpenDeploymentManager.Common.Projection
         /// <param name="item">The source entity to project</param>
         /// <returns>The projected type</returns>
         public static TProjection ProjectedAs<TProjection>(this object item)
-            where TProjection : class,new()
+            where TProjection : class
         {
             var adapter = TypeAdapterFactory.CreateAdapter();
             return adapter.Adapt<TProjection>(item);
@@ -39,7 +39,7 @@ namespace OpenDeploymentManager.Common.Projection
         /// <param name="items">the collection of entity items</param>
         /// <returns>Projected collection</returns>
         public static IEnumerable<TProjection> ProjectedAsCollection<TProjection>(this IEnumerable<object> items)
-            where TProjection : class, new()
+            where TProjection : class
         {
             var adapter = TypeAdapterFactory.CreateAdapter();
             return adapter.Adapt<IEnumerable<TProjection>>(items);

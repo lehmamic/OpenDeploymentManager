@@ -74,6 +74,8 @@
     <Compile Include="IPagingQuery.cs" />
     <Compile Include="IUserGroupRepository.cs" />
     <Compile Include="PagingQuery.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="PermissionSet.cs" />
     <Compile Include="ResourceBase.cs" />
     <Compile Include="IResourceRepository.cs" />
     <Compile Include="IUserRepository.cs" />

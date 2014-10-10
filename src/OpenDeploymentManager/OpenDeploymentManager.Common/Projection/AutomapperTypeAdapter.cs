@@ -9,9 +9,7 @@ namespace OpenDeploymentManager.Common.Projection
     {
         #region ITypeAdapter Members
 
-        public TTarget Adapt<TSource, TTarget>(TSource source)
-            where TSource : class
-            where TTarget : class, new()
+        public TTarget Adapt<TSource, TTarget>(TSource source) where TSource : class where TTarget : class
         {
             return Mapper.Map<TSource, TTarget>(source);
         }

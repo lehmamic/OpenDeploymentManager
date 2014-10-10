@@ -168,4 +168,10 @@
   <data name="UserGroup_Administrators" xml:space="preserve">
     <value>Administrators</value>
   </data>
+  <data name="GlobalResources_UnknownResourceName" xml:space="preserve">
+    <value>Unknown resource name.</value>
+  </data>
+  <data name="ResourceOperations_UnknownOperationName" xml:space="preserve">
+    <value>Unknown resource operation name.</value>
+  </data>
 </root>
