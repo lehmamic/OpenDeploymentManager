@@ -145,5 +145,31 @@ namespace OpenDeploymentManager.Server.IntegrationTests.Controllers
             // arrange
             CollectionAssert.IsNotEmpty(operations);
         }
+
+        [Test]
+        [ExpectedException(typeof(NotFoundException))]
+        public void GetResoureOperations_WithInvalidResoureName_ThrowsException()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
+            var target = client.GetService<IUserGroupRepository>();
+
+            // act
+            IEnumerable<string> operations = target.GetResourceOperations("AnyNotExistingResourceName");
+        }
+
+        [Test]
+        public void GetPermissions_WithValidUserGroup_ReturnsPermissionSet()
+        {
+            // arrange
+            IOpenDeploymentManagerClient client = ClientHelper.CreateAdminClient();
+            var target = client.GetService<IUserGroupRepository>();
+
+            // act
+            PermissionSet permissions = target.GetPermissions(WellKnownEntityKeys.AdministratorsUserGroup);
+
+            // arrange
+            Assert.That(permissions, Is.Not.Null);
+        }
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Projection\ITypeAdapterFactory.cs" />
     <Compile Include="Projection\ProjectionsExtensions.cs" />
     <Compile Include="Projection\TypeAdapterFactory.cs" />
+    <Compile Include="Reflection\EnumHelper.cs" />
     <Compile Include="Reflection\MemberInfoExtensions.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Theading\AsyncHelper.cs" />

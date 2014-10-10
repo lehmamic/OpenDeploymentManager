@@ -188,7 +188,6 @@
     <Compile Include="DataAccess\ApplicationUserManager.cs" />
     <Compile Include="DataAccess\IdentityUserStore.cs" />
     <Compile Include="DataAccess\IdentityUserStoreSupport.cs" />
-    <Compile Include="Models\Entity\PermissionMatrix.cs" />
     <Compile Include="Models\Entity\WellKnownEntityKeys.cs" />
     <Compile Include="DataAccess\ODataQueryParameterBindingAttribute.cs" />
     <Compile Include="DataAccess\DocumentSessionExtensions.cs" />
@@ -229,7 +228,7 @@
     <Compile Include="Security\ApiKeyAuthenticationOptions.cs" />
     <Compile Include="Security\GlobalResourcesExtensions.cs" />
     <Compile Include="Security\GlobalResources.cs" />
-    <Compile Include="Models\Entity\ResourceOperationSet.cs" />
+    <Compile Include="Models\Entity\ResourcePermissionEntry.cs" />
     <Compile Include="Security\ResourceOperations.cs" />
     <Compile Include="Security\RoleNames.cs" />
     <Compile Include="Servces\ISecurityService.cs" />

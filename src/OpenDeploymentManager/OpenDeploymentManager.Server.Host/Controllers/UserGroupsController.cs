@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -131,10 +132,11 @@ namespace OpenDeploymentManager.Server.Host.Controllers
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         public IEnumerable<string> GetResourceOperations(string resource)
         {
-            if (resource.IsValidResource())
+            if (!resource.IsValidResource())
             {
-                
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
+
             GlobalResources globalResource = resource.FromResourceName();
 
             IEnumerable<ResourceOperations> operationses = this.securityService.GetResourceOperations(globalResource);
@@ -172,7 +174,7 @@ namespace OpenDeploymentManager.Server.Host.Controllers
                 return this.BadRequest(this.ModelState);
             }
 
-            userGroup.GlobalPermissions = permissionSet.ProjectedAs<PermissionMatrix>();
+            userGroup.GlobalPermissions = permissionSet.ProjectedAs<Collection<ResourcePermissionEntry>>();
             this.userGroupService.Update(userGroup);
 
             return this.Ok();

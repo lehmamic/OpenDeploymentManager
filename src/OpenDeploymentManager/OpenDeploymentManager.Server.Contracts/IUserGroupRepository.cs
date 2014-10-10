@@ -27,5 +27,8 @@ namespace OpenDeploymentManager.Server.Contracts
 
         [HttpRequestUri("resources/{resource}/operations")]
         IEnumerable<string> GetResourceOperations(string resource);
+
+        [HttpRequestUri("{id}/permissions")]
+        PermissionSet GetPermissions(Guid id);
     }
 }

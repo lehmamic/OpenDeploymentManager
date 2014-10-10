@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using Bootstrap.Extensions.StartupTasks;
 using Microsoft.AspNet.Identity;
@@ -35,7 +36,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         }
         #endregion
 
-        private static void CreateUserGroups(IUserGroupService userGroupService)
+        private static void CreateUserGroups(IUserGroupService userGroupService, ISecurityService securityService)
         {
             if (userGroupService.GetById(WellKnownEntityKeys.AdministratorsUserGroup) == null)
             {
@@ -45,7 +46,25 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
                                                   Name = Resources.UserGroup_Administrators
                                               };
 
+                AddAllPermissionsToUserGroup(securityService, administratorsGroup);
+
                 userGroupService.Create(administratorsGroup);
+
+
+            }
+        }
+
+        private static void AddAllPermissionsToUserGroup(ISecurityService securityService, ApplicationUserGroup userGroup)
+        {
+            foreach (GlobalResources resource in securityService.GetGlobalResources())
+            {
+                var entry = new ResourcePermissionEntry
+                                {
+                                    Resource = resource.ToResourceName(),
+                                    PermittedOperations = ResourceOperations.All
+                                };
+
+                userGroup.GlobalPermissions.Add(entry);
             }
         }
 
@@ -82,7 +101,7 @@ namespace OpenDeploymentManager.Server.Host.StartupTasks
         {
             using (IUnityContainer childContainer = this.container.CreateChildContainer())
             {
-                CreateUserGroups(childContainer.Resolve<IUserGroupService>());
+                CreateUserGroups(childContainer.Resolve<IUserGroupService>(), childContainer.Resolve<ISecurityService>());
                 CreateRoles(childContainer.Resolve<ApplicationRoleManager>());
                 CreateAdminUser(childContainer.Resolve<ApplicationUserManager>());
 
